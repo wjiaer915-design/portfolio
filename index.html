@@ -314,29 +314,54 @@
 </div>  
             
                 <!-- Project 03: UI 设计 -->
-            <div class="reveal grid md:grid-cols-12 gap-12 items-center">
-                <div class="md:col-span-7 order-2 md:order-1">
-                   <a href="project-fashion.html" class="block" aria-label="打开项目：AI 时尚顾问">
- <div class="work-card group aspect-[16/9] bg-zinc-900 overflow-hidden relative">
-                        <!-- 路径格式：assets/images/project-03-cover.png -->
-                        <img src="assets/images/project-03-cover.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Project 03 UI 设计封面">
+<div class="reveal grid md:grid-cols-12 gap-12 items-center">
+  <!-- 左侧：封面卡片（整块可点击） -->
+  <div class="md:col-span-7 order-2 md:order-1">
+    <a href="project-fashion.html" class="block" aria-label="打开项目：AI时尚顾问">
+      <div class="work-card group aspect-[16/9] bg-zinc-900 overflow-hidden relative cursor-pointer">
+        <img
+          src="assets/images/project-03-cover.png"
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          alt="Project 03 UI 设计封面"
+        />
 
-                    </div>
-                       </a>
-                </div>
-                <div class="md:col-span-5 order-1 md:order-2">
-                    <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">03 / UI & UX DESIGN</span>
-                   <h2 class="text-3xl md:text-4xl font-bold mb-6">AI 时尚顾问界面设计<br><span class="text-zinc-500 text-xl font-normal">面向线上用户的虚拟试搭与搭配建议</span></h2>
-                   <p class="text-zinc-400 leading-relaxed mb-8 text-sm">面向线上购物场景的智能搭配产品概念设计，聚焦“无法试穿、风格不明确、搭配成本高”等痛点。通过用户画像与偏好分析输出穿搭方案，并结合 3D 虚拟形象实现换装预览与对比，帮助用户更快做出购买决策、降低试错。
-                 </p>
+        <!-- 悬浮按钮层（和项目一一样的效果） -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black">
+            VIEW PROJECT
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
 
-                    <ul class="flex flex-wrap gap-3 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Interface Design</li>
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">User Experience</li>
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Prototyping</li>
-                    </ul>
-                </div>
-            </div>
+  <!-- 右侧：文字说明（这里就是你说的“后面半部分”） -->
+  <div class="md:col-span-5 order-1 md:order-2">
+    <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">03 / UI & UX DESIGN</span>
+
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+      AI 时尚顾问界面设计<br>
+      <span class="text-zinc-500 text-xl font-normal">面向线上用户的虚拟试衣与搭配建议</span>
+    </h2>
+
+    <p class="text-zinc-400 leading-relaxed mb-8 text-sm">
+      聚焦线上购物“无法试穿、风格不明确、搭配成本高”等痛点，基于用户画像与偏好分析，
+      输出可执行的穿搭建议与试衣体验，提升决策效率与购物信心。
+    </p>
+
+    <ul class="flex flex-wrap gap-3 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
+      <li class="border border-zinc-800 px-3 py-1 rounded-full">Interface Design</li>
+      <li class="border border-zinc-800 px-3 py-1 rounded-full">User Experience</li>
+      <li class="border border-zinc-800 px-3 py-1 rounded-full">Prototyping</li>
+    </ul>
+
+    <!-- 可选：右侧再放一个文字按钮（更像“按钮跳转”） -->
+    <a href="project-fashion.html" class="inline-flex mt-8 text-xs tracking-widest uppercase text-zinc-300 hover:text-white">
+      → View Project
+    </a>
+  </div>
+</div>
+
         </section>
 
         <!-- Exhibition & Events (独立板块：展示落地能力) -->
@@ -479,6 +504,7 @@
 </body>
 
 </html>
+
 
 
 
