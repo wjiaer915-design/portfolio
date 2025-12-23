@@ -81,7 +81,16 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        
+        /* ===== Mobile: make banner shorter & disable fixed background ===== */
+@media (max-width: 768px){
+  .parallax-img{
+    height: 22vh !important;
+    min-height: 22vh !important;
+    background-attachment: scroll !important; /* iOS 上 fixed 容易怪 */
+    background-position: center top !important;
+  }
+}
+
         .img-reveal {
             opacity: 0;
             transform: translateY(20px);
@@ -328,6 +337,7 @@
 </body>
 
 </html>
+
 
 
 
