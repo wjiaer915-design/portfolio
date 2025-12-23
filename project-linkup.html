@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linkup 领跑计划 | Exhibition Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            /* 活力青柠色：象征环保、可持续与行动力 */
+            --accent: #bef264; /* Lime-300 */
+            --text-primary: #f4f4f5;
+        }
+
+        /* 强制隐藏默认光标 */
+        html, body, * {
+            cursor: none !important;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--accent); color: #000; }
+
+        /* 滚动条 */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* 字体排版 */
+        .project-title-zh {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3rem, 10vw, 10rem);
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .project-title-en {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(190, 242, 100, 0.3);
+        }
+
+        /* 氛围粒子背景 */
+        .particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                radial-gradient(var(--accent) 1px, transparent 1px),
+                radial-gradient(var(--accent) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.05;
+        }
+
+        /* 自定义光标 */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        /* 长图容器 */
+        .long-image-container {
+            max-width: 1080px; /* 限制最大宽度为原图宽度，避免模糊 */
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* 简单的淡入动画 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div class="particles"></div>
+
+    <!-- 导航 -->
+    <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center mix-blend-difference text-white">
+        <a href="index.html" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-lime-300 transition group">
+            <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
+            Back to Index
+        </a>
+        <div class="text-xs font-mono opacity-50">Exhibition Design</div>
+    </nav>
+
+    <main>
+        <!-- Hero: 标题区域 (简短介绍，为长图做铺垫) -->
+        <header class="min-h-[60vh] flex flex-col justify-end px-6 md:px-12 pb-20 pt-32 relative text-center items-center">
+            <div class="mb-12 relative z-10 reveal">
+                <span class="highlight-text font-bold text-xs tracking-widest mb-4 flex items-center justify-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-lime-300 animate-pulse"></span>
+                    SUSTAINABLE EXHIBITION
+                </span>
+                
+                <h1 class="flex flex-col items-center">
+                    <span class="project-title-zh text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-600">Linkup 领跑计划</span>
+                    <span class="project-title-en highlight-text text-lg md:text-2xl mt-4">Sustainable Life.</span>
+                </h1>
+
+                <p class="mt-8 text-zinc-400 max-w-lg mx-auto text-sm md:text-base leading-relaxed">
+                    一场关于环保与日常生活的对话。<br>
+                    从视觉到材料，全方位探索“可持续”在展陈空间中的表达。
+                </p>
+                
+                <div class="mt-8 flex justify-center gap-4 text-[10px] uppercase tracking-widest text-zinc-600">
+                    <span class="border border-zinc-800 px-3 py-1 rounded-full">Key Visual</span>
+                    <span class="border border-zinc-800 px-3 py-1 rounded-full">Print</span>
+                    <span class="border border-zinc-800 px-3 py-1 rounded-full">Event</span>
+                </div>
+            </div>
+            
+            <!-- 向下箭头提示 -->
+            <div class="animate-bounce mt-10">
+                <i data-lucide="arrow-down" class="text-lime-300 w-6 h-6"></i>
+            </div>
+        </header>
+
+        <!-- 核心内容：长图展示 -->
+        <section class="pb-32 px-4 md:px-0">
+            <div class="long-image-container reveal">
+                <!-- ⚠️ 请上传您的长图，命名为 linkup_long.jpg -->
+                <!-- 为了预览，我使用了一个占位图链接，请务必替换 -->
+                <img src="assets/images/linkup_long.jpg" 
+                     onerror="this.src='https://placehold.co/1080x2939/1a1a1a/bef264?text=Please+Upload+Your+Long+Image+(1080x2939)'"
+                     class="w-full h-auto block rounded-sm" 
+                     alt="Linkup Exhibition Long Project Image">
+            </div>
+        </section>
+
+        <!-- 底部导航：返回首页 -->
+        <a href="index.html#work" class="block max-w-4xl mx-auto mb-20 px-6 py-12 border-t border-zinc-900 hover:border-lime-300/30 transition cursor-pointer group text-center">
+            <span class="text-zinc-500 text-xs tracking-widest uppercase mb-2 block">Back to</span>
+            <h2 class="text-3xl md:text-4xl font-bold group-hover:text-lime-300 transition">Selected Works</h2>
+            <div class="mt-4 flex justify-center">
+                <i data-lucide="arrow-up" class="w-6 h-6 text-zinc-700 group-hover:text-lime-300 transition transform group-hover:-translate-y-2"></i>
+            </div>
+        </a>
+
+    </main>
+
+    <footer class="px-6 md:px-12 py-12 text-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
+        <p>© 2025 Jackson Jin Portfolio</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // 自定义光标逻辑 (严格控制)
+        const cursor = document.getElementById('cursor');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.querySelectorAll('a, .group, img').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(3)';
+                    cursor.style.mixBlendMode = 'normal';
+                    cursor.style.backgroundColor = 'rgba(190, 242, 100, 0.3)'; // 青柠色光标
+                    cursor.style.backdropFilter = 'blur(2px)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.mixBlendMode = 'difference';
+                    cursor.style.backgroundColor = '#fff';
+                    cursor.style.backdropFilter = 'none';
+                });
+            });
+        } else {
+            cursor.style.display = 'none';
+        }
+
+        // 简单的淡入动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.02 }); // 长图只需露出一点点就开始显示
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
