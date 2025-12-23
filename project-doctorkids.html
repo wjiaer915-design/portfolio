@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小小医生 Little Dr. Bear | IP Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --accent: #38bdf8; 
+            --accent-warm: #fbbf24;
+            --text-primary: #f4f4f5;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--accent); color: #000; }
+
+        /* 滚动条 */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        .project-title-zh {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            font-size: clamp(4rem, 15vw, 15rem);
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .project-title-en {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+        }
+        
+        .warm-text { color: var(--accent-warm); }
+
+        /* 氛围光晕 */
+        .ambient-light {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(3, 105, 161, 0.08) 0%, transparent 50%);
+        }
+
+        /* 动画 */
+        .img-reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .img-reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-light"></div>
+
+    <!-- 导航 -->
+    <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center mix-blend-difference text-white">
+        <a href="index.html" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-sky-400 transition group">
+            <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
+            Back to Index
+        </a>
+        <div class="text-xs font-mono opacity-50">IP Character Design</div>
+    </nav>
+
+    <main>
+        <!-- Hero: 标题区域 -->
+        <header class="min-h-[85vh] flex flex-col justify-end px-6 md:px-12 pb-20 pt-32 relative">
+            <div class="mb-12 relative z-10">
+                <span class="highlight-text font-bold text-xs tracking-widest mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse shadow-[0_0_15px_rgba(56,189,248,0.8)]"></span>
+                    MEDICAL IP CREATION
+                </span>
+                
+                <h1 class="flex flex-col">
+                    <span class="project-title-zh text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-400">小小医生</span>
+                    <span class="project-title-en highlight-text text-lg md:text-3xl mt-2 md:-mt-4 ml-1 md:ml-4">Little Dr. Bear.</span>
+                </h1>
+
+                <div class="mt-12 max-w-2xl">
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">
+                        守护童心的治愈力量。<br>
+                        将专业医疗与<span class="warm-text mx-1">温暖熊设</span>结合，用童趣的视觉语言化解儿童对就医的恐惧感。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-zinc-800/50 pt-8 text-xs uppercase tracking-widest text-zinc-500">
+                <div><span class="block text-zinc-700 mb-1">Role</span><span class="text-white">Lead IP Designer</span></div>
+                <div><span class="block text-zinc-700 mb-1">Concept</span><span class="text-white">Medical / Healing</span></div>
+                <div><span class="block text-zinc-700 mb-1">Tools</span><span class="text-white">Ps, Ai, Blender</span></div>
+                <div><span class="block text-zinc-700 mb-1">Year</span><span class="text-white">2023</span></div>
+            </div>
+        </header>
+
+        <!-- 核心内容区：按照您的6张图定制排版 -->
+        <section class="space-y-32 px-4 md:px-12 pb-32">
+            
+            <!-- 1. 项目背景与流程 (3840 x 3884, ≈1:1) -->
+            <div class="max-w-6xl mx-auto">
+                <div class="mb-8 border-t border-zinc-800 pt-8">
+                    <span class="text-sky-400 text-xs tracking-widest font-bold border border-sky-400 px-2 py-1 rounded-full">PHASE 01</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-4">Project Background & Process</h2>
+                </div>
+                <!-- 比例 aspect-[3840/3884] -->
+                <div class="w-full aspect-[3840/3884] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50">
+                    <img src="assets/images/doc_intro.jpg" class="w-full h-full object-cover" alt="Background and Process">
+                </div>
+            </div>
+
+            <!-- 2. 角色设定 (两竖 + 一横) -->
+            <div class="max-w-full">
+                <div class="mb-8 border-t border-zinc-800 pt-8 px-2 md:px-0">
+                    <span class="text-sky-400 text-xs tracking-widest font-bold border border-sky-400 px-2 py-1 rounded-full">PHASE 02</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-4">Character Design</h2>
+                    <p class="text-zinc-400 mt-2">角色三视图与变装设定</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- 两张竖图并列 (3840 x 5698) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="w-full aspect-[3840/5698] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50">
+                            <img src="assets/images/doc_char_1.jpg" class="w-full h-full object-cover" alt="Character Design 1">
+                        </div>
+                        <div class="w-full aspect-[3840/5698] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50" style="transition-delay: 0.1s">
+                            <img src="assets/images/doc_char_2.jpg" class="w-full h-full object-cover" alt="Character Design 2">
+                        </div>
+                    </div>
+
+                    <!-- 一张横图 (3840 x 2664) -->
+                    <div class="w-full aspect-[3840/2664] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50">
+                        <img src="assets/images/doc_char_var.jpg" class="w-full h-full object-cover" alt="Character Variations">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 应用与海报 (KT板 + 长KV) -->
+            <div class="max-w-full">
+                <div class="mb-8 border-t border-zinc-800 pt-8 px-2 md:px-0">
+                    <span class="text-sky-400 text-xs tracking-widest font-bold border border-sky-400 px-2 py-1 rounded-full">PHASE 03</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-4">Applications & Key Visual</h2>
+                </div>
+                
+                <div class="space-y-16">
+                    <!-- KT板展示 (3840 x 3848, ≈1:1) -->
+                    <div class="max-w-5xl mx-auto w-full aspect-[3840/3848] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50">
+                        <img src="assets/images/doc_kt.jpg" class="w-full h-full object-cover" alt="KT Board Design">
+                    </div>
+
+                    <!-- 长KV海报 (3840 x 10372) - 沉浸式长图 -->
+                    <div class="w-full relative">
+                        <div class="text-center mb-6">
+                            <span class="text-xs text-zinc-500 uppercase tracking-[0.5em]">Scroll for Details ↓</span>
+                        </div>
+                        <!-- 比例 aspect-[3840/10372] -->
+                        <div class="w-full aspect-[3840/10372] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 shadow-2xl shadow-sky-900/10">
+                            <img src="assets/images/doc_kv.jpg" class="w-full h-full object-cover" alt="Long Key Visual Poster">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 底部导航 -->
+        <a href="index.html#work" class="block mt-32 px-6 md:px-12 py-24 border-t border-zinc-900/50 hover:bg-zinc-900/30 transition cursor-pointer group relative overflow-hidden">
+            <div class="relative z-10 flex justify-between items-center">
+                <div>
+                    <span class="text-zinc-500 text-xs tracking-widest uppercase mb-2 block">Next Project</span>
+                    <h2 class="text-3xl md:text-5xl font-bold group-hover:text-sky-400 transition">App Interface Design</h2>
+                </div>
+                <i data-lucide="arrow-right" class="w-12 h-12 text-zinc-700 group-hover:text-sky-400 transition transform group-hover:translate-x-4"></i>
+            </div>
+        </a>
+
+    </main>
+
+    <footer class="px-6 md:px-12 py-12 text-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
+        <p>© 2025 Jackson Jin Portfolio</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.05 }); // 长图只需露出5%就开始显示，避免等待太久
+
+        document.querySelectorAll('.img-reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
