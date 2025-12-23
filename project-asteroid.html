@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一颗小行星 We Echo Each Other | Exhibition Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            /* 低饱和度粉色：温柔而坚定 */
+            --accent: #fda4af; /* Rose-300 */
+            --accent-dim: rgba(253, 164, 175, 0.1);
+            --text-primary: #f4f4f5;
+        }
+
+        /* 强制隐藏默认光标 */
+        html, body, * { cursor: none !important; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--accent); color: #000; }
+
+        /* 滚动条 */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* 字体排版 */
+        .project-title-zh {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2.5rem, 8vw, 8rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .project-title-en {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(253, 164, 175, 0.3);
+        }
+
+        /* 柔和的粉色氛围光晕 */
+        .ambient-light {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(circle at 80% 20%, rgba(253, 164, 175, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 10% 70%, rgba(244, 63, 94, 0.05) 0%, transparent 40%);
+        }
+
+        /* 自定义光标 */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        /* 长图容器 */
+        .long-image-container {
+            width: 100%;
+            max-width: 1080px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            background-color: #1a1a1a;
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div class="ambient-light"></div>
+
+    <!-- 导航 -->
+    <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center mix-blend-difference text-white">
+        <a href="index.html" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-rose-300 transition group">
+            <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
+            Back to Index
+        </a>
+        <div class="text-xs font-mono opacity-50">Exhibition Design</div>
+    </nav>
+
+    <main>
+        <!-- Hero: 标题区域 -->
+        <header class="min-h-[70vh] flex flex-col justify-end px-6 md:px-12 pb-20 pt-32 relative text-center items-center">
+            <div class="mb-12 relative z-10 reveal">
+                <span class="highlight-text font-bold text-xs tracking-widest mb-6 flex items-center justify-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-rose-300 animate-pulse"></span>
+                    PUBLIC WELFARE EXHIBITION
+                </span>
+                
+                <h1 class="flex flex-col items-center gap-2">
+                    <span class="project-title-en text-sm md:text-xl text-rose-300/80">We Echo Each Other</span>
+                    <span class="project-title-zh text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500">点击拒绝羞耻</span>
+                </h1>
+
+                <div class="mt-12 max-w-2xl mx-auto text-zinc-400 text-sm md:text-base leading-loose font-light text-justify md:text-center">
+                    <p class="mb-4">
+                        “听到别人谈论月经，你会觉得羞耻吗？”
+                    </p>
+                    <p>
+                        本展以“月经羞耻”为切口，回望那些被遮蔽的身体感受。我们不替任何人定义“正确感受”，而是邀请每个人在看与被看之间，重新确认自身经验的合法性。愿你在这里听见他人的回声，也听见自己的声音——温柔而坚定。
+                    </p>
+                </div>
+                
+                <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900/50 pt-8 w-full max-w-4xl mx-auto">
+                    <div><span class="block mb-1 text-zinc-800">Role</span>Graphic Designer</div>
+                    <div><span class="block mb-1 text-zinc-800">Focus</span>Banner / Icon / Layout</div>
+                    <div><span class="block mb-1 text-zinc-800">Tools</span>Ps, Ai</div>
+                    <div><span class="block mb-1 text-zinc-800">Host</span>一颗小行星</div>
+                </div>
+            </div>
+            
+            <div class="animate-bounce mt-10">
+                <i data-lucide="arrow-down" class="text-rose-300 w-6 h-6"></i>
+            </div>
+        </header>
+
+        <!-- 核心内容：双长图展示 -->
+        <section class="pb-32 px-4 md:px-6 space-y-32">
+            
+            <!-- Long Image 1: 预热视觉 (1317 x 6771) -->
+            <div class="reveal">
+                <div class="text-center mb-8">
+                    <span class="text-rose-300 text-xs font-mono border border-rose-300/30 px-3 py-1 rounded-full">01 / Pre-heat Visuals</span>
+                    <h2 class="text-xl md:text-2xl font-bold mt-4 text-white">展览预热宣发</h2>
+                    <p class="text-zinc-500 text-sm mt-2">负责推文长图中的 Banner 视觉、装饰图形与版式设计</p>
+                </div>
+                
+                <div class="long-image-container" style="max-width: 800px;"> <!-- 稍微限制宽度，因为原图比例非常细长 -->
+                    <!-- ⚠️ 请上传您的长图，命名为 asteroid_long_1.jpg -->
+                    <img src="assets/images/asteroid_long_1.jpg" 
+                         onerror="this.src='https://placehold.co/1317x6771/1a1a1a/fda4af?text=Upload+Pre-heat+Image+(1317x6771)'"
+                         class="w-full h-auto block rounded-sm opacity-90 hover:opacity-100 transition duration-500" 
+                         alt="Exhibition Pre-heat Long Image">
+                </div>
+            </div>
+
+            <!-- Long Image 2: 活动指引 (1080 x 3836) -->
+            <div class="reveal">
+                <div class="text-center mb-8">
+                    <span class="text-rose-300 text-xs font-mono border border-rose-300/30 px-3 py-1 rounded-full">02 / Event Guide</span>
+                    <h2 class="text-xl md:text-2xl font-bold mt-4 text-white">活动地点指引</h2>
+                    <p class="text-zinc-500 text-sm mt-2">Icon 图标绘制与信息可视化排版</p>
+                </div>
+                
+                <div class="long-image-container">
+                    <!-- ⚠️ 请上传您的长图，命名为 asteroid_long_2.jpg -->
+                    <img src="assets/images/asteroid_long_2.jpg" 
+                         onerror="this.src='https://placehold.co/1080x3836/1a1a1a/fda4af?text=Upload+Guide+Image+(1080x3836)'"
+                         class="w-full h-auto block rounded-sm opacity-90 hover:opacity-100 transition duration-500" 
+                         alt="Exhibition Guide Long Image">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 底部导航：跳转到 Exhibition 列表 -->
+        <a href="index.html#exhibition" class="block max-w-4xl mx-auto mb-20 px-6 py-12 border-t border-zinc-900 hover:border-rose-300/30 transition cursor-pointer group text-center">
+            <span class="text-zinc-500 text-xs tracking-widest uppercase mb-2 block">Back to</span>
+            <h2 class="text-3xl md:text-4xl font-bold group-hover:text-rose-300 transition">Exhibition List</h2>
+            <div class="mt-4 flex justify-center">
+                <i data-lucide="arrow-up" class="w-6 h-6 text-zinc-700 group-hover:text-rose-300 transition transform group-hover:-translate-y-2"></i>
+            </div>
+        </a>
+
+    </main>
+
+    <footer class="px-6 md:px-12 py-12 text-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
+        <p>© 2025 Jackson Jin Portfolio</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // 自定义光标逻辑
+        const cursor = document.getElementById('cursor');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.querySelectorAll('a, .long-image-container').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(3)';
+                    cursor.style.mixBlendMode = 'normal';
+                    cursor.style.backgroundColor = 'rgba(253, 164, 175, 0.3)'; // 粉色光标
+                    cursor.style.backdropFilter = 'blur(2px)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.mixBlendMode = 'difference';
+                    cursor.style.backgroundColor = '#fff';
+                    cursor.style.backdropFilter = 'none';
+                });
+            });
+        } else {
+            cursor.style.display = 'none';
+        }
+
+        // 简单的淡入动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.02 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
