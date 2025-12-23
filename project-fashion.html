@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 时尚顾问 Fashion Stylist | UI/UX Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505; 
+            --accent: #a78bfa; 
+            --accent-glow: #8b5cf6;
+            --text-primary: #f4f4f5;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--accent); color: #000; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        .project-title-zh {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3.5rem, 12vw, 12rem);
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+        }
+
+        .project-title-en {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .highlight-text {
+            color: var(--accent);
+            text-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
+        }
+
+        .ambient-light {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
+            background: radial-gradient(circle at 80% 10%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 5% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 40%);
+        }
+
+        .parallax-img {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .img-reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .img-reveal.active { opacity: 1; transform: translateY(0); }
+        
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        /* 宽跨页比例 */
+        .aspect-spread {
+            aspect-ratio: 594 / 210;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div class="ambient-light"></div>
+
+    <!-- 导航 -->
+    <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center mix-blend-difference text-white">
+        <a href="index.html" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-violet-400 transition group">
+            <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
+            Back to Index
+        </a>
+        <div class="text-xs font-mono opacity-50">UI/UX & Product Design</div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <header class="min-h-[85vh] flex flex-col justify-end px-6 md:px-12 pb-20 pt-32 relative">
+            <div class="mb-12 relative z-10">
+                <span class="highlight-text font-bold text-xs tracking-widest mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-violet-400 animate-pulse shadow-[0_0_15px_rgba(167,139,250,0.8)]"></span>
+                    AI PRODUCT DESIGN
+                </span>
+                
+                <h1 class="flex flex-col">
+                    <span class="project-title-zh text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-500">AI 时尚顾问</span>
+                    <span class="project-title-en highlight-text text-lg md:text-3xl mt-2 md:-mt-4 ml-1 md:ml-4">Fashion Stylist.</span>
+                </h1>
+
+                <div class="mt-12 max-w-3xl">
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">
+                        解决“无法试穿”的线上购物痛点。<br>
+                        基于 <span class="highlight-text mx-1">3D Avatar</span> 与用户画像的智能穿搭推荐系统，提供更直观、个性化的虚拟试搭体验。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-zinc-800/50 pt-8 text-xs uppercase tracking-widest text-zinc-500">
+                <div><span class="block text-zinc-700 mb-1">Role</span><span class="text-white">Product Designer / UI</span></div>
+                <div><span class="block text-zinc-700 mb-1">Keywords</span><span class="text-white">AI / Virtual Try-on / 3D</span></div>
+                <div><span class="block text-zinc-700 mb-1">Tools</span><span class="text-white">Adobe XD, Figma, PS</span></div>
+                <div><span class="block text-zinc-700 mb-1">Year</span><span class="text-white">2024</span></div>
+            </div>
+        </header>
+
+        <!-- Banner -->
+        <!-- ⚠️ 请上传 ui_banner.jpg -->
+        <section class="w-full h-[60vh] md:h-[80vh] parallax-img bg-zinc-800 relative mb-32" 
+                 style="background-image: url('assets/images/ui_banner.jpg');">
+             <div class="absolute inset-0 bg-violet-900/20 mix-blend-overlay"></div>
+             <div class="absolute bottom-10 right-10 text-xs text-violet-400 uppercase tracking-widest">Digital Experience</div>
+        </section>
+
+        <!-- 核心内容区 -->
+        <section class="space-y-32 px-4 md:px-12 pb-32">
+            
+            <!-- PHASE 01: 前期调研 (5张图 - 2806x992 宽幅适配版) -->
+            <div class="max-w-full">
+                <div class="mb-8 border-t border-zinc-800 pt-8 px-2 md:px-0">
+                    <span class="text-violet-400 text-xs tracking-widest font-bold border border-violet-400 px-2 py-1 rounded-full">PHASE 01</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-4">Research & Strategy</h2>
+                    <p class="text-zinc-400 mt-2">产品策略梳理与用户需求分析</p>
+                </div>
+                
+                <!-- 布局修改：2列网格，最后一张跨栏 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- 图 1 -->
+                    <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
+                        <img src="assets/images/ui_research_1.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 1">
+                    </div>
+                    
+                    <!-- 图 2 -->
+                    <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group" style="transition-delay: 0.1s">
+                        <img src="assets/images/ui_research_2.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 2">
+                    </div>
+                    
+                    <!-- 图 3 -->
+                    <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
+                        <img src="assets/images/ui_research_3.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 3">
+                    </div>
+                    
+                    <!-- 图 4 -->
+                    <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group" style="transition-delay: 0.1s">
+                        <img src="assets/images/ui_research_4.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 4">
+                    </div>
+
+                    <!-- 图 5 (全宽压轴) -->
+                    <div class="md:col-span-2 aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
+                        <img src="assets/images/ui_research_5.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 5">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PHASE 02: 低保真原型 (2张) -->
+            <div class="max-w-full">
+                <div class="mb-8 border-t border-zinc-800 pt-8 px-2 md:px-0">
+                    <span class="text-violet-400 text-xs tracking-widest font-bold border border-violet-400 px-2 py-1 rounded-full">PHASE 02</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-4">Lo-Fi Prototypes</h2>
+                    <p class="text-zinc-400 mt-2">信息架构与交互流程探索</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
+                        <img src="assets/images/ui_lofi_1.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="LoFi 1">
+                    </div>
+                    <div class="aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group" style="transition-delay: 0.1s">
+                        <img src="assets/images/ui_lofi_2.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="LoFi 2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 03: 高保真界面 (2张 - 巨幕展示) -->
+            <div class="max-w-full">
+                <div class="mb-8 border-t border-zinc-800 pt-8 px-2 md:px-0">
+                    <span class="text-violet-400 text-xs tracking-widest font-bold border border-violet-400 px-2 py-1 rounded-full">PHASE 03</span>
+                    <h2 class="text-3xl md:text-5xl font-bold mt-4 text-white">Hi-Fi Interface</h2>
+                    <p class="text-zinc-400 mt-2 text-lg">核心界面设计与 3D 虚拟形象展示</p>
+                </div>
+                
+                <div class="space-y-12">
+                    <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
+                        <img src="assets/images/ui_hifi_1.jpg" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="HiFi 1">
+                        <div class="absolute bottom-6 left-6 px-4 py-2 bg-black/60 backdrop-blur-md rounded text-violet-300 text-xs font-mono uppercase">Core Features</div>
+                    </div>
+                    
+                    <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
+                        <img src="assets/images/ui_hifi_2.jpg" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="HiFi 2">
+                        <div class="absolute bottom-6 left-6 px-4 py-2 bg-black/60 backdrop-blur-md rounded text-violet-300 text-xs font-mono uppercase">3D Avatar System</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 04: 物料应用 (2张 - 巨幕展示) -->
+            <div class="max-w-full">
+                <div class="mb-8 border-t border-zinc-800 pt-8 px-2 md:px-0">
+                    <span class="text-violet-400 text-xs tracking-widest font-bold border border-violet-400 px-2 py-1 rounded-full">PHASE 04</span>
+                    <h2 class="text-3xl md:text-5xl font-bold mt-4 text-white">Applications</h2>
+                    <p class="text-zinc-400 mt-2 text-lg">关键页面展示与动效规范</p>
+                </div>
+                
+                <div class="space-y-12">
+                    <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
+                        <img src="assets/images/ui_app_1.jpg" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="App 1">
+                    </div>
+                    
+                    <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
+                        <img src="assets/images/ui_app_2.jpg" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="App 2">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 底部导航：返回首页 -->
+        <a href="index.html#work" class="block mt-32 px-6 md:px-12 py-24 border-t border-zinc-900/50 hover:bg-zinc-900/30 transition cursor-pointer group relative overflow-hidden">
+            <div class="relative z-10 flex justify-between items-center">
+                <div>
+                    <span class="text-zinc-500 text-xs tracking-widest uppercase mb-2 block">Back to</span>
+                    <h2 class="text-3xl md:text-5xl font-bold group-hover:text-violet-400 transition">Selected Works</h2>
+                </div>
+                <i data-lucide="arrow-up-left" class="w-12 h-12 text-zinc-700 group-hover:text-violet-400 transition transform group-hover:-translate-y-2 group-hover:-translate-x-2"></i>
+            </div>
+        </a>
+
+    </main>
+
+    <footer class="px-6 md:px-12 py-12 text-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
+        <p>© 2025 Jackson Jin Portfolio</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        const cursor = document.getElementById('cursor');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.querySelectorAll('a, .group, img').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(3)';
+                    cursor.style.mixBlendMode = 'normal';
+                    cursor.style.backgroundColor = 'rgba(167, 139, 250, 0.3)';
+                    cursor.style.backdropFilter = 'blur(2px)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.mixBlendMode = 'difference';
+                    cursor.style.backgroundColor = '#fff';
+                    cursor.style.backdropFilter = 'none';
+                });
+            });
+        } else {
+            cursor.style.display = 'none';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.img-reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
