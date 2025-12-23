@@ -21,6 +21,12 @@
             font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
             overflow-x: hidden;
         }
+       /* ===== custom cursor: hide system cursor (desktop only) ===== */
+@media (pointer: fine) {
+  body, body * {
+    cursor: none !important;
+  }
+}
 
         ::selection { background: var(--accent); color: #000; }
 
@@ -295,3 +301,4 @@
 </body>
 
 </html>
+
