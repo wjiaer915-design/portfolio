@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Creative Lab | Jackson Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --accent: #818cf8;
+      --text-primary: #f4f4f5;
+      --text-secondary: #a1a1aa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    @media (pointer: fine) {
+      body, body * {
+        cursor: none !important;
+      }
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .hero-title {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 11rem);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+    }
+
+    .outline-text {
+      -webkit-text-stroke: 1px rgba(255,255,255,0.22);
+      color: transparent;
+    }
+
+    #cursor {
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 0.1s, background-color 0.2s, backdrop-filter 0.2s;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #000;
+    }
+
+    /* ===== Native Scrollbar Style ===== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(129, 140, 248, 0.55);
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(129, 140, 248, 0.9);
+    }
+
+    .lab-card {
+      transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      filter: grayscale(100%);
+    }
+
+    .lab-card:hover {
+      filter: grayscale(0%);
+      transform: scale(1.015);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-label {
+      font-family: 'Syncopate', sans-serif;
+      letter-spacing: 0.25em;
+    }
+  </style>
+</head>
+
+<body class="grid-bg">
+
+  <div id="cursor"></div>
+
+  <!-- 顶部导航 -->
+  <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center mix-blend-difference text-white">
+    <a href="index.html#creative-lab" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-indigo-400 transition group">
+      <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
+      Back to Index
+    </a>
+
+    <div class="text-xs font-mono opacity-50">
+      Daily Visual Experiments
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- Hero -->
+    <header class="min-h-[88vh] flex flex-col justify-end px-6 md:px-12 pb-20 pt-32 relative">
+      <div class="mb-12 relative z-10 reveal active">
+        <div class="flex items-center gap-4 mb-8">
+          <span class="w-12 h-[1px] bg-indigo-500"></span>
+          <p class="text-[10px] uppercase tracking-[0.4em] text-indigo-400">
+            Branding / AIGC / Typography / Poster / Illustration
+          </p>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="block">Creative</span>
+          <span class="block outline-text">Lab.</span>
+        </h1>
+
+        <div class="mt-12 grid md:grid-cols-12 gap-12 border-t border-zinc-800 pt-10">
+          <div class="md:col-span-7">
+            <p class="text-2xl md:text-4xl leading-snug text-zinc-300 font-light">
+              正式项目之外的视觉实验档案。<br>
+              在风格、材质、文字与叙事之间持续练习。
+            </p>
+          </div>
+
+          <div class="md:col-span-5">
+            <p class="text-zinc-500 text-sm leading-loose">
+              这里收录了我在品牌版式、AIGC 材质、中文字体、文化主题海报与插画叙事方面的日常练习。
+              这些作品不完全以商业项目为导向，而是作为视觉语言、材质表现和版式节奏的持续探索。
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 01 Brand & Editorial Visual -->
+    <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
+      <div class="reveal mb-12">
+        <span class="section-label text-indigo-400 text-xs font-bold uppercase">
+          01 / Brand & Editorial Visual
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-bold mt-5 tracking-tight">
+          品牌视觉与版式实验
+        </h2>
+
+        <p class="text-zinc-500 mt-4 max-w-2xl leading-loose text-sm">
+          以品牌展板、文字编排与图像肌理为核心，探索品牌叙事在平面空间中的视觉展开方式。
+        </p>
+      </div>
+
+      <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+        <img src="assets/images/lab-brand-board.jpg"
+             class="w-full h-auto block"
+             alt="Scenery and Mountains Brand Board">
+      </div>
+    </section>
+
+    <!-- 02 AIGC Material Experiments -->
+    <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
+      <div class="reveal mb-12">
+        <span class="section-label text-indigo-400 text-xs font-bold uppercase">
+          02 / AIGC Material Experiments
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-bold mt-5 tracking-tight">
+          AIGC 材质与物体形态实验
+        </h2>
+
+        <p class="text-zinc-500 mt-4 max-w-2xl leading-loose text-sm">
+          通过生成式图像探索物体材质、质感变化与视觉识别，包括玻璃、软糖、云朵、金属、果冻与布料等形态。
+        </p>
+      </div>
+
+      <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+        <img src="assets/images/lab-aigc-chess.jpg"
+             class="w-full h-auto block"
+             alt="AIGC Material Chess Set">
+      </div>
+    </section>
+
+    <!-- 03 Chinese Typography Poster -->
+    <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
+      <div class="reveal mb-12">
+        <span class="section-label text-indigo-400 text-xs font-bold uppercase">
+          03 / Chinese Typography Poster
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-bold mt-5 tracking-tight">
+          中文字体与东方视觉实验
+        </h2>
+
+        <p class="text-zinc-500 mt-4 max-w-2xl leading-loose text-sm">
+          围绕中文竖排、草本意象、纸张肌理与字体气质展开，尝试在传统语汇与现代平面编排之间建立视觉张力。
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-herbal-mint.jpg" class="w-full h-auto block" alt="Mint Typography Poster">
+        </div>
+
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-herbal-rosemary.jpg" class="w-full h-auto block" alt="Rosemary Typography Poster">
+        </div>
+
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-nature-typography.jpg" class="w-full h-auto block" alt="Nature Typography Poster">
+        </div>
+
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-grass-human.jpg" class="w-full h-auto block" alt="Grass and Human World Poster">
+        </div>
+
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden md:col-span-2">
+          <img src="assets/images/lab-macau-poster.png" class="w-full h-auto block" alt="Macau 25th Anniversary Poster">
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Cultural & Public Poster -->
+    <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
+      <div class="reveal mb-12">
+        <span class="section-label text-indigo-400 text-xs font-bold uppercase">
+          04 / Cultural & Public Poster
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-bold mt-5 tracking-tight">
+          文化主题与公共议题海报
+        </h2>
+
+        <p class="text-zinc-500 mt-4 max-w-2xl leading-loose text-sm">
+          面向文化传播、公共议题与竞赛命题的主题海报练习，强调视觉冲击力、信息聚焦与情绪表达。
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-defense-poster.png" class="w-full h-auto block" alt="National Defense Poster">
+        </div>
+
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-museum-day.jpg" class="w-full h-auto block" alt="World Museum Day Poster">
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Illustrated Poster -->
+    <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
+      <div class="reveal mb-12">
+        <span class="section-label text-indigo-400 text-xs font-bold uppercase">
+          05 / Illustrated Poster
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-bold mt-5 tracking-tight">
+          插画叙事海报
+        </h2>
+
+        <p class="text-zinc-500 mt-4 max-w-2xl leading-loose text-sm">
+          以场景、人物与系列化画面为主要内容，探索插画在主题视觉、空间叙事与系列传播中的应用方式。
+        </p>
+      </div>
+
+      <div class="space-y-10">
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-illustration-01.png" class="w-full h-auto block" alt="Illustrated Poster Series 01">
+        </div>
+
+        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
+          <img src="assets/images/lab-illustration-02.png" class="w-full h-auto block" alt="Illustrated Poster Series 02">
+        </div>
+      </div>
+    </section>
+
+    <!-- 底部导航 -->
+    <a href="index.html#creative-lab"
+       class="block mt-16 px-6 md:px-12 py-16 border-t border-zinc-900/50 hover:bg-zinc-900/30 transition cursor-pointer group relative overflow-hidden">
+      <div class="relative z-10 flex justify-between items-center">
+        <div>
+          <span class="text-zinc-500 text-xs tracking-widest uppercase mb-2 block">
+            Back to
+          </span>
+
+          <h2 class="text-3xl md:text-5xl font-bold group-hover:text-indigo-400 transition">
+            Creative Lab
+          </h2>
+        </div>
+
+        <i data-lucide="arrow-up-left" class="w-12 h-12 text-zinc-700 group-hover:text-indigo-400 transition transform group-hover:-translate-y-2 group-hover:-translate-x-2"></i>
+      </div>
+    </a>
+
+  </main>
+
+  <footer class="px-6 md:px-12 py-12 text-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
+    <p>© 2025 Jackson Jin Portfolio</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const cursor = document.getElementById('cursor');
+
+    if (cursor && window.matchMedia("(pointer: fine)").matches) {
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      document.querySelectorAll('a, button, .lab-card, img, .group').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.style.transform = 'translate(-50%, -50%) scale(3)';
+          cursor.style.mixBlendMode = 'normal';
+          cursor.style.backgroundColor = 'rgba(129, 140, 248, 0.3)';
+          cursor.style.backdropFilter = 'blur(2px)';
+        });
+
+        el.addEventListener('mouseleave', () => {
+          cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursor.style.mixBlendMode = 'difference';
+          cursor.style.backgroundColor = '#fff';
+          cursor.style.backdropFilter = 'none';
+        });
+      });
+    } else if (cursor) {
+      cursor.style.display = 'none';
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
