@@ -106,18 +106,36 @@
             text-shadow: 0 0 20px rgba(110, 231, 183, 0.3);
         }
 
-        /* Section Number Styling */
-        .section-num {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 2px 8px;
-            border-radius: 999px;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
+       /* Section Number Styling */
+.section-num {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 2px 8px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* ===== Native Scrollbar Style ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(110, 231, 183, 0.55);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(110, 231, 183, 0.9);
+}
     </style>
 </head>
 <body>
