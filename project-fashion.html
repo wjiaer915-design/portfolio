@@ -85,9 +85,41 @@
         }
 
         /* 宽跨页比例 */
-        .aspect-spread {
-            aspect-ratio: 594 / 210;
-        }
+     /* 宽跨页比例：桌面端保持横向跨页展示 */
+.aspect-spread {
+  aspect-ratio: 594 / 210;
+}
+
+/* 手机端跨页图优化：改为横向可滑动，不再压成细条 */
+@media (max-width: 768px) {
+  .mobile-spread-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-spread-scroll img {
+    width: 980px;
+    max-width: none;
+    height: auto;
+    display: block;
+  }
+
+  .mobile-spread-scroll::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .mobile-spread-scroll::-webkit-scrollbar-track {
+    background: #111;
+  }
+
+  .mobile-spread-scroll::-webkit-scrollbar-thumb {
+    background: rgba(167, 139, 250, 0.7);
+    border-radius: 999px;
+  }
+}
     </style>
 </head>
 <body>
