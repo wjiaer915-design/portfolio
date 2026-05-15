@@ -145,9 +145,27 @@
 <a href="#exhibition" class="hover:text-indigo-400 transition">Exhibitions</a>
 <a href="#archive" class="hover:text-indigo-400 transition">Archive</a>
         </div>
-        <button class="md:hidden text-white"><i data-lucide="menu"></i></button>
+<button id="mobile-menu-btn" class="md:hidden text-white relative z-[60]" aria-label="打开菜单">
+  <i data-lucide="menu"></i>
+</button>
     </nav>
+<!-- Mobile Menu -->
+<div id="mobile-menu"
+     class="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl hidden md:hidden px-8 pt-28 pb-12">
+  <div class="flex flex-col gap-8 text-2xl font-bold uppercase tracking-widest">
+    <a href="#profile" class="mobile-link hover:text-indigo-400 transition">Info</a>
+    <a href="#work" class="mobile-link hover:text-indigo-400 transition">Selected Works</a>
+    <a href="#creative-lab" class="mobile-link hover:text-indigo-400 transition">Creative Lab</a>
+    <a href="#exhibition" class="mobile-link hover:text-indigo-400 transition">Exhibitions</a>
+    <a href="#archive" class="mobile-link hover:text-indigo-400 transition">Archive</a>
+  </div>
 
+  <div class="absolute bottom-10 left-8 right-8 border-t border-zinc-800 pt-6">
+    <p class="text-[10px] uppercase tracking-[0.35em] text-zinc-600">
+      Jackson.J Portfolio
+    </p>
+  </div>
+</div>
     <main>
         <!-- Hero Section -->
         <section class="h-[90vh] flex flex-col justify-center px-6 md:px-12 pt-20">
@@ -758,6 +776,23 @@
     <script>
         lucide.createIcons();
 
+        // Mobile menu toggle
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileLinks = document.querySelectorAll('.mobile-link');
+
+if (mobileMenuBtn && mobileMenu) {
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+}
+        
         // 简单的自定义光标逻辑
         const cursor = document.getElementById('cursor');
         
