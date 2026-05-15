@@ -92,30 +92,23 @@
 
 /* ===== Mobile Image Fix: show full original image ===== */
 @media (max-width: 768px) {
-  .aspect-spread {
+  .img-reveal {
     aspect-ratio: auto !important;
     height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
   }
 
-  .aspect-spread img {
+  .img-reveal img {
     width: 100% !important;
     height: auto !important;
     object-fit: contain !important;
-    display: block;
-  }
-}
-
-  .mobile-spread-scroll::-webkit-scrollbar {
-    height: 4px;
+    display: block !important;
   }
 
-  .mobile-spread-scroll::-webkit-scrollbar-track {
-    background: #111;
-  }
-
-  .mobile-spread-scroll::-webkit-scrollbar-thumb {
-    background: rgba(167, 139, 250, 0.7);
-    border-radius: 999px;
+  .aspect-spread {
+    aspect-ratio: auto !important;
+    height: auto !important;
   }
 }
     </style>
@@ -276,17 +269,24 @@
 
         </section>
 
-       <!-- 底部导航：跳转到下一个项目 -->
-<a href="project4.html" class="block mt-32 px-6 md:px-12 py-24 border-t border-zinc-900/50 hover:bg-zinc-900/30 transition cursor-pointer group relative overflow-hidden">
-    <div class="relative z-10 flex justify-between items-center">
+    <!-- 底部导航：跳转到下一个项目 -->
+<a href="project4.html" class="block mt-24 md:mt-32 px-6 md:px-12 py-20 md:py-24 border-t border-zinc-900/50 hover:bg-zinc-900/30 transition cursor-pointer group relative overflow-hidden">
+    <div class="relative z-10 flex justify-between items-center gap-6">
         <div>
-            <span class="text-zinc-500 text-xs tracking-widest uppercase mb-2 block">Next Project</span>
-            <h2 class="text-3xl md:text-5xl font-bold group-hover:text-violet-400 transition">
-                小宇宙世界睡眠日 H5 营销活动设计
+            <span class="text-zinc-500 text-xs tracking-widest uppercase mb-3 block">
+                Next Project
+            </span>
+
+            <h2 class="text-3xl md:text-5xl font-bold uppercase tracking-tight group-hover:text-violet-400 transition leading-tight">
+                The Sleep Wave Project
             </h2>
+
+            <p class="text-zinc-500 text-xs md:text-sm uppercase tracking-widest mt-4">
+                AIGC Campaign Design / H5 Experience
+            </p>
         </div>
 
-        <i data-lucide="arrow-right" class="w-12 h-12 text-zinc-700 group-hover:text-violet-400 transition transform group-hover:translate-x-2"></i>
+        <i data-lucide="arrow-right" class="w-10 h-10 md:w-12 md:h-12 text-zinc-700 group-hover:text-violet-400 transition transform group-hover:translate-x-2 shrink-0"></i>
     </div>
 </a>
 
