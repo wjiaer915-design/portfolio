@@ -133,8 +133,8 @@
 </head>
 <body class="grid-bg">
 
+    <div id="top"></div>
     <div id="cursor"></div>
-
     <!-- 导航 -->
     <nav class="fixed top-0 w-full z-50 mix-blend-difference px-6 md:px-12 py-8 flex justify-between items-center backdrop-blur-sm bg-black/10">
         <div class="text-xl font-bold tracking-tighter uppercase">Jackson.J</div>
@@ -636,16 +636,34 @@
         </section>
 
         <!-- Footer -->
-        <footer class="px-6 md:px-12 py-12 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
-            <div class="mb-4 md:mb-0">
-                <p>© 2025 Jackson Jin Portfolio</p>
-            </div>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-white transition">WeChat</a>
-                <a href="#" class="hover:text-white transition">Email</a>
-                <a href="#" class="hover:text-white transition">RedBook</a>
-            </div>
-        </footer>
+      <footer class="px-6 md:px-12 py-12 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
+  <div class="mb-6 md:mb-0">
+    <p>© 2026 Jackson Jin Portfolio</p>
+  </div>
+
+  <div class="flex flex-wrap justify-center md:justify-end gap-6">
+    <a href="mailto:wjiaer915@gmail.com" class="hover:text-white transition">
+      Email
+    </a>
+
+    <a href="https://www.xiaohongshu.com/user/profile/你的ID"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="hover:text-white transition">
+      RedBook
+    </a>
+
+    <button type="button"
+            onclick="navigator.clipboard.writeText('你的微信号'); alert('微信号已复制');"
+            class="hover:text-white transition uppercase tracking-widest">
+      WeChat
+    </button>
+
+    <a href="#top" class="hover:text-white transition">
+      Back To Top
+    </a>
+  </div>
+</footer>
     </main>
 
     <script>
