@@ -171,13 +171,32 @@
 <!-- Mobile Menu -->
 <div id="mobile-menu"
      class="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl hidden md:hidden px-8 pt-28 pb-12">
-  <div class="flex flex-col gap-8 text-2xl font-bold uppercase tracking-widest">
-    <a href="#profile" class="mobile-link hover:text-indigo-400 transition">Info</a>
-    <a href="#work" class="mobile-link hover:text-indigo-400 transition">Selected Works</a>
-    <a href="#creative-lab" class="mobile-link hover:text-indigo-400 transition">Creative Lab</a>
-    <a href="#exhibition" class="mobile-link hover:text-indigo-400 transition">Exhibitions</a>
-    <a href="#archive" class="mobile-link hover:text-indigo-400 transition">Archive</a>
-  </div>
+<div class="flex flex-col gap-8 font-bold uppercase tracking-widest">
+  <a href="#profile" class="mobile-link group hover:text-indigo-400 transition">
+    <span class="block text-4xl">Info</span>
+    <span class="block mt-2 text-sm text-zinc-500 tracking-[0.25em] group-hover:text-indigo-400 transition">关于我</span>
+  </a>
+
+  <a href="#work" class="mobile-link group hover:text-indigo-400 transition">
+    <span class="block text-4xl">Selected Works</span>
+    <span class="block mt-2 text-sm text-zinc-500 tracking-[0.25em] group-hover:text-indigo-400 transition">精选项目</span>
+  </a>
+
+  <a href="#creative-lab" class="mobile-link group hover:text-indigo-400 transition">
+    <span class="block text-4xl">Creative Lab</span>
+    <span class="block mt-2 text-sm text-zinc-500 tracking-[0.25em] group-hover:text-indigo-400 transition">视觉实验</span>
+  </a>
+
+  <a href="#exhibition" class="mobile-link group hover:text-indigo-400 transition">
+    <span class="block text-4xl">Exhibitions</span>
+    <span class="block mt-2 text-sm text-zinc-500 tracking-[0.25em] group-hover:text-indigo-400 transition">展览项目</span>
+  </a>
+
+  <a href="#archive" class="mobile-link group hover:text-indigo-400 transition">
+    <span class="block text-4xl">Archive</span>
+    <span class="block mt-2 text-sm text-zinc-500 tracking-[0.25em] group-hover:text-indigo-400 transition">档案荣誉</span>
+  </a>
+</div>
 
   <div class="absolute bottom-10 left-8 right-8 border-t border-zinc-800 pt-6">
     <p class="text-[10px] uppercase tracking-[0.35em] text-zinc-600">
