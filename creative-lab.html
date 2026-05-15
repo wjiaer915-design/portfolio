@@ -105,6 +105,26 @@
       transform: scale(1.015);
     }
 
+    /* ===== Poster Display Frame ===== */
+.poster-frame {
+  width: 100%;
+  height: 64vh;
+  max-height: 680px;
+  min-height: 460px;
+  background: #111;
+  border: 1px solid #27272a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.poster-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+    
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -190,11 +210,10 @@
         </p>
       </div>
 
-      <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-        <img src="assets/images/lab-brand-board.jpg"
-             class="w-full h-auto block"
-             alt="Scenery and Mountains Brand Board">
-      </div>
+     <div class="reveal lab-card brand-frame">
+  <img src="assets/images/lab-brand-board.jpg"
+       alt="Scenery and Mountains Brand Board">
+</div>
     </section>
 
     <!-- 02 AIGC Material Experiments -->
@@ -236,27 +255,27 @@
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-herbal-mint.jpg" class="w-full h-auto block" alt="Mint Typography Poster">
-        </div>
+    <div class="grid md:grid-cols-2 gap-8">
+  <div class="reveal lab-card poster-frame">
+    <img src="assets/images/lab-herbal-mint.jpg" alt="Mint Typography Poster">
+  </div>
 
-        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-herbal-rosemary.jpg" class="w-full h-auto block" alt="Rosemary Typography Poster">
-        </div>
+  <div class="reveal lab-card poster-frame">
+    <img src="assets/images/lab-herbal-rosemary.jpg" alt="Rosemary Typography Poster">
+  </div>
 
-        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-nature-typography.jpg" class="w-full h-auto block" alt="Nature Typography Poster">
-        </div>
+  <div class="reveal lab-card poster-frame">
+    <img src="assets/images/lab-nature-typography.jpg" alt="Nature Typography Poster">
+  </div>
 
-        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-grass-human.jpg" class="w-full h-auto block" alt="Grass and Human World Poster">
-        </div>
+  <div class="reveal lab-card poster-frame">
+    <img src="assets/images/lab-grass-human.jpg" alt="Grass and Human World Poster">
+  </div>
 
-        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden md:col-span-2">
-          <img src="assets/images/lab-macau-poster.png" class="w-full h-auto block" alt="Macau 25th Anniversary Poster">
-        </div>
-      </div>
+  <div class="reveal lab-card poster-frame md:col-span-2">
+    <img src="assets/images/lab-macau-poster.png" alt="Macau 25th Anniversary Poster">
+  </div>
+</div>
     </section>
 
     <!-- 04 Cultural & Public Poster -->
@@ -275,15 +294,15 @@
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-defense-poster.png" class="w-full h-auto block" alt="National Defense Poster">
-        </div>
+    <div class="grid md:grid-cols-2 gap-8">
+  <div class="reveal lab-card poster-frame">
+    <img src="assets/images/lab-defense-poster.png" alt="National Defense Poster">
+  </div>
 
-        <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-museum-day.jpg" class="w-full h-auto block" alt="World Museum Day Poster">
-        </div>
-      </div>
+  <div class="reveal lab-card poster-frame">
+    <img src="assets/images/lab-museum-day.jpg" alt="World Museum Day Poster">
+  </div>
+</div>
     </section>
 
     <!-- 05 Illustrated Poster -->
