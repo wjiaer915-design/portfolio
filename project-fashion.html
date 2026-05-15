@@ -90,22 +90,20 @@
   aspect-ratio: 594 / 210;
 }
 
-/* 手机端跨页图优化：改为横向可滑动，不再压成细条 */
+/* ===== Mobile Image Fix: show full original image ===== */
 @media (max-width: 768px) {
-  .mobile-spread-scroll {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-radius: 0.5rem;
-    -webkit-overflow-scrolling: touch;
+  .aspect-spread {
+    aspect-ratio: auto !important;
+    height: auto !important;
   }
 
-  .mobile-spread-scroll img {
-    width: 980px;
-    max-width: none;
-    height: auto;
+  .aspect-spread img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
     display: block;
   }
+}
 
   .mobile-spread-scroll::-webkit-scrollbar {
     height: 4px;
