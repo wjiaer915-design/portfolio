@@ -129,24 +129,6 @@
             transform: translateX(5px) rotate(-45deg);
             opacity: 1;
         }
-        
-        /* ===== Page Transition 页面跳转过渡 ===== */
-#page-transition {
-    position: fixed;
-    inset: 0;
-    background: #050505;
-    z-index: 99999;
-    pointer-events: none;
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease;
-}
-
-#page-transition.active {
-    opacity: 1;
-    transform: scaleY(1);
-}
     </style>
 </head>
 <body class="grid-bg">
@@ -837,8 +819,6 @@
 </footer>
     </main>
 
-    <div id="page-transition"></div>
-
     <script>
         lucide.createIcons();
 
@@ -899,36 +879,6 @@ if (mobileMenuBtn && mobileMenu) {
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // 页面跳转过渡动画
-const pageTransition = document.getElementById('page-transition');
-
-document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-
-        // 不拦截锚点、邮箱、电话、新窗口链接、下载链接
-        if (
-            !href ||
-            href.startsWith('#') ||
-            href.startsWith('mailto:') ||
-            href.startsWith('tel:') ||
-            this.target === '_blank' ||
-            this.hasAttribute('download')
-        ) {
-            return;
-        }
-
-        e.preventDefault();
-
-        if (pageTransition) {
-            pageTransition.classList.add('active');
-        }
-
-        setTimeout(() => {
-            window.location.href = href;
-        }, 500);
-    });
-});
     </script>
 </body>
 
