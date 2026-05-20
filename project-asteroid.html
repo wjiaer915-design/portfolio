@@ -66,17 +66,26 @@
         }
 
         /* 自定义光标 */
-        #cursor {
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.1s;
-        }
+   /* 自定义光标 */
+#cursor {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+#cursor.cursor-ready {
+    opacity: 1;
+}
 
         /* 长图容器 */
         .long-image-container {
@@ -207,13 +216,13 @@
 });
             document.querySelectorAll('a, .long-image-container').forEach(el => {
                 el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(3)';
+                   cursor.style.transform = 'translate(-50%, -50%) scale(3)';
                     cursor.style.mixBlendMode = 'normal';
                     cursor.style.backgroundColor = 'rgba(253, 164, 175, 0.3)'; // 粉色光标
                     cursor.style.backdropFilter = 'blur(2px)';
                 });
                 el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
+                   cursor.style.transform = 'translate(-50%, -50%) scale(1)';
                     cursor.style.mixBlendMode = 'difference';
                     cursor.style.backgroundColor = '#fff';
                     cursor.style.backdropFilter = 'none';
