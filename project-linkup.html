@@ -192,10 +192,11 @@ html {
         // 自定义光标逻辑 (严格控制)
         const cursor = document.getElementById('cursor');
         if (window.matchMedia("(pointer: fine)").matches) {
-            document.addEventListener('mousemove', e => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
+           document.addEventListener('mousemove', e => {
+    cursor.classList.add('cursor-ready');
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
             document.querySelectorAll('a, .group, img').forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.style.transform = 'scale(3)';
