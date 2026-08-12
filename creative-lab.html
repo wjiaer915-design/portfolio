@@ -68,8 +68,10 @@
       pointer-events: none;
       z-index: 9999;
       mix-blend-mode: difference;
-      transform: translate(-50%, -50%) scale(1);
-      transition: transform 0.1s, background-color 0.2s, backdrop-filter 0.2s;
+      translate: -100px -100px;
+      transform: translate(-50%, -50%) scale(var(--cursor-scale, 1));
+      transition: transform 0.1s, background-color 0.2s;
+      will-change: translate, transform;
     }
 
     ::selection {
@@ -247,10 +249,10 @@
       border: 1px solid rgba(255,255,255,.1);
       background: #111114;
       isolation: isolate;
-      contain: paint;
+      contain: layout paint;
       transition:
-        flex-grow .4s cubic-bezier(.2,.75,.25,1),
-        border-color .25s ease;
+        flex-grow .3s cubic-bezier(.22,.7,.22,1),
+        border-color .2s ease;
     }
 
     .ag-panel::after {
@@ -268,23 +270,32 @@
       border-color: rgba(129,140,248,.72);
     }
 
-    .ag-panel img {
+    .ag-panel__image {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
       object-position: center;
-      padding: 0;
-      opacity: .72;
       transform: translateZ(0);
       backface-visibility: hidden;
-      transition: opacity .25s ease;
+      pointer-events: none;
+      will-change: opacity;
+      transition: opacity .18s linear;
     }
 
-    .ag-panel.is-active img {
+    .ag-panel__image--cover {
+      object-fit: cover;
+      opacity: .72;
+    }
+
+    .ag-panel__image--full {
       object-fit: contain;
       padding: clamp(12px, 1.5vw, 24px);
+      opacity: 0;
+    }
+
+    .ag-panel.is-active .ag-panel__image--cover { opacity: 0; }
+    .ag-panel.is-active .ag-panel__image--full {
       opacity: 1;
     }
 
@@ -361,7 +372,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .ag-panel, .ag-panel img, .ag-panel__label { transition-duration: 0s !important; }
+      .ag-panel, .ag-panel__image, .ag-panel__label { transition-duration: 0s !important; }
     }
   </style>
 </head>
@@ -557,37 +568,44 @@
 
       <div class="reveal accordion-gallery" data-accordion-gallery role="list" aria-label="Creative Lab 手风琴作品画廊">
         <button class="ag-panel is-active" type="button" role="listitem" aria-expanded="true" aria-label="薄荷 中医药主题海报设计">
-          <img src="assets/images/lab-herbal-mint.jpg" alt="薄荷中医药主题海报" draggable="false">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-herbal-mint-web.jpg" alt="薄荷中医药主题海报" draggable="false" decoding="async">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-herbal-mint-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async">
           <span class="ag-panel__index">01</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">薄荷<span class="ag-panel__meta">TCM THEME POSTER</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="迷迭香 中医药主题海报设计">
-          <img src="assets/images/lab-herbal-rosemary.jpg" alt="迷迭香中医药主题海报" draggable="false">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-herbal-rosemary-web.jpg" alt="迷迭香中医药主题海报" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-herbal-rosemary-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
           <span class="ag-panel__index">02</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">迷迭香<span class="ag-panel__meta">TCM THEME POSTER</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="鸢飞鱼跃 字体设计">
-          <img src="assets/images/lab-nature-typography.jpg" alt="鸢飞鱼跃字体设计" draggable="false">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-nature-typography-web.jpg" alt="鸢飞鱼跃字体设计" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-nature-typography-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
           <span class="ag-panel__index">03</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">鸢飞鱼跃<span class="ag-panel__meta">CHINESE TYPE DESIGN</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="草木人家 字体设计">
-          <img src="assets/images/lab-grass-human.jpg" alt="草木人家字体设计" draggable="false">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-grass-human-web.jpg" alt="草木人家字体设计" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-grass-human-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
           <span class="ag-panel__index">04</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">草木人家<span class="ag-panel__meta">CHINESE TYPE DESIGN</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="澳门回归二十五周年海报">
-          <img src="assets/images/lab-macau-poster.png" alt="澳门回归二十五周年海报" draggable="false">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-macau-poster-web.jpg" alt="澳门回归二十五周年海报" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-macau-poster-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
           <span class="ag-panel__index">05</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">澳门回归 25 周年<span class="ag-panel__meta">MACAO RETURN 25TH</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="国防主题海报">
-          <img src="assets/images/lab-defense-poster.png" alt="国防主题海报" draggable="false">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-defense-poster-web.jpg" alt="国防主题海报" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-defense-poster-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
           <span class="ag-panel__index">06</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">国防主题<span class="ag-panel__meta">PUBLIC POSTER</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="世界博物馆日海报">
-          <img src="assets/images/lab-museum-day.jpg" alt="世界博物馆日海报" draggable="false">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-museum-day-web.jpg" alt="世界博物馆日海报" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-museum-day-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
           <span class="ag-panel__index">07</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">博物馆日<span class="ag-panel__meta">CULTURAL POSTER</span></span></span>
         </button>
@@ -651,24 +669,30 @@
     const cursor = document.getElementById('cursor');
 
     if (cursor && window.matchMedia("(pointer: fine)").matches) {
+      let cursorFrame = 0;
+      let cursorX = -100;
+      let cursorY = -100;
       document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        if (cursorFrame) return;
+        cursorFrame = requestAnimationFrame(() => {
+          cursor.style.translate = `${cursorX}px ${cursorY}px`;
+          cursorFrame = 0;
+        });
       });
 
       document.querySelectorAll('a, button, .lab-card, img, .group').forEach(el => {
         el.addEventListener('mouseenter', () => {
-          cursor.style.transform = 'translate(-50%, -50%) scale(3)';
+          cursor.style.setProperty('--cursor-scale', '3');
           cursor.style.mixBlendMode = 'normal';
           cursor.style.backgroundColor = 'rgba(129, 140, 248, 0.3)';
-          cursor.style.backdropFilter = 'blur(2px)';
         });
 
         el.addEventListener('mouseleave', () => {
-          cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursor.style.setProperty('--cursor-scale', '1');
           cursor.style.mixBlendMode = 'difference';
           cursor.style.backgroundColor = '#fff';
-          cursor.style.backdropFilter = 'none';
         });
       });
     } else if (cursor) {
@@ -688,9 +712,12 @@
     document.querySelectorAll('[data-accordion-gallery]').forEach(gallery => {
       const panels = Array.from(gallery.querySelectorAll('.ag-panel'));
       let hoverFrame = 0;
-      let pendingIndex = 0;
+      let hoverTimer = 0;
+      let activeIndex = panels.findIndex(panel => panel.classList.contains('is-active'));
 
       const activate = index => {
+        if (index === activeIndex) return;
+        activeIndex = index;
         panels.forEach((panel, panelIndex) => {
           const selected = panelIndex === index;
           panel.classList.toggle('is-active', selected);
@@ -702,9 +729,11 @@
         panel.addEventListener('click', () => activate(index));
         panel.addEventListener('mouseenter', () => {
           if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-          pendingIndex = index;
+          clearTimeout(hoverTimer);
           cancelAnimationFrame(hoverFrame);
-          hoverFrame = requestAnimationFrame(() => activate(pendingIndex));
+          hoverTimer = window.setTimeout(() => {
+            hoverFrame = requestAnimationFrame(() => activate(index));
+          }, 55);
         });
         panel.addEventListener('focus', () => activate(index));
         panel.addEventListener('keydown', event => {
@@ -720,7 +749,10 @@
         });
       });
 
-      gallery.addEventListener('mouseleave', () => cancelAnimationFrame(hoverFrame));
+      gallery.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimer);
+        cancelAnimationFrame(hoverFrame);
+      });
     });
   </script>
 
