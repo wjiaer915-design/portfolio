@@ -212,7 +212,7 @@
   flex-direction: column;
   justify-content: center;
 }
-    
+
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -227,6 +227,144 @@
     .section-label {
       font-family: 'Syncopate', sans-serif;
       letter-spacing: 0.25em;
+    }
+
+    /* ===== ReactBits-inspired accordion gallery ===== */
+    .accordion-gallery {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      height: min(66vw, 680px);
+      min-height: 520px;
+      perspective: 1200px;
+    }
+
+    .ag-panel {
+      position: relative;
+      flex: 1 1 0;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+      background: #111114;
+      isolation: isolate;
+      transition:
+        flex-grow .62s cubic-bezier(.16,1,.3,1),
+        border-color .35s ease,
+        transform .62s cubic-bezier(.16,1,.3,1);
+    }
+
+    .ag-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(6,6,10,.04) 35%, rgba(6,6,10,.88) 100%);
+      transition: opacity .45s ease;
+    }
+
+    .ag-panel:not(.is-active)::after { opacity: .82; }
+    .ag-panel.is-active {
+      flex-grow: 6.5;
+      border-color: rgba(129,140,248,.72);
+    }
+
+    .ag-panel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1);
+      opacity: .65;
+      transform: scale(1.08);
+      transition:
+        filter .55s ease,
+        opacity .55s ease,
+        transform .8s cubic-bezier(.16,1,.3,1);
+    }
+
+    .ag-panel.is-active img {
+      filter: grayscale(0);
+      opacity: 1;
+      transform: scale(1);
+      object-fit: contain;
+      padding: clamp(12px, 1.5vw, 24px);
+    }
+
+    .ag-panel__index {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      z-index: 3;
+      color: rgba(255,255,255,.72);
+      font-family: 'Syncopate', sans-serif;
+      font-size: 9px;
+      letter-spacing: .22em;
+    }
+
+    .ag-panel__label {
+      position: absolute;
+      z-index: 3;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transform: translateX(-14px);
+      transition: opacity .35s ease, transform .5s cubic-bezier(.16,1,.3,1);
+    }
+
+    .ag-panel.is-active .ag-panel__label {
+      opacity: 1;
+      transform: translateX(0);
+      transition-delay: .16s;
+    }
+
+    .ag-panel__bar {
+      width: 32px;
+      height: 1px;
+      flex: 0 0 auto;
+      background: var(--accent);
+    }
+
+    .ag-panel__title {
+      color: #fff;
+      font-size: clamp(.75rem, 1vw, 1rem);
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ag-panel__meta {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255,255,255,.52);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: .18em;
+    }
+
+    @media (max-width: 767px) {
+      .accordion-gallery {
+        height: 720px;
+        min-height: 0;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .ag-panel { min-height: 0; }
+      .ag-panel.is-active { flex-grow: 5.3; }
+      .ag-panel__index { top: 14px; left: 16px; }
+      .ag-panel__label { left: 16px; right: 16px; bottom: 15px; }
+      .ag-panel__title { font-size: 12px; letter-spacing: .1em; }
+      .ag-panel__meta { font-size: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ag-panel, .ag-panel img, .ag-panel__label { transition-duration: 0s !important; }
     }
   </style>
 </head>
@@ -404,73 +542,62 @@
       </div>
     </section>
 
-    <!-- 03 Chinese Typography Poster -->
+    <!-- 03-04 Daily Visual Archive / Accordion Gallery -->
     <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
       <div class="reveal mb-12">
         <span class="section-label text-indigo-400 text-xs font-bold uppercase">
-          03 / Chinese Typography Poster
+          03-04 / Daily Visual Archive
         </span>
 
         <h2 class="text-3xl md:text-5xl font-bold mt-5 tracking-tight">
-          中文字体与东方视觉实验
+          中文字体到东方视觉实验
         </h2>
 
         <p class="text-zinc-500 mt-4 max-w-2xl leading-loose text-sm">
-          围绕中文竖排、草本意象、纸张肌理与字体气质展开，尝试在传统语汇与现代平面编排之间建立视觉张力。
+          从中文字体到文化公共议题，以手风琴画廊收录日常视觉练习。悬停或点击作品以完整查看。
         </p>
       </div>
 
-    <div class="grid md:grid-cols-2 gap-8">
-  <div class="reveal lab-card poster-frame">
-    <img src="assets/images/lab-herbal-mint.jpg" alt="Mint Typography Poster">
-  </div>
-
-  <div class="reveal lab-card poster-frame">
-    <img src="assets/images/lab-herbal-rosemary.jpg" alt="Rosemary Typography Poster">
-  </div>
-
-  <div class="reveal lab-card poster-frame">
-    <img src="assets/images/lab-nature-typography.jpg" alt="Nature Typography Poster">
-  </div>
-
-  <div class="reveal lab-card poster-frame">
-    <img src="assets/images/lab-grass-human.jpg" alt="Grass and Human World Poster">
-  </div>
-
-  <div class="reveal lab-card poster-frame md:col-span-2">
-    <img src="assets/images/lab-macau-poster.png" alt="Macau 25th Anniversary Poster">
-  </div>
-</div>
-    </section>
-
-    <!-- 04 Cultural & Public Poster -->
-    <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
-      <div class="reveal mb-12">
-        <span class="section-label text-indigo-400 text-xs font-bold uppercase">
-          04 / Cultural & Public Poster
-        </span>
-
-        <h2 class="text-3xl md:text-5xl font-bold mt-5 tracking-tight">
-          文化主题与公共议题海报
-        </h2>
-
-        <p class="text-zinc-500 mt-4 max-w-2xl leading-loose text-sm">
-          面向文化传播、公共议题与竞赛命题的主题海报练习，强调视觉冲击力、信息聚焦与情绪表达。
-        </p>
+      <div class="reveal accordion-gallery" data-accordion-gallery role="list" aria-label="Creative Lab 手风琴作品画廊">
+        <button class="ag-panel is-active" type="button" role="listitem" aria-expanded="true" aria-label="薄荷 中医药主题海报设计">
+          <img src="assets/images/lab-herbal-mint.jpg" alt="薄荷中医药主题海报" draggable="false">
+          <span class="ag-panel__index">01</span>
+          <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">薄荷<span class="ag-panel__meta">TCM THEME POSTER</span></span></span>
+        </button>
+        <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="迷迭香 中医药主题海报设计">
+          <img src="assets/images/lab-herbal-rosemary.jpg" alt="迷迭香中医药主题海报" draggable="false">
+          <span class="ag-panel__index">02</span>
+          <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">迷迭香<span class="ag-panel__meta">TCM THEME POSTER</span></span></span>
+        </button>
+        <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="鸢飞鱼跃 字体设计">
+          <img src="assets/images/lab-nature-typography.jpg" alt="鸢飞鱼跃字体设计" draggable="false">
+          <span class="ag-panel__index">03</span>
+          <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">鸢飞鱼跃<span class="ag-panel__meta">CHINESE TYPE DESIGN</span></span></span>
+        </button>
+        <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="草木人家 字体设计">
+          <img src="assets/images/lab-grass-human.jpg" alt="草木人家字体设计" draggable="false">
+          <span class="ag-panel__index">04</span>
+          <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">草木人家<span class="ag-panel__meta">CHINESE TYPE DESIGN</span></span></span>
+        </button>
+        <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="澳门回归二十五周年海报">
+          <img src="assets/images/lab-macau-poster.png" alt="澳门回归二十五周年海报" draggable="false">
+          <span class="ag-panel__index">05</span>
+          <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">澳门回归 25 周年<span class="ag-panel__meta">MACAO RETURN 25TH</span></span></span>
+        </button>
+        <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="国防主题海报">
+          <img src="assets/images/lab-defense-poster.png" alt="国防主题海报" draggable="false">
+          <span class="ag-panel__index">06</span>
+          <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">国防主题<span class="ag-panel__meta">PUBLIC POSTER</span></span></span>
+        </button>
+        <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="世界博物馆日海报">
+          <img src="assets/images/lab-museum-day.jpg" alt="世界博物馆日海报" draggable="false">
+          <span class="ag-panel__index">07</span>
+          <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">博物馆日<span class="ag-panel__meta">CULTURAL POSTER</span></span></span>
+        </button>
       </div>
-
-    <div class="grid md:grid-cols-2 gap-8">
-  <div class="reveal lab-card poster-frame">
-    <img src="assets/images/lab-defense-poster.png" alt="National Defense Poster">
-  </div>
-
-  <div class="reveal lab-card poster-frame">
-    <img src="assets/images/lab-museum-day.jpg" alt="World Museum Day Poster">
-  </div>
-</div>
     </section>
 
-    <!-- 05 Illustrated Poster -->
+    <!-- 05 Illustrated Poster / original layout retained -->
     <section class="px-6 md:px-12 py-28 border-t border-zinc-900">
       <div class="reveal mb-12">
         <span class="section-label text-indigo-400 text-xs font-bold uppercase">
@@ -560,6 +687,37 @@
     }, { threshold: 0.05 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('[data-accordion-gallery]').forEach(gallery => {
+      const panels = Array.from(gallery.querySelectorAll('.ag-panel'));
+
+      const activate = index => {
+        panels.forEach((panel, panelIndex) => {
+          const selected = panelIndex === index;
+          panel.classList.toggle('is-active', selected);
+          panel.setAttribute('aria-expanded', String(selected));
+        });
+      };
+
+      panels.forEach((panel, index) => {
+        panel.addEventListener('click', () => activate(index));
+        panel.addEventListener('mouseenter', () => {
+          if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) activate(index);
+        });
+        panel.addEventListener('focus', () => activate(index));
+        panel.addEventListener('keydown', event => {
+          const forward = event.key === 'ArrowRight' || event.key === 'ArrowDown';
+          const backward = event.key === 'ArrowLeft' || event.key === 'ArrowUp';
+          if (!forward && !backward) return;
+          event.preventDefault();
+          const next = forward
+            ? (index + 1) % panels.length
+            : (index - 1 + panels.length) % panels.length;
+          activate(next);
+          panels[next].focus();
+        });
+      });
+    });
   </script>
 
 </body>
