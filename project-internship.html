@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jackson Huan 在 XFUN 智能包装平台实习期间参与的真实产品设计项目。">
+  <title>XFUN 产品设计实习 | Jackson Huan Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070709;
+      --panel: #0d0d12;
+      --accent: #818cf8;
+      --accent-2: #a78bfa;
+      --mint: #6ee7b7;
+    }
+
+    html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: rgba(129,140,248,.75) var(--bg); }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: #f4f4f5;
+      font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    }
+    @media (pointer: fine) { body, body * { cursor: none !important; } }
+    ::selection { color: #050505; background: var(--accent); }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(129,140,248,.75); border: 2px solid var(--bg); border-radius: 999px; }
+
+    #cursor {
+      position: fixed;
+      z-index: 9999;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      pointer-events: none;
+      background: #fff;
+      mix-blend-mode: difference;
+      transition: transform .12s ease, background-color .2s ease;
+    }
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 82% 9%, rgba(99,102,241,.18), transparent 34%),
+        radial-gradient(circle at 4% 68%, rgba(167,139,250,.11), transparent 35%);
+    }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .display-title {
+      font-family: 'Syncopate', 'Noto Sans SC', sans-serif;
+      font-size: clamp(3rem, 9vw, 9.5rem);
+      line-height: .92;
+      letter-spacing: -.055em;
+    }
+    .eyebrow { letter-spacing: .26em; }
+    .glass {
+      background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(18px);
+    }
+    .business-pill {
+      border: 1px solid rgba(110,231,183,.3);
+      background: rgba(110,231,183,.08);
+      color: #a7f3d0;
+    }
+    .media-frame {
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+      background: #111116;
+      box-shadow: 0 28px 80px rgba(0,0,0,.3);
+    }
+    .media-frame img { display: block; width: 100%; height: auto; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.22,1,.36,1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .section-label { color: var(--accent); border: 1px solid rgba(129,140,248,.45); }
+    .metric { font-variant-numeric: tabular-nums; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+    @media (max-width: 767px) {
+      .display-title { font-size: clamp(2.15rem, 9.2vw, 3rem); line-height: 1.04; letter-spacing: -.04em; }
+      .grid-bg { background-size: 28px 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+  <div class="ambient"></div>
+
+  <nav class="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-white/5 bg-[#09090c]/80 px-5 py-5 text-white shadow-[0_14px_50px_rgba(0,0,0,.35)] backdrop-blur-xl md:px-12 md:py-7">
+    <a href="index.html#project-internship" class="group flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.2em] transition hover:text-indigo-300">
+      <i data-lucide="arrow-left" class="h-4 w-4 transition group-hover:-translate-x-1"></i>
+      Back to Index
+    </a>
+    <div class="hidden items-center gap-3 md:flex">
+      <span class="business-pill rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[.22em]">Real Business</span>
+      <span class="font-mono text-[10px] uppercase tracking-[.2em] text-zinc-500">Product Design Internship</span>
+    </div>
+  </nav>
+
+  <main>
+    <header class="grid-bg relative flex min-h-[92vh] flex-col justify-end overflow-hidden px-6 pb-16 pt-32 md:px-12 md:pb-20">
+      <div class="pointer-events-none absolute right-[-10vw] top-[12vh] h-[42vw] w-[42vw] rounded-full border border-indigo-400/10"></div>
+      <div class="pointer-events-none absolute right-[4vw] top-[24vh] h-[20vw] w-[20vw] rounded-full border border-violet-400/10"></div>
+      <div class="relative z-10 max-w-[1500px]">
+        <div class="mb-7 flex flex-wrap items-center gap-3">
+          <span class="business-pill inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-[.22em]">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,.9)]"></span>
+            实习期真实业务
+          </span>
+          <span class="text-[10px] uppercase tracking-[.24em] text-zinc-500">2026 · XFUN Platform</span>
+        </div>
+
+        <h1 class="display-title font-bold uppercase text-transparent bg-clip-text bg-gradient-to-br from-white via-zinc-100 to-zinc-600">
+          Product<br>Internship.
+        </h1>
+
+        <div class="mt-10 grid gap-8 md:mt-14 md:grid-cols-12 md:items-end">
+          <p class="max-w-3xl text-lg font-light leading-relaxed text-zinc-300 md:col-span-8 md:text-2xl">
+            在既有产品、业务目标与开发约束中，持续推进从内容广场到 AI 设计工具、再到会员体系的界面体验。这里记录的不是课堂命题，而是<span class="text-indigo-300">真实上线语境中的设计判断与迭代</span>。
+          </p>
+          <div class="grid grid-cols-2 gap-5 border-l border-zinc-800 pl-6 text-[10px] uppercase tracking-[.18em] text-zinc-500 md:col-span-4">
+            <div><span class="mb-1 block text-zinc-700">Role</span><strong class="text-zinc-200">UI / Product Design</strong></div>
+            <div><span class="mb-1 block text-zinc-700">Context</span><strong class="text-zinc-200">Production Team</strong></div>
+            <div><span class="mb-1 block text-zinc-700">Scope</span><strong class="text-zinc-200">Web Platform</strong></div>
+            <div><span class="mb-1 block text-zinc-700">Tools</span><strong class="text-zinc-200">Figma / Adobe</strong></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="px-4 md:px-12 md:pb-28">
+      <div class="media-frame reveal mx-auto max-w-[1600px] rounded-2xl md:rounded-3xl">
+        <img src="assets/images/internship-platform-home.jpg" alt="XFUN 智能包装平台首页方案">
+      </div>
+    </section>
+
+    <section class="px-6 py-24 md:px-12 md:py-32">
+      <div class="mx-auto grid max-w-[1500px] gap-16 md:grid-cols-12">
+        <div class="md:col-span-4">
+          <span class="section-label rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[.22em]">Context 01</span>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight md:text-6xl">真实业务<br><span class="text-zinc-600">Real Constraints.</span></h2>
+        </div>
+        <div class="space-y-8 md:col-span-8">
+          <p class="text-xl leading-relaxed text-zinc-300 md:text-3xl">
+            设计目标不仅是“好看”，还需要同时服务内容供给、工具转化、会员运营与跨角色使用路径。
+          </p>
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div class="glass rounded-2xl p-6"><span class="metric text-3xl font-bold text-indigo-300">01</span><h3 class="mt-6 font-bold">业务目标</h3><p class="mt-2 text-sm leading-relaxed text-zinc-500">让包装灵感被发现，并自然连接到 AI 工具与设计服务。</p></div>
+            <div class="glass rounded-2xl p-6"><span class="metric text-3xl font-bold text-indigo-300">02</span><h3 class="mt-6 font-bold">多角色入口</h3><p class="mt-2 text-sm leading-relaxed text-zinc-500">兼顾品牌方、设计师及工厂设备厂家的不同任务。</p></div>
+            <div class="glass rounded-2xl p-6"><span class="metric text-3xl font-bold text-indigo-300">03</span><h3 class="mt-6 font-bold">交付约束</h3><p class="mt-2 text-sm leading-relaxed text-zinc-500">在现有组件、开发周期与内容资源中完成可落地方案。</p></div>
+          </div>
+          <div class="rounded-2xl border border-amber-300/15 bg-amber-200/[.04] p-6 md:p-8">
+            <div class="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+              <div class="shrink-0"><span class="text-[10px] font-bold uppercase tracking-[.24em] text-amber-200/80">Scope Note / 项目范围说明</span></div>
+              <p class="max-w-3xl text-sm leading-7 text-zinc-400 md:text-base">
+                实习期的设计需求多以<strong class="font-medium text-zinc-200">短周期、模块化任务</strong>推进，并依据项目排期分配给不同实习生协作完成，因此最终产出并非单一功能的连续全流程，而是分布在多个真实业务节点中的设计切片。本案例不刻意扩充数量，只收录我实际参与、能够说明设计判断与迭代过程的页面；它们共同呈现了我在真实团队中响应需求、统一体验并推进落地的工作方式。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-28 px-4 pb-32 md:px-12">
+      <div class="mx-auto max-w-[1600px]">
+        <div class="mb-10 border-t border-zinc-800 pt-8">
+          <span class="section-label rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[.22em]">Workstream 01</span>
+          <div class="mt-5 grid gap-5 md:grid-cols-12 md:items-end">
+            <h2 class="text-3xl font-bold md:col-span-7 md:text-5xl">广场页与案例浏览</h2>
+            <p class="text-sm leading-relaxed text-zinc-500 md:col-span-5">广场页承担平台内容发现与服务转化的双重任务。通过重组内容密度、分类入口与推荐节奏，让用户先快速获取灵感，再自然进入案例详情、字体资源与相关服务。</p>
+          </div>
+        </div>
+        <div class="mb-6 grid gap-4 md:grid-cols-3">
+          <div class="glass rounded-xl p-5"><span class="text-[9px] font-bold uppercase tracking-[.2em] text-indigo-300">Business Scene</span><p class="mt-3 text-sm leading-relaxed text-zinc-400">用户希望在有限时间内找到与行业、品类和风格相符的包装参考。</p></div>
+          <div class="glass rounded-xl p-5"><span class="text-[9px] font-bold uppercase tracking-[.2em] text-indigo-300">Design Focus</span><p class="mt-3 text-sm leading-relaxed text-zinc-400">用精选大卡建立视觉焦点，以规则网格承接持续增长的内容数量。</p></div>
+          <div class="glass rounded-xl p-5"><span class="text-[9px] font-bold uppercase tracking-[.2em] text-indigo-300">My Contribution</span><p class="mt-3 text-sm leading-relaxed text-zinc-400">探索不同内容编排方案，并补齐列表、详情与相关推荐之间的浏览链路。</p></div>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <figure class="media-frame reveal rounded-2xl"><img src="assets/images/internship-gallery-system.jpg" alt="包装案例广场网格方案"></figure>
+          <figure class="media-frame reveal rounded-2xl"><img src="assets/images/internship-gallery-exploration.jpg" alt="包装案例广场混合布局探索"></figure>
+        </div>
+        <figure class="media-frame reveal mt-6 rounded-2xl"><img src="assets/images/internship-case-detail.jpg" alt="包装案例详情页"></figure>
+      </div>
+
+      <div class="mx-auto max-w-[1600px]">
+        <div class="mb-10 border-t border-zinc-800 pt-8">
+          <span class="section-label rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[.22em]">Workstream 02</span>
+          <div class="mt-5 grid gap-5 md:grid-cols-12 md:items-end">
+            <h2 class="text-3xl font-bold md:col-span-7 md:text-5xl">弹窗筛选页与字体工具</h2>
+            <p class="text-sm leading-relaxed text-zinc-500 md:col-span-5">针对中文字体选择维度多、判断成本高的问题，将文字输入、方向、笔触效果与风格筛选集中在侧栏弹窗中，并同步展示可直接使用的字体灵感，缩短从筛选到生成的路径。</p>
+          </div>
+        </div>
+        <figure class="media-frame reveal rounded-2xl"><img src="assets/images/internship-font-tool.jpg" alt="AI 中文字体生成与字体灵感工具"></figure>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <div class="rounded-xl border border-zinc-800 p-5"><h3 class="font-bold">筛选信息不离开当前任务</h3><p class="mt-2 text-sm leading-relaxed text-zinc-500">将筛选条件组织在固定侧栏中，用户可持续预览结果，避免频繁打开与关闭多层页面。</p></div>
+          <div class="rounded-xl border border-zinc-800 p-5"><h3 class="font-bold">从专业参数转译为视觉语言</h3><p class="mt-2 text-sm leading-relaxed text-zinc-500">用字体故事、风格标签和场景分类辅助选择，让非专业用户也能快速建立判断。</p></div>
+        </div>
+        <div class="mt-6 grid gap-6 lg:grid-cols-[.72fr_1.28fr]">
+          <figure class="media-frame reveal rounded-2xl"><img src="assets/images/internship-inspiration-home.jpg" alt="案例广场精选内容页面"></figure>
+          <figure class="media-frame reveal rounded-2xl"><img src="assets/images/internship-inspiration-feed.jpg" alt="案例广场视觉灵感瀑布流"></figure>
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-[1600px]">
+        <div class="mb-10 border-t border-zinc-800 pt-8">
+          <span class="section-label rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[.22em]">Workstream 03</span>
+          <div class="mt-5 grid gap-5 md:grid-cols-12 md:items-end">
+            <h2 class="text-3xl font-bold md:col-span-7 md:text-5xl">个人信息页与会员状态</h2>
+            <p class="text-sm leading-relaxed text-zinc-500 md:col-span-5">个人信息页需要同时承载身份识别、会员权益、积分信息与高频功能入口。围绕个人版与专业版两类用户，统一状态结构，并通过色彩和标签差异明确当前身份。</p>
+          </div>
+        </div>
+        <div class="mb-6 rounded-xl border border-zinc-800 bg-zinc-950/70 p-5 text-sm leading-relaxed text-zinc-400 md:p-6">
+          页面采用“<strong class="text-zinc-200">首页即时状态 + 账户卡片详情</strong>”两层表达：用户在首页即可确认会员类型和积分概况，展开后再处理续费、作品、订单与邀请记录，兼顾快速识别与完整操作。
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <figure class="media-frame reveal rounded-2xl"><img src="assets/images/internship-account-home-pro.jpg" alt="专业版账户在平台首页的状态"></figure>
+          <figure class="media-frame reveal rounded-2xl"><img src="assets/images/internship-account-home-vip.jpg" alt="个人版账户在平台首页的状态"></figure>
+        </div>
+        <div class="mt-8 border-t border-zinc-800/80 pt-6">
+          <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span class="text-[9px] font-bold uppercase tracking-[.22em] text-indigo-300">Component Detail</span>
+              <h3 class="mt-2 text-lg font-bold">会员卡片局部状态</h3>
+            </div>
+            <p class="max-w-xl text-xs leading-relaxed text-zinc-600">作为个人信息页的组件补充，对比未开通、专业版与个人版三个会员阶段在权益提示、积分信息和功能入口上的状态差异。</p>
+          </div>
+          <div class="flex flex-wrap items-start justify-center gap-8 md:justify-start md:gap-12">
+            <figure class="reveal w-full max-w-[260px]">
+              <img class="w-full object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,.28)]" src="assets/images/internship-account-free.png" alt="未开通会员账户卡片">
+              <figcaption class="mt-3 text-center text-[9px] font-bold uppercase tracking-[.2em] text-zinc-600">Free / Not Activated</figcaption>
+            </figure>
+            <figure class="reveal w-full max-w-[260px]">
+              <img class="w-full object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,.28)]" src="assets/images/internship-account-pro.png" alt="专业版会员账户卡片">
+              <figcaption class="mt-3 text-center text-[9px] font-bold uppercase tracking-[.2em] text-zinc-600">Professional Plan</figcaption>
+            </figure>
+            <figure class="reveal w-full max-w-[260px]">
+              <img class="w-full object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,.28)]" src="assets/images/internship-account-vip.png" alt="个人版会员账户卡片">
+              <figcaption class="mt-3 text-center text-[9px] font-bold uppercase tracking-[.2em] text-zinc-600">Personal Plan</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-y border-zinc-800/70 bg-zinc-950/50 px-6 py-24 md:px-12 md:py-32">
+      <div class="mx-auto grid max-w-[1500px] gap-14 md:grid-cols-12">
+        <div class="md:col-span-5"><span class="eyebrow text-[10px] font-bold uppercase text-indigo-400">What I Learned</span><h2 class="mt-5 text-4xl font-bold md:text-6xl">从画面到产品判断</h2></div>
+        <div class="grid gap-8 md:col-span-7 sm:grid-cols-2">
+          <div><span class="text-xs font-bold text-indigo-300">01 / PRIORITY</span><h3 class="mt-3 text-xl font-bold">先解决信息优先级</h3><p class="mt-3 text-sm leading-relaxed text-zinc-500">真实产品中，每个入口都有业务诉求；设计需要通过层级和节奏建立清晰取舍。</p></div>
+          <div><span class="text-xs font-bold text-indigo-300">02 / CONSISTENCY</span><h3 class="mt-3 text-xl font-bold">用系统承接迭代</h3><p class="mt-3 text-sm leading-relaxed text-zinc-500">把会员状态、卡片规则和间距规范沉淀为可复用结构，降低后续扩展成本。</p></div>
+          <div><span class="text-xs font-bold text-indigo-300">03 / COLLABORATION</span><h3 class="mt-3 text-xl font-bold">面向交付沟通</h3><p class="mt-3 text-sm leading-relaxed text-zinc-500">方案表达从单张效果图转向完整状态、边界条件与开发可实现性。</p></div>
+          <div><span class="text-xs font-bold text-indigo-300">04 / BUSINESS</span><h3 class="mt-3 text-xl font-bold">理解转化链路</h3><p class="mt-3 text-sm leading-relaxed text-zinc-500">将灵感内容、AI 工具与会员权益串联，让体验服务于完整业务路径。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <a href="project-tangping.html" class="group relative block overflow-hidden border-b border-zinc-900 px-6 py-20 transition hover:bg-zinc-900/40 md:px-12 md:py-24">
+      <div class="relative z-10 flex items-center justify-between gap-8">
+        <div><span class="mb-3 block text-[10px] uppercase tracking-[.24em] text-zinc-600">Next Project</span><h2 class="text-3xl font-bold uppercase tracking-tight transition group-hover:text-indigo-300 md:text-6xl">Tangping Brand Identity</h2><p class="mt-4 text-xs uppercase tracking-[.2em] text-zinc-600">Conceptual Brand Project</p></div>
+        <i data-lucide="arrow-right" class="h-10 w-10 shrink-0 text-zinc-700 transition group-hover:translate-x-2 group-hover:text-indigo-300 md:h-14 md:w-14"></i>
+      </div>
+    </a>
+  </main>
+
+  <footer class="px-6 py-12 text-center text-[10px] uppercase tracking-[.22em] text-zinc-600 md:px-12"><p>© 2026 Jackson Huan Portfolio</p></footer>
+
+  <script>
+    lucide.createIcons();
+    const cursor = document.getElementById('cursor');
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document.addEventListener('mousemove', (event) => {
+        cursor.style.left = event.clientX + 'px';
+        cursor.style.top = event.clientY + 'px';
+      });
+      document.querySelectorAll('a, img, .glass').forEach((element) => {
+        element.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.8)'; cursor.style.backgroundColor = 'rgba(129,140,248,.4)'; cursor.style.mixBlendMode = 'normal'; });
+        element.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; cursor.style.backgroundColor = '#fff'; cursor.style.mixBlendMode = 'difference'; });
+      });
+    } else { cursor.style.display = 'none'; }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>
