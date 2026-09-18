@@ -88,37 +88,14 @@
         }
 
         .work-card {
-            transition: filter 0.55s ease, transform 0.55s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.55s ease;
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             filter: grayscale(100%);
             position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            backface-visibility: hidden;
-            transform: translateZ(0);
-        }
-
-        .work-card::after {
-            content: '';
-            position: absolute;
-            z-index: 5;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 3px;
-            pointer-events: none;
-            background: linear-gradient(to bottom, rgba(9, 9, 11, 0), rgba(9, 9, 11, 0.96));
         }
 
         .work-card:hover {
             filter: grayscale(0%);
-            transform: translate3d(0, -3px, 0);
-            box-shadow: 0 20px 54px rgba(0, 0, 0, 0.38);
-        }
-
-        .work-card > img {
-            display: block;
-            backface-visibility: hidden;
-            transform-origin: center;
+            transform: scale(1.02);
         }
 
         .reveal {
@@ -798,15 +775,14 @@
                     <a href="project-internship.html" class="block" aria-label="打开项目：XFUN 产品设计实习">
                         <div class="work-card group aspect-[16/9] bg-zinc-900 overflow-hidden relative cursor-pointer">
                             <img src="assets/images/internship-cover.jpg"
-                                 class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                  alt="XFUN 智能包装平台产品设计实习项目">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
-                            <div class="absolute left-5 top-5 md:left-7 md:top-7 flex items-center gap-2 rounded-full border border-indigo-300/30 bg-black/55 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-indigo-200 backdrop-blur-xl">
+                            <div class="absolute left-5 top-5 md:left-7 md:top-7 flex items-center gap-2 rounded-full border border-indigo-300/30 bg-black/55 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-indigo-200 backdrop-blur-xl transition-opacity group-hover:opacity-0">
                                 <span class="h-1.5 w-1.5 rounded-full bg-indigo-400 shadow-[0_0_12px_rgba(129,140,248,0.9)]"></span>
                                 Real-world Product
                             </div>
-                            <div class="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black">
+                            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest transition hover:bg-white hover:text-black">
                                     VIEW INTERNSHIP CASE
                                 </span>
                             </div>
@@ -839,10 +815,10 @@
                   <a href="project-tangping.html" class="block" aria-label="打开项目：躺平品牌">
   <div class="work-card group aspect-[4/3] bg-zinc-900 overflow-hidden relative cursor-pointer">
     <!-- 路径格式：assets/images/project-01-cover.png -->
-    <img src="assets/images/project-01-cover.png" class="w-full h-full object-cover" alt="躺平品牌">
+    <img src="assets/images/project-01-cover.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="躺平品牌">
 
     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-      <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black">
+      <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest transition hover:bg-white hover:text-black">
         VIEW BRAND CASE
       </span>
     </div>
