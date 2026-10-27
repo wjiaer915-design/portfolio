@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>躺平吧 Lie Down Flat | Brand Identity</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/tailwind.css">
+    <script src="assets/vendor/lucide.min.js"></script>
+    <link rel="stylesheet" href="assets/styles/fonts.css">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -195,7 +195,7 @@
         </header>
 
        <section class="w-full h-[22vh] md:h-[80vh] parallax-img bg-zinc-800 relative mb-10 md:mb-32 bg-center bg-cover"
-  style="background-image: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=2000');">
+  style="background-image: url('assets/images/project-01-cover-web.webp');">
   <div class="absolute inset-0 bg-black/20"></div>
 </section>
 
@@ -234,21 +234,21 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Research Spread 1 -->
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full">
-                    <img src="assets/images/project-01-01.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 1">
+                    <img src="assets/images/project-01-01-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 1" decoding="async" fetchpriority="high">
                     <div class="absolute bottom-4 left-4 text-[10px] text-emerald-300 uppercase tracking-widest bg-black/50 px-2 py-1 backdrop-blur-sm">Moodboard A</div>
                 </div>
                 <!-- Research Spread 2 -->
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full" style="transition-delay: 0.1s">
-                    <img src="assets/images/project-01-02.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 2">
+                    <img src="assets/images/project-01-02-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 2" decoding="async" loading="lazy">
                     <div class="absolute bottom-4 left-4 text-[10px] text-emerald-300 uppercase tracking-widest bg-black/50 px-2 py-1 backdrop-blur-sm">Moodboard B</div>
                 </div>
                 <!-- Research Spread 3 -->
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full">
-                    <img src="assets/images/project-01-03.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 3">
+                    <img src="assets/images/project-01-03-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 3" decoding="async" loading="lazy">
                 </div>
                 <!-- Research Spread 4 -->
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full" style="transition-delay: 0.1s">
-                    <img src="assets/images/project-01-04.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 4">
+                    <img src="assets/images/project-01-04-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100" alt="Research Spread 4" decoding="async" loading="lazy">
                 </div>
             </div>
         </section>
@@ -266,11 +266,11 @@
             <!-- 使用 594x210 比例 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full">
-                    <img src="assets/images/project-01-10.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Graphic Spread 1">
+                    <img src="assets/images/project-01-10-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Graphic Spread 1" decoding="async" loading="lazy">
                     <div class="absolute bottom-6 left-6 text-emerald-300 text-xs font-mono uppercase tracking-widest bg-black/50 px-2 py-1 backdrop-blur-sm">Key Element A</div>
                 </div>
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full" style="transition-delay: 0.2s">
-                    <img src="assets/images/project-01-11.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Graphic Spread 2">
+                    <img src="assets/images/project-01-11-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Graphic Spread 2" decoding="async" loading="lazy">
                     <div class="absolute bottom-6 left-6 text-emerald-300 text-xs font-mono uppercase tracking-widest bg-black/50 px-2 py-1 backdrop-blur-sm">Key Element B</div>
                 </div>
             </div>
@@ -289,10 +289,10 @@
             <!-- 2 Large Spread Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full">
-                    <img src="assets/images/project-01-13.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Application Spread 1">
+                    <img src="assets/images/project-01-13-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Application Spread 1" decoding="async" loading="lazy">
                 </div>
                 <div class="aspect-[594/210] bg-zinc-900 overflow-hidden img-reveal group relative w-full" style="transition-delay: 0.2s">
-                    <img src="assets/images/project-01-14.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Application Spread 2">
+                    <img src="assets/images/project-01-14-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Application Spread 2" decoding="async" loading="lazy">
                 </div>
             </div>
         </section>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>一颗小行星 We Echo Each Other | Exhibition Design</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/tailwind.css">
+    <script src="assets/vendor/lucide.min.js"></script>
+    <link rel="stylesheet" href="assets/styles/fonts.css">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -163,10 +163,10 @@
                 </div>
                 
                 <div class="long-image-container" style="max-width: 800px;"> <!-- 稍微限制宽度，因为原图比例非常细长 -->
-                    <img src="assets/images/project-asteroid-01.png" 
+                    <img src="assets/images/project-asteroid-01-web.webp" 
                          onerror="this.src='https://placehold.co/1317x6771/1a1a1a/fda4af?text=Upload+Pre-heat+Image+(1317x6771)'"
                          class="w-full h-auto block rounded-sm opacity-90 hover:opacity-100 transition duration-500" 
-                         alt="Exhibition Pre-heat Long Image">
+                         alt="Exhibition Pre-heat Long Image" decoding="async" fetchpriority="high">
                 </div>
             </div>
 
@@ -179,10 +179,10 @@
                 </div>
                 
                 <div class="long-image-container">
-                    <img src="assets/images/project-asteroid-02.png" 
+                    <img src="assets/images/project-asteroid-02-web.webp" 
                          onerror="this.src='https://placehold.co/1080x3836/1a1a1a/fda4af?text=Upload+Guide+Image+(1080x3836)'"
                          class="w-full h-auto block rounded-sm opacity-90 hover:opacity-100 transition duration-500" 
-                         alt="Exhibition Guide Long Image">
+                         alt="Exhibition Guide Long Image" decoding="async" loading="lazy">
                 </div>
             </div>
 

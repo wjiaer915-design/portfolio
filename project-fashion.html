@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 时尚顾问 Fashion Stylist | UI/UX Design</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/tailwind.css">
+    <script src="assets/vendor/lucide.min.js"></script>
+    <link rel="stylesheet" href="assets/styles/fonts.css">
     <style>
         :root {
             --bg: #050505; 
@@ -182,7 +182,7 @@ html {
 
   <!-- Desktop: parallax background -->
   <div class="hidden md:block w-full h-[80vh] parallax-img bg-zinc-800 bg-center bg-cover"
-       style="background-image: url('assets/images/ui_banner.png');">
+       style="background-image: url('assets/images/ui_banner-web.webp');">
     <div class="absolute inset-0 bg-violet-900/20 mix-blend-overlay"></div>
     <div class="absolute bottom-10 right-10 text-xs text-violet-400 uppercase tracking-widest">
       Digital Experience
@@ -191,9 +191,9 @@ html {
 
   <!-- Mobile: full image display -->
 <div class="block md:hidden w-full bg-zinc-800 overflow-hidden relative">
-  <img src="assets/images/ui_banner.png"
+  <img src="assets/images/ui_banner-web.webp"
        class="w-full h-auto block"
-       alt="AI Fashion Stylist Banner">
+       alt="AI Fashion Stylist Banner" decoding="async" fetchpriority="high">
 
   <div class="absolute bottom-4 right-5 text-[10px] text-violet-500/80 uppercase tracking-[0.25em]">
     Digital Experience
@@ -219,27 +219,27 @@ html {
                     
                     <!-- 图 1 -->
                     <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
-                        <img src="assets/images/project-03-01.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 1">
+                        <img src="assets/images/project-03-01-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 1" decoding="async" loading="lazy">
                     </div>
                     
                     <!-- 图 2 -->
                     <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group" style="transition-delay: 0.1s">
-                        <img src="assets/images/project-03-02.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 2">
+                        <img src="assets/images/project-03-02-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 2" decoding="async" loading="lazy">
                     </div>
                     
                     <!-- 图 3 -->
                     <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
-                        <img src="assets/images/project-03-03.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 3">
+                        <img src="assets/images/project-03-03-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 3" decoding="async" loading="lazy">
                     </div>
                     
                     <!-- 图 4 -->
                     <div class="aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group" style="transition-delay: 0.1s">
-                        <img src="assets/images/project-03-04.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 4">
+                        <img src="assets/images/project-03-04-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 4" decoding="async" loading="lazy">
                     </div>
 
                     <!-- 图 5 (全宽压轴) -->
                     <div class="md:col-span-2 aspect-[2806/992] bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
-                        <img src="assets/images/project-03-05.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 5">
+                        <img src="assets/images/project-03-05-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Research 5" decoding="async" loading="lazy">
                     </div>
 
                 </div>
@@ -255,10 +255,10 @@ html {
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group">
-                        <img src="assets/images/project-03-07.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="LoFi 1">
+                        <img src="assets/images/project-03-07-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="LoFi 1" decoding="async" loading="lazy">
                     </div>
                     <div class="aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800/50 group" style="transition-delay: 0.1s">
-                        <img src="assets/images/project-03-08.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="LoFi 2">
+                        <img src="assets/images/project-03-08-web.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="LoFi 2" decoding="async" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -273,12 +273,12 @@ html {
                 
                 <div class="space-y-12">
                     <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
-                        <img src="assets/images/project-03-09.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="HiFi 1">
+                        <img src="assets/images/project-03-09-web.webp" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="HiFi 1" decoding="async" loading="lazy">
                         <div class="absolute bottom-6 left-6 px-4 py-2 bg-black/60 backdrop-blur-md rounded text-violet-300 text-xs font-mono uppercase">Core Features</div>
                     </div>
                     
                     <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
-                        <img src="assets/images/project-03-10.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="HiFi 2">
+                        <img src="assets/images/project-03-10-web.webp" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="HiFi 2" decoding="async" loading="lazy">
                         <div class="absolute bottom-6 left-6 px-4 py-2 bg-black/60 backdrop-blur-md rounded text-violet-300 text-xs font-mono uppercase">3D Avatar System</div>
                     </div>
                 </div>
@@ -294,11 +294,11 @@ html {
                 
                 <div class="space-y-12">
                     <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
-                        <img src="assets/images/project-03-11.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="App 1">
+                        <img src="assets/images/project-03-11-web.webp" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="App 1" decoding="async" loading="lazy">
                     </div>
                     
                     <div class="w-full aspect-spread bg-zinc-900 overflow-hidden img-reveal relative rounded-lg border border-zinc-800 shadow-2xl shadow-violet-900/20 group">
-                        <img src="assets/images/project-03-12.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="App 2">
+                        <img src="assets/images/project-03-12-web.webp" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="App 2" decoding="async" loading="lazy">
                     </div>
                 </div>
             </div>

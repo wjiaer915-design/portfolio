@@ -6,10 +6,10 @@
 
   <title>Creative Lab | Jackson Portfolio</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/styles/tailwind.css">
+  <script src="assets/vendor/lucide.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@400;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles/fonts.css">
 
   <style>
     :root {
@@ -454,13 +454,13 @@
 
   <div class="grid md:grid-cols-2 gap-8 items-start">
     <div class="lab-card portrait-board-frame">
-      <img src="assets/images/lab-brand-board.jpg"
-           alt="Scenery and Mountains Brand Board">
+      <img src="assets/images/lab-brand-board-web.webp"
+           alt="Scenery and Mountains Brand Board" decoding="async" loading="lazy">
     </div>
 
     <div class="lab-card portrait-board-frame">
-      <img src="assets/images/lab-brand-poster.jpg"
-           alt="@Jackson Brand Poster Extension">
+      <img src="assets/images/lab-brand-poster-web.webp"
+           alt="@Jackson Brand Poster Extension" decoding="async" loading="lazy">
     </div>
   </div>
 </div>
@@ -494,7 +494,7 @@
     <!-- 左侧：品牌物料主图 -->
     <div class="md:col-span-8 lab-card brand-horizontal-frame">
       <img src="assets/images/lab-tea-brand-extension.jpg"
-           alt="三原的茶茶饮品牌物料延展">
+           alt="三原的茶茶饮品牌物料延展" decoding="async" loading="lazy">
     </div>
 
     <!-- 右侧：视频预览 -->
@@ -510,15 +510,16 @@
       </div>
 
    <video
-  autoplay
   loop
   muted
   playsinline
   webkit-playsinline
-  preload="auto"
+  preload="none"
+  poster="assets/images/lab-tea-brand-extension.jpg"
+  data-lazy-video
   class="w-full h-full object-contain rounded-lg bg-black pointer-events-none"
 >
-  <source src="assets/images/lab-tea-brand-motion.mp4" type="video/mp4">
+  <source data-src="assets/images/lab-tea-brand-motion.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
     </div>
@@ -544,9 +545,9 @@
       </div>
 
       <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-        <img src="assets/images/lab-aigc-chess.jpg"
+        <img src="assets/images/lab-aigc-chess-web.webp"
              class="w-full h-auto block"
-             alt="AIGC Material Chess Set">
+             alt="AIGC Material Chess Set" decoding="async" loading="lazy">
       </div>
     </section>
 
@@ -568,44 +569,44 @@
 
       <div class="reveal accordion-gallery" data-accordion-gallery role="list" aria-label="Creative Lab 手风琴作品画廊">
         <button class="ag-panel is-active" type="button" role="listitem" aria-expanded="true" aria-label="薄荷 中医药主题海报设计">
-          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-herbal-mint-web.jpg" alt="薄荷中医药主题海报" draggable="false" decoding="async">
-          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-herbal-mint-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-herbal-mint-web.jpg" alt="薄荷中医药主题海报" draggable="false" decoding="async" loading="lazy">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-herbal-mint-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <span class="ag-panel__index">01</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">薄荷<span class="ag-panel__meta">TCM THEME POSTER</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="迷迭香 中医药主题海报设计">
-          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-herbal-rosemary-web.jpg" alt="迷迭香中医药主题海报" draggable="false" loading="lazy" decoding="async">
-          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-herbal-rosemary-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-herbal-rosemary-web.jpg" alt="迷迭香中医药主题海报" draggable="false" decoding="async" loading="lazy">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-herbal-rosemary-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <span class="ag-panel__index">02</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">迷迭香<span class="ag-panel__meta">TCM THEME POSTER</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="鸢飞鱼跃 字体设计">
-          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-nature-typography-web.jpg" alt="鸢飞鱼跃字体设计" draggable="false" loading="lazy" decoding="async">
-          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-nature-typography-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-nature-typography-web.jpg" alt="鸢飞鱼跃字体设计" draggable="false" decoding="async" loading="lazy">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-nature-typography-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <span class="ag-panel__index">03</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">鸢飞鱼跃<span class="ag-panel__meta">CHINESE TYPE DESIGN</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="草木人家 字体设计">
-          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-grass-human-web.jpg" alt="草木人家字体设计" draggable="false" loading="lazy" decoding="async">
-          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-grass-human-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-grass-human-web.jpg" alt="草木人家字体设计" draggable="false" decoding="async" loading="lazy">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-grass-human-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <span class="ag-panel__index">04</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">草木人家<span class="ag-panel__meta">CHINESE TYPE DESIGN</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="澳门回归二十五周年海报">
-          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-macau-poster-web.jpg" alt="澳门回归二十五周年海报" draggable="false" loading="lazy" decoding="async">
-          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-macau-poster-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-macau-poster-web.jpg" alt="澳门回归二十五周年海报" draggable="false" decoding="async" loading="lazy">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-macau-poster-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <span class="ag-panel__index">05</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">澳门回归 25 周年<span class="ag-panel__meta">MACAO RETURN 25TH</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="国防主题海报">
-          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-defense-poster-web.jpg" alt="国防主题海报" draggable="false" loading="lazy" decoding="async">
-          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-defense-poster-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-defense-poster-web-web.webp" alt="国防主题海报" draggable="false" decoding="async" loading="lazy">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-defense-poster-web-web.webp" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <span class="ag-panel__index">06</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">国防主题<span class="ag-panel__meta">PUBLIC POSTER</span></span></span>
         </button>
         <button class="ag-panel" type="button" role="listitem" aria-expanded="false" aria-label="世界博物馆日海报">
-          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-museum-day-web.jpg" alt="世界博物馆日海报" draggable="false" loading="lazy" decoding="async">
-          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-museum-day-web.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+          <img class="ag-panel__image ag-panel__image--cover" src="assets/images/lab-museum-day-web.jpg" alt="世界博物馆日海报" draggable="false" decoding="async" loading="lazy">
+          <img class="ag-panel__image ag-panel__image--full" src="assets/images/lab-museum-day-web.jpg" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <span class="ag-panel__index">07</span>
           <span class="ag-panel__label"><span class="ag-panel__bar"></span><span class="ag-panel__title">博物馆日<span class="ag-panel__meta">CULTURAL POSTER</span></span></span>
         </button>
@@ -640,8 +641,7 @@
         <img src="assets/images/lab-fairy-lake-ip.webp"
              class="block h-auto w-full"
              alt="江西新余仙女湖毛毛贺贺 IP 形象设计长图"
-             loading="lazy"
-             decoding="async">
+             decoding="async" loading="lazy">
       </div>
     </section>
 
@@ -663,11 +663,11 @@
 
       <div class="space-y-10">
         <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-illustration-01.png" class="w-full h-auto block" alt="Illustrated Poster Series 01">
+          <img src="assets/images/lab-illustration-01-web.webp" class="w-full h-auto block" alt="Illustrated Poster Series 01" decoding="async" loading="lazy">
         </div>
 
         <div class="reveal lab-card bg-zinc-900/40 border border-zinc-800 overflow-hidden">
-          <img src="assets/images/lab-illustration-02.png" class="w-full h-auto block" alt="Illustrated Poster Series 02">
+          <img src="assets/images/lab-illustration-02-web.webp" class="w-full h-auto block" alt="Illustrated Poster Series 02" decoding="async" loading="lazy">
         </div>
       </div>
     </section>
@@ -698,6 +698,31 @@
 
   <script>
     lucide.createIcons();
+
+    const lazyVideos = document.querySelectorAll('[data-lazy-video]');
+    const loadVideo = (video) => {
+      if (video.dataset.loaded) return;
+      video.querySelectorAll('source[data-src]').forEach(source => {
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
+      });
+      video.dataset.loaded = 'true';
+      video.load();
+      video.play().catch(() => {});
+    };
+
+    if ('IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          loadVideo(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '320px 0px' });
+      lazyVideos.forEach(video => videoObserver.observe(video));
+    } else {
+      lazyVideos.forEach(loadVideo);
+    }
 
     const cursor = document.getElementById('cursor');
 

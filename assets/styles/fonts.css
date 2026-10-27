@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/space-grotesk-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Syncopate";
+  src: url("../fonts/syncopate-400-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Syncopate";
+  src: url("../fonts/syncopate-700-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-latin: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  --font-display: "Syncopate", "Arial Black", sans-serif;
+  --font-cjk: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+}
