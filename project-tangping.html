@@ -16,7 +16,13 @@
             --text-secondary: #a1a1aa;
         }
 
-        * { cursor: none; }
+        @media (pointer: fine) and (hover: hover) {
+            html, body, body * { cursor: none !important; }
+        }
+
+        @media (pointer: coarse), (hover: none) {
+            html, body, body * { cursor: auto !important; }
+        }
         
         ::selection {
             background: var(--accent);
@@ -145,7 +151,7 @@
 
     <!-- 导航 -->
   <nav class="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 md:py-8 flex justify-between items-center bg-[#0a0a0a]/82 backdrop-blur-xl border-b border-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.35)] text-white">
-       <a href="index.html#project-01" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-emerald-300 transition group">
+<a href="index.html#selected-works-title" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-emerald-300 transition group">
             <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
             Back to Index
         </a>

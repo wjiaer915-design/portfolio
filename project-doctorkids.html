@@ -21,10 +21,8 @@
             font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
             overflow-x: hidden;
         }
-/* ===== custom cursor (same as project 1) ===== */
-* { cursor: none; }
-
-#cursor{
+/* ===== custom cursor: pointer-capability based, stable at narrow widths ===== */
+#cursor {
   width: 20px;
   height: 20px;
   background: #fff;
@@ -35,16 +33,29 @@
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
-  transition: transform 0.1s;
+  display: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.1s, opacity 0.12s, background-color 0.2s, backdrop-filter 0.2s;
+  will-change: left, top, transform;
 }
-@media (max-width: 768px) {
-  #cursor {
-    display: none !important;
+
+@media (pointer: fine) and (hover: hover) {
+  html, body, body * {
+    cursor: none !important;
   }
 
-  body {
-    cursor: auto;
+  #cursor {
+    display: block;
   }
+}
+
+@media (pointer: coarse), (hover: none) {
+  html, body, body * {
+    cursor: auto !important;
+  }
+
+  #cursor { display: none !important; }
 }
         ::selection { background: var(--accent); color: #000; }
 
@@ -115,7 +126,7 @@ html {
 
     <!-- 导航 -->
    <nav class="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 md:py-8 flex justify-between items-center bg-[#0a0a0a]/82 backdrop-blur-xl border-b border-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.35)] text-white">
-      <a href="index.html#project-03" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-sky-400 transition group">
+<a href="index.html#selected-works-title" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-sky-400 transition group">
             <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
             Back to Index
         </a>
@@ -244,10 +255,28 @@ html {
           // ===== custom cursor (same behavior as project 1) =====
   const cursor = document.getElementById('cursor');
 
-  if (cursor && window.matchMedia('(pointer: fine)').matches) {
-    document.addEventListener('mousemove', (e) => {
+  const hasFinePointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
+
+  if (cursor && hasFinePointer) {
+    cursor.style.display = 'block';
+
+    document.addEventListener('pointermove', (e) => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
+      cursor.style.opacity = '1';
+    }, { passive: true });
+
+    document.documentElement.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+    });
+
+    window.addEventListener('blur', () => {
+      cursor.style.opacity = '0';
+    });
+
+    window.addEventListener('pageshow', () => {
+      cursor.style.opacity = '0';
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
     });
 
     document.querySelectorAll('a, button, .group, img, [role="button"]').forEach((el) => {
@@ -265,6 +294,8 @@ html {
         cursor.style.backdropFilter = 'none';
       });
     });
+  } else if (cursor) {
+    cursor.style.display = 'none';
   }
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

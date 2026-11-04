@@ -98,6 +98,373 @@
             transform: scale(1.02);
         }
 
+        /* Selected Works：紧凑环形项目浏览器 */
+        .project-gallery-shell {
+            --gallery-accent: #818cf8;
+            position: relative;
+            margin-top: clamp(3rem, 7vw, 6rem);
+        }
+
+        .selected-work-intro-copy {
+            max-width: 48rem;
+            color: #a1a1aa;
+            font-size: 0.88rem;
+            line-height: 1.9;
+            text-align: left;
+        }
+
+        .project-category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1.35rem;
+        }
+
+        .project-category-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.75rem;
+            color: #71717a;
+            font-size: 0.57rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid #27272a;
+            border-radius: 999px;
+        }
+
+        .project-category-item::before {
+            content: '';
+            width: 0.32rem;
+            height: 0.32rem;
+            flex: 0 0 auto;
+            border-radius: 999px;
+            background: #818cf8;
+            box-shadow: 0 0 10px rgba(129, 140, 248, 0.65);
+        }
+
+        @media (min-width: 768px) {
+            .selected-work-heading-column {
+                grid-column: span 3 / span 3;
+            }
+
+            .selected-work-intro-column {
+                grid-column: span 9 / span 9;
+                padding-left: clamp(1rem, 3vw, 3rem);
+            }
+        }
+
+        .project-gallery-stage {
+            position: relative;
+            height: clamp(390px, 48vw, 620px);
+            overflow: hidden;
+            perspective: 1500px;
+            touch-action: pan-y;
+            user-select: none;
+            cursor: grab;
+        }
+
+        .project-gallery-stage.is-dragging {
+            cursor: grabbing;
+        }
+
+        .project-gallery-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: clamp(250px, 34vw, 520px);
+            aspect-ratio: 4 / 3;
+            padding: 0;
+            overflow: hidden;
+            color: white;
+            text-align: left;
+            background: #111114;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 2px;
+            opacity: 1;
+            z-index: var(--card-z, 1);
+            transform: translate(-50%, -50%) translateX(var(--card-x, 0px)) rotateY(var(--card-rotate, 0deg)) scale(var(--card-scale, 0.75));
+            transform-origin: 50% 80%;
+            transition:
+                transform 620ms cubic-bezier(0.19, 1, 0.22, 1),
+                border-color 420ms ease,
+                filter 420ms ease;
+            will-change: transform;
+        }
+
+        .project-gallery-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(180deg, transparent 38%, rgba(4, 4, 7, 0.9) 100%);
+        }
+
+        .project-gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) brightness(0.62);
+            transform: scale(1.03);
+            transition: filter 560ms ease, transform 820ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .project-gallery-card:hover img,
+        .project-gallery-card.is-active img {
+            filter: grayscale(0) brightness(1);
+            transform: scale(1);
+        }
+
+        .project-gallery-card.is-active {
+            isolation: isolate;
+            border-color: rgba(129, 140, 248, 0.72);
+            background: #09090b;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(129, 140, 248, 0.12);
+        }
+
+        .project-gallery-card.is-active img {
+            opacity: 1;
+        }
+
+        .project-gallery-card-copy {
+            position: absolute;
+            z-index: 2;
+            right: clamp(1rem, 3vw, 2rem);
+            bottom: clamp(1rem, 3vw, 2rem);
+            left: clamp(1rem, 3vw, 2rem);
+        }
+
+        .project-gallery-card-index {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #a5b4fc;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+        }
+
+        .project-gallery-card-title {
+            display: block;
+            max-width: 92%;
+            font-size: clamp(1.05rem, 1.65vw, 1.4rem);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+            transition: font-size 420ms cubic-bezier(0.19, 1, 0.22, 1), transform 420ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .project-gallery-card.is-active .project-gallery-card-title {
+            font-size: clamp(1.35rem, 2.3vw, 2rem);
+            transform: translateY(-2px);
+        }
+
+        .project-gallery-card.is-active .project-gallery-card-copy {
+            opacity: 0;
+        }
+
+        .project-gallery-card-details {
+            position: absolute;
+            z-index: 20;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: clamp(1.15rem, 2.5vw, 2rem);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(10px);
+            background: linear-gradient(180deg, transparent 22%, rgba(5, 5, 8, 0.2) 42%, rgba(5, 5, 8, 0.96) 100%);
+            transition: opacity 320ms ease, transform 460ms cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: opacity, transform;
+        }
+
+        .project-gallery-card.is-active .project-gallery-card-details {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-gallery-overlay-kicker {
+            color: #a5b4fc;
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .project-gallery-overlay-title {
+            margin-top: 0.5rem;
+            font-size: clamp(1.45rem, 2.55vw, 2.15rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.045em;
+        }
+
+        .project-gallery-overlay-subtitle {
+            margin-top: 0.45rem;
+            color: #a1a1aa;
+            font-size: clamp(0.7rem, 1vw, 0.82rem);
+        }
+
+        .project-gallery-overlay-description {
+            display: -webkit-box;
+            max-width: 36rem;
+            margin-top: 0.7rem;
+            overflow: hidden;
+            color: #d4d4d8;
+            font-size: clamp(0.68rem, 0.95vw, 0.8rem);
+            line-height: 1.65;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .project-gallery-overlay-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 0.85rem;
+        }
+
+        .project-gallery-overlay-tags {
+            display: flex;
+            min-width: 0;
+            gap: 0.45rem;
+            overflow: hidden;
+        }
+
+        .project-gallery-overlay-tags span {
+            flex: 0 0 auto;
+            padding: 0.25rem 0.5rem;
+            color: #a1a1aa;
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+        }
+
+        .project-gallery-overlay-action {
+            flex: 0 0 auto;
+            color: white;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .project-gallery-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.85rem;
+            margin-top: -1rem;
+        }
+
+        .project-gallery-arrow {
+            display: grid;
+            width: 2.65rem;
+            height: 2.65rem;
+            place-items: center;
+            color: #d4d4d8;
+            border: 1px solid #27272a;
+            border-radius: 999px;
+            background: rgba(9, 9, 11, 0.72);
+            transition: color 220ms ease, border-color 220ms ease, background 220ms ease;
+        }
+
+        .project-gallery-arrow:hover,
+        .project-gallery-arrow:focus-visible {
+            color: white;
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.12);
+        }
+
+        .project-gallery-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .project-gallery-dot {
+            width: 1.6rem;
+            height: 2px;
+            background: #3f3f46;
+            transition: width 320ms ease, background 320ms ease;
+        }
+
+        .project-gallery-dot.is-active {
+            width: 3.2rem;
+            background: var(--gallery-accent);
+        }
+
+        @media (max-width: 767px) {
+            .project-gallery-stage {
+                height: 390px;
+                margin-right: -1.5rem;
+                margin-left: -1.5rem;
+            }
+
+            .project-gallery-card {
+                width: min(78vw, 350px);
+            }
+
+            .project-gallery-card-details {
+                padding: 1.15rem;
+            }
+
+            .project-gallery-overlay-description {
+                -webkit-line-clamp: 3;
+            }
+
+            .project-gallery-overlay-tags span:nth-child(n + 3) {
+                display: none;
+            }
+
+            .project-gallery-controls {
+                margin-top: -0.25rem;
+            }
+
+        }
+
+        /* iPad / tablet: keep the active case readable without losing side-card context. */
+        @media (min-width: 768px) and (max-width: 1180px) {
+            .project-gallery-stage {
+                height: clamp(500px, 60vw, 560px);
+            }
+
+            .project-gallery-card {
+                width: min(62vw, 520px);
+            }
+
+            .project-gallery-card-details {
+                padding: clamp(1.35rem, 3vw, 1.8rem);
+            }
+
+            .project-gallery-overlay-description {
+                font-size: 0.76rem;
+                -webkit-line-clamp: 3;
+            }
+
+            .project-gallery-controls {
+                margin-top: -0.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project-gallery-card,
+            .project-gallery-card img,
+            .project-gallery-card-title,
+            .project-gallery-dot {
+                transition-duration: 0.01ms !important;
+            }
+
+            .project-gallery-card-details {
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -136,8 +503,14 @@
         }
 
         #profile { scroll-margin-top: 93px; }
+        #selected-works-title {
+            display: block;
+            height: 0;
+            scroll-margin-top: 132px;
+        }
         @media (max-width: 767px) {
             #profile { scroll-margin-top: 60px; }
+            #selected-works-title { scroll-margin-top: 88px; }
         }
 
         /* React Bits-inspired PillNav, adapted to the static portfolio. */
@@ -762,225 +1135,139 @@
             </div>
         </section>
 
-        <!-- Selected Works (Brand / IP / UI) -->
-        <section id="work" class="px-6 md:px-12 py-32 space-y-48">
-            <div class="reveal">
-                <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">PORTFOLIO</span>
-                <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter">Selected<br>Works.</h2>
-            </div>
-
-            <!-- Project 01: XFUN 实习期真实业务项目 -->
-            <div id="project-internship" class="reveal grid md:grid-cols-12 gap-12 items-center scroll-mt-32">
-                <div class="md:col-span-7 order-2 md:order-2">
-                    <a href="project-internship.html" class="block" aria-label="打开项目：XFUN 产品设计实习">
-                        <div class="work-card group aspect-[16/9] bg-zinc-900 overflow-hidden relative cursor-pointer">
-                            <img src="assets/images/internship-cover.jpg"
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                 alt="XFUN 智能包装平台产品设计实习项目" decoding="async" loading="lazy">
-                            <div class="absolute left-5 top-5 md:left-7 md:top-7 flex items-center gap-2 rounded-full border border-indigo-300/30 bg-black/55 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-indigo-200 backdrop-blur-xl transition-opacity group-hover:opacity-0">
-                                <span class="h-1.5 w-1.5 rounded-full bg-indigo-400 shadow-[0_0_12px_rgba(129,140,248,0.9)]"></span>
-                                Real-world Product
-                            </div>
-                            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest transition hover:bg-white hover:text-black">
-                                    VIEW INTERNSHIP CASE
-                                </span>
-                            </div>
-                        </div>
-                    </a>
+        <!-- Selected Works：紧凑环形项目浏览 -->
+        <section id="work" class="selected-work-section px-6 md:px-12 py-24 md:py-32 overflow-hidden">
+            <span id="selected-works-title" aria-hidden="true"></span>
+            <div class="reveal grid gap-8 md:grid-cols-12 md:items-end">
+                <div class="selected-work-heading-column">
+                    <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">PORTFOLIO / 01—05</span>
+                    <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-none">Selected<br>Works.</h2>
                 </div>
-                <div class="md:col-span-5 order-1 md:order-1">
-                    <div class="mb-5 flex flex-wrap items-center gap-3">
-                        <span class="text-indigo-400 font-bold text-xs tracking-widest">01 / PRODUCT DESIGN INTERNSHIP</span>
-                        <span class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-emerald-300">真实业务</span>
+                <div class="selected-work-intro-column">
+                    <span class="text-indigo-400 font-bold text-[10px] tracking-[0.2em] uppercase block mb-3">Project Index / 项目分类</span>
+                    <p class="selected-work-intro-copy">
+                        从真实业务到系统化课程研究，精选项目覆盖产品实习、品牌系统、界面体验、IP 与 AIGC 传播。项目按任务性质与方法路径编排，保留从问题定义到视觉落地的完整线索。
+                    </p>
+                    <div class="project-category-list" aria-label="项目类别">
+                        <span class="project-category-item">实习项目 / Real-world Practice</span>
+                        <span class="project-category-item">课程作业 / Systematic Study</span>
+                        <span class="project-category-item">个人提案 / Self-initiated</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">XFUN 智能包装平台<br><span class="text-zinc-500 text-xl font-normal">实习期产品体验与界面设计</span></h2>
-                    <p class="text-zinc-400 leading-relaxed mb-8 text-sm">
-                        面向真实平台业务，参与内容广场、案例详情、AI 字体工具与会员账户体系等功能设计。在既有产品约束下完成信息架构、界面方案、状态迭代与交付协作。
-                    </p>
-                    <ul class="flex flex-wrap gap-3 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Production UI</li>
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Design System</li>
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Business Scenario</li>
-                    </ul>
-                    <a href="project-internship.html" class="inline-flex mt-8 text-xs tracking-widest uppercase text-zinc-300 hover:text-white">
-                        → View Internship Project
+                    <p class="mt-4 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-700">Click / Drag / Swipe / Arrow Keys</p>
+                </div>
+            </div>
+
+            <div class="project-gallery-shell reveal" data-project-gallery>
+                <div class="project-gallery-stage" data-gallery-stage tabindex="0" aria-label="精选项目画廊，可使用左右方向键切换">
+                    <a id="project-internship" class="project-gallery-card is-active" data-project-index="0" href="project-internship.html" aria-label="打开 XFUN 智能包装平台项目" aria-current="true">
+                        <img src="assets/images/internship-cover.jpg" alt="XFUN 智能包装平台产品设计实习项目" decoding="async" loading="lazy">
+                        <span class="project-gallery-card-copy">
+                            <span class="project-gallery-card-index">01 / REAL-WORLD PRODUCT</span>
+                            <span class="project-gallery-card-title">XFUN 智能包装平台</span>
+                        </span>
+                        <span class="project-gallery-card-details">
+                            <span class="project-gallery-overlay-kicker">01 / 实习项目 · REAL-WORLD PRODUCT</span>
+                            <span class="project-gallery-overlay-title">XFUN 智能包装平台</span>
+                            <span class="project-gallery-overlay-subtitle">实习期产品体验与界面设计</span>
+                            <span class="project-gallery-overlay-description">面向真实平台业务，参与内容广场、案例详情、AI 字体工具与会员账户体系等功能设计。在既有产品约束下完成信息架构、界面方案、状态迭代与交付协作。</span>
+                            <span class="project-gallery-overlay-footer">
+                                <span class="project-gallery-overlay-tags"><span>Production UI</span><span>Design System</span><span>Business Scenario</span></span>
+                                <span class="project-gallery-overlay-action">查看完整项目 →</span>
+                            </span>
+                        </span>
+                    </a>
+
+                    <a id="project-01" class="project-gallery-card" data-project-index="1" href="project-tangping.html" aria-label="打开躺平品牌项目">
+                        <img src="assets/images/project-01-cover-web.webp" alt="躺平生活方式品牌" decoding="async" loading="lazy">
+                        <span class="project-gallery-card-copy">
+                            <span class="project-gallery-card-index">02 / BRAND IDENTITY</span>
+                            <span class="project-gallery-card-title">躺平 TANGPING</span>
+                        </span>
+                        <span class="project-gallery-card-details">
+                            <span class="project-gallery-overlay-kicker">02 / 课程作业 · BRAND IDENTITY</span>
+                            <span class="project-gallery-overlay-title">躺平 TANGPING</span>
+                            <span class="project-gallery-overlay-subtitle">拒绝焦虑的生活方式品牌</span>
+                            <span class="project-gallery-overlay-description">以“拒绝内卷，回归自在”为核心理念的品牌全案设计。通过低饱和度色彩与极简视觉符号，传达松弛感与治愈力。</span>
+                            <span class="project-gallery-overlay-footer">
+                                <span class="project-gallery-overlay-tags"><span>Visual Identity</span><span>Packaging</span><span>Art Direction</span></span>
+                                <span class="project-gallery-overlay-action">查看完整项目 →</span>
+                            </span>
+                        </span>
+                    </a>
+
+                    <a id="project-02" class="project-gallery-card" data-project-index="2" href="project-fashion.html" aria-label="打开 AI 时尚顾问项目">
+                        <img src="assets/images/project-03-cover-web.webp" alt="AI 时尚顾问界面设计" decoding="async" loading="lazy">
+                        <span class="project-gallery-card-copy">
+                            <span class="project-gallery-card-index">03 / UI &amp; UX DESIGN</span>
+                            <span class="project-gallery-card-title">AI 时尚顾问</span>
+                        </span>
+                        <span class="project-gallery-card-details">
+                            <span class="project-gallery-overlay-kicker">03 / 课程作业 · UI &amp; UX DESIGN</span>
+                            <span class="project-gallery-overlay-title">AI 时尚顾问</span>
+                            <span class="project-gallery-overlay-subtitle">虚拟试衣与个性化搭配建议</span>
+                            <span class="project-gallery-overlay-description">聚焦无法试穿、风格不明确与搭配成本高等痛点，基于用户画像与偏好分析，输出可执行的穿搭建议与试衣体验。</span>
+                            <span class="project-gallery-overlay-footer">
+                                <span class="project-gallery-overlay-tags"><span>Interface Design</span><span>User Experience</span><span>Prototyping</span></span>
+                                <span class="project-gallery-overlay-action">查看完整项目 →</span>
+                            </span>
+                        </span>
+                    </a>
+
+                    <a id="project-03" class="project-gallery-card" data-project-index="3" href="project-doctorkids.html" aria-label="打开小小医生项目">
+                        <img src="assets/images/project-02-cover-web.webp" alt="Doctor Kids 小小医生 IP 设计" decoding="async" loading="lazy">
+                        <span class="project-gallery-card-copy">
+                            <span class="project-gallery-card-index">04 / IP &amp; CAMPAIGN</span>
+                            <span class="project-gallery-card-title">DOCTOR KIDS 小小医生</span>
+                        </span>
+                        <span class="project-gallery-card-details">
+                            <span class="project-gallery-overlay-kicker">04 / 个人提案 · IP &amp; CAMPAIGN</span>
+                            <span class="project-gallery-overlay-title">DOCTOR KIDS 小小医生</span>
+                            <span class="project-gallery-overlay-subtitle">卓正医疗公益活动 IP 设计</span>
+                            <span class="project-gallery-overlay-description">围绕“缓解儿童就医恐惧”的公益活动，完成 IP 形象设定、3D 角色三视图、主视觉与延展物料，构建亲和统一的传播系统。</span>
+                            <span class="project-gallery-overlay-footer">
+                                <span class="project-gallery-overlay-tags"><span>IP Design</span><span>3D Character</span><span>Key Visual</span></span>
+                                <span class="project-gallery-overlay-action">查看完整项目 →</span>
+                            </span>
+                        </span>
+                    </a>
+
+                    <a id="project-04" class="project-gallery-card" data-project-index="4" href="project4.html" aria-label="打开小宇宙世界睡眠日项目">
+                        <img src="assets/images/sleep-wave-01-web.webp" alt="小宇宙世界睡眠日 H5 营销活动" decoding="async" loading="lazy">
+                        <span class="project-gallery-card-copy">
+                            <span class="project-gallery-card-index">05 / AIGC CAMPAIGN</span>
+                            <span class="project-gallery-card-title">小宇宙世界睡眠日</span>
+                        </span>
+                        <span class="project-gallery-card-details">
+                            <span class="project-gallery-overlay-kicker">05 / 个人提案 · AIGC CAMPAIGN</span>
+                            <span class="project-gallery-overlay-title">小宇宙世界睡眠日</span>
+                            <span class="project-gallery-overlay-subtitle">H5 营销活动与 AIGC 运营视觉</span>
+                            <span class="project-gallery-overlay-description">以“宇宙睡眠舱”为核心概念，结合 AIGC 主视觉、入睡测试、盲盒歌单与签到奖励，将助眠内容转化为更具陪伴感的互动体验。</span>
+                            <span class="project-gallery-overlay-footer">
+                                <span class="project-gallery-overlay-tags"><span>AIGC Visual</span><span>H5 Campaign</span><span>Brand Operation</span></span>
+                                <span class="project-gallery-overlay-action">查看完整项目 →</span>
+                            </span>
+                        </span>
                     </a>
                 </div>
+
+                <div class="project-gallery-controls" aria-label="项目切换控制">
+                    <button type="button" class="project-gallery-arrow" data-gallery-prev aria-label="上一个项目">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    </button>
+                    <div class="project-gallery-dots" role="tablist" aria-label="选择项目">
+                        <button type="button" class="project-gallery-dot is-active" data-gallery-dot="0" role="tab" aria-label="项目 1" aria-selected="true"></button>
+                        <button type="button" class="project-gallery-dot" data-gallery-dot="1" role="tab" aria-label="项目 2" aria-selected="false"></button>
+                        <button type="button" class="project-gallery-dot" data-gallery-dot="2" role="tab" aria-label="项目 3" aria-selected="false"></button>
+                        <button type="button" class="project-gallery-dot" data-gallery-dot="3" role="tab" aria-label="项目 4" aria-selected="false"></button>
+                        <button type="button" class="project-gallery-dot" data-gallery-dot="4" role="tab" aria-label="项目 5" aria-selected="false"></button>
+                    </div>
+                    <button type="button" class="project-gallery-arrow" data-gallery-next aria-label="下一个项目">
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
             </div>
-
-            <!-- Project 02: 躺平品牌 -->
-            <div id="project-01" class="reveal grid md:grid-cols-12 gap-12 items-center scroll-mt-32">
-                <div class="md:col-span-7 order-2 md:order-1">
-                  <a href="project-tangping.html" class="block" aria-label="打开项目：躺平品牌">
-  <div class="work-card group aspect-[4/3] bg-zinc-900 overflow-hidden relative cursor-pointer">
-    <!-- 路径格式：assets/images/project-01-cover.png -->
-    <img src="assets/images/project-01-cover-web.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="躺平品牌" decoding="async" loading="lazy">
-
-    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-      <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest transition hover:bg-white hover:text-black">
-        VIEW BRAND CASE
-      </span>
-    </div>
-  </div>
-</a>
-
-                </div>
-                <div class="md:col-span-5 order-1 md:order-2">
-                    <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">02 / BRAND IDENTITY</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">躺平 TANGPING<br><span class="text-zinc-500 text-xl font-normal">拒绝焦虑 生活方式品牌</span></h2>
-                    <p class="text-zinc-400 leading-relaxed mb-8 text-sm">
-                        以“拒绝内卷，回归自在”为核心理念的品牌全案设计。通过低饱和度的色彩体系与极简的视觉符号，传达松弛感与治愈力，构建与 Z 世代产生精神共鸣的栖息地。
-                    </p>
-                    <ul class="flex flex-wrap gap-3 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Visual Identity</li>
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Packaging</li>
-                        <li class="border border-zinc-800 px-3 py-1 rounded-full">Art Direction</li>
-                    </ul>
-                    
-                    <a href="project-tangping.html" class="inline-flex mt-8 text-xs tracking-widest uppercase text-zinc-300 hover:text-white">
-  → View Project
-</a>
-                </div>
-            </div>
-
-            <!-- Project 03: UI 设计 -->
-<div id="project-02" class="reveal grid md:grid-cols-12 gap-12 items-center scroll-mt-32">
-  <!-- 右侧：封面卡片（整块可点击） -->
-  <div class="md:col-span-7 order-2 md:order-2">
-    <a href="project-fashion.html" class="block" aria-label="打开项目：AI时尚顾问">
-      <div class="work-card group aspect-[16/9] bg-zinc-900 overflow-hidden relative cursor-pointer">
-        <img
-          src="assets/images/project-03-cover-web.webp"
-          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          alt="Project 03 UI 设计封面" decoding="async" loading="lazy" />
-
-        <!-- 悬浮按钮层（和项目一一样的效果） -->
-        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black">
-            VIEW PROJECT
-          </span>
-        </div>
-      </div>
-    </a>
-  </div>
-
-  <!-- 左侧：文字说明 -->
-  <div class="md:col-span-5 order-1 md:order-1">
-    <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">03 / UI & UX DESIGN</span>
-
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">
-      AI 时尚顾问界面设计<br>
-      <span class="text-zinc-500 text-xl font-normal">面向线上用户的虚拟试衣与搭配建议</span>
-    </h2>
-
-    <p class="text-zinc-400 leading-relaxed mb-8 text-sm">
-      聚焦线上购物“无法试穿、风格不明确、搭配成本高”等痛点，基于用户画像与偏好分析，
-      输出可执行的穿搭建议与试衣体验，提升决策效率与购物信心。
-    </p>
-
-    <ul class="flex flex-wrap gap-3 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
-      <li class="border border-zinc-800 px-3 py-1 rounded-full">Interface Design</li>
-      <li class="border border-zinc-800 px-3 py-1 rounded-full">User Experience</li>
-      <li class="border border-zinc-800 px-3 py-1 rounded-full">Prototyping</li>
-    </ul>
-
-    <!-- 可选：右侧再放一个文字按钮（更像“按钮跳转”） -->
-    <a href="project-fashion.html" class="inline-flex mt-8 text-xs tracking-widest uppercase text-zinc-300 hover:text-white">
-      → View Project
-    </a>
-  </div>
-</div>
-
-            <!-- Project 04: 小小医生 IP -->
-           <div id="project-03" class="reveal grid md:grid-cols-12 gap-12 items-center scroll-mt-32">
-                <div class="md:col-span-5 order-1 md:order-2 flex flex-col justify-center">
-                    <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">04 / IP & CAMPAIGN DESIGN</span>
-<h2 class="text-3xl md:text-4xl font-bold mb-6">DOCTOR KIDS 小小医生<br><span class="text-zinc-500 text-xl font-normal">卓正医疗公益活动 IP 设计</span></h2>
-<p class="text-zinc-400 leading-relaxed mb-8 text-sm">
-  围绕“缓解儿童就医恐惧”的公益活动，完成IP形象设定、3D角色三视图、主KV与延展物料展示，构建统一的亲和型视觉系统与传播语气。
-</p>
-<ul class="flex flex-wrap gap-3 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
-  <li class="border border-zinc-800 px-3 py-1 rounded-full">IP Design</li>
-  <li class="border border-zinc-800 px-3 py-1 rounded-full">3D Character</li>
-  <li class="border border-zinc-800 px-3 py-1 rounded-full">Key Visual</li>
-</ul>
-
-                    <a href="project-doctorkids.html" class="inline-flex mt-8 text-xs tracking-widest uppercase text-zinc-300 hover:text-white">
-  → View Project
-</a>
-
-                </div>
-                  <div class="md:col-span-7 order-2 md:order-1">
-  <a href="project-doctorkids.html" class="block" aria-label="打开项目：Doctor Kids 小小医生">
-    <div class="work-card group aspect-[4/3] bg-zinc-900 overflow-hidden relative cursor-pointer">
-      <img src="assets/images/project-02-cover-web.webp"
-           class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-           alt="Doctor Kids 小小医生 IP 设计封面" decoding="async" loading="lazy">
-        <!-- hover 遮罩 + 按钮 -->
-<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-  <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest transition hover:bg-white hover:text-black">
-    VIEW CASE
-  </span>
-</div>
-
-    </div>
-  </a>
-</div>
-</div>
- <!-- Project 05: 小宇宙世界睡眠日 H5 营销活动 -->
-<div id="project-04" class="reveal grid md:grid-cols-12 gap-16 items-center scroll-mt-32">
-
-  <!-- 左侧：文字说明 -->
-  <div class="md:col-span-5 flex flex-col justify-center">
-    <span class="text-indigo-500 font-bold text-xs tracking-widest mb-5 block">
-      05 / AIGC CAMPAIGN DESIGN
-    </span>
-
-    <h2 class="text-3xl md:text-[42px] font-bold leading-tight tracking-[-0.03em] mb-5 max-w-[560px]">
-      小宇宙世界睡眠日<br>
-      H5 营销活动设计
-    </h2>
-
-    <p class="text-zinc-500 text-lg md:text-xl leading-relaxed mb-8">
-      AIGC 辅助运营视觉与互动页面设计
-    </p>
-
-    <p class="text-zinc-400 leading-loose mb-8 text-sm max-w-[520px]">
-      围绕世界睡眠日传播节点，为小宇宙构建一套面向夜间收听场景的 H5 营销活动方案。
-      项目以“宇宙睡眠舱”为核心视觉概念，结合 AIGC 主视觉生成、入睡测试、盲盒歌单推荐与签到奖励，
-      将助眠内容转化为更具陪伴感与参与感的品牌互动体验。
-    </p>
-
-    <ul class="flex flex-wrap gap-3 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
-      <li class="border border-zinc-800 px-3 py-1 rounded-full">AIGC Visual</li>
-      <li class="border border-zinc-800 px-3 py-1 rounded-full">H5 Campaign</li>
-      <li class="border border-zinc-800 px-3 py-1 rounded-full">Brand Operation</li>
-    </ul>
-
-    <a href="project4.html" class="inline-flex mt-8 text-xs tracking-widest uppercase text-zinc-300 hover:text-white">
-      → View Project
-    </a>
-  </div>
-
-  <!-- 右侧：封面卡片 -->
-  <div class="md:col-span-7">
-    <a href="project4.html" class="block" aria-label="打开项目：小宇宙世界睡眠日 H5 营销活动设计">
-      <div class="work-card group aspect-[16/9] bg-zinc-900 overflow-hidden relative cursor-pointer rounded-sm">
-        <img
-          src="assets/images/sleep-wave-01-web.webp"
-          class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-          alt="小宇宙世界睡眠日 H5 营销活动设计封面" decoding="async" loading="lazy" />
-
-        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span class="border border-white/30 backdrop-blur-md px-6 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black">
-            VIEW PROJECT
-          </span>
-        </div>
-      </div>
-    </a>
-  </div>
-</div>
+        </section>
  <!-- Creative Lab：日常视觉实验 -->
 <section id="creative-lab" class="px-6 md:px-12 py-20 border-t border-zinc-900">
 <div class="reveal grid md:grid-cols-12 gap-12 items-end mb-12">
@@ -1325,6 +1612,136 @@ if (pillSections.length) {
   }, { rootMargin: '-18% 0px -68%', threshold: [0, 0.15, 0.35] });
 
   pillSections.forEach(section => navObserver.observe(section));
+}
+
+// Selected Works：原生环形画廊（不引入外部运行时）
+const projectGallery = document.querySelector('[data-project-gallery]');
+
+if (projectGallery) {
+  const stage = projectGallery.querySelector('[data-gallery-stage]');
+  const cards = [...projectGallery.querySelectorAll('[data-project-index]')];
+  const dots = [...projectGallery.querySelectorAll('[data-gallery-dot]')];
+
+  let activeProject = 0;
+  let pointerStartX = null;
+  let activePointerId = null;
+  let pointerDragging = false;
+  let suppressClickUntil = 0;
+
+  const wrappedOffset = (index, active, count) => {
+    let offset = index - active;
+    if (offset > count / 2) offset -= count;
+    if (offset < -count / 2) offset += count;
+    return offset;
+  };
+
+  const positionCards = () => {
+    const compact = window.innerWidth <= 1180;
+    const step = compact
+      ? Math.min(stage.clientWidth * 0.68, 300)
+      : Math.min(Math.max(stage.clientWidth * 0.27, 210), 350);
+
+    cards.forEach((card, index) => {
+      const offset = wrappedOffset(index, activeProject, cards.length);
+      const distance = Math.abs(offset);
+      card.style.setProperty('--card-x', `${offset * step}px`);
+      card.style.setProperty('--card-rotate', `${offset * -8}deg`);
+      card.style.setProperty('--card-scale', String(distance === 0 ? 1.055 : Math.max(0.7, 0.84 - distance * 0.07)));
+      card.style.setProperty('--card-z', String(10 - distance));
+      card.classList.toggle('is-active', index === activeProject);
+      if (index === activeProject) card.setAttribute('aria-current', 'true');
+      else card.removeAttribute('aria-current');
+      card.tabIndex = index === activeProject ? 0 : -1;
+    });
+  };
+
+  const updateDots = () => {
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('is-active', index === activeProject);
+      dot.setAttribute('aria-selected', String(index === activeProject));
+    });
+  };
+
+  const selectProject = (next, focusCard = false) => {
+    activeProject = (next + cards.length) % cards.length;
+    positionCards();
+    updateDots();
+    if (focusCard) cards[activeProject].focus({ preventScroll: true });
+  };
+
+  cards.forEach((card, index) => {
+    card.addEventListener('click', event => {
+      if (performance.now() < suppressClickUntil) {
+        event.preventDefault();
+        return;
+      }
+      if (index === activeProject) return;
+      event.preventDefault();
+      selectProject(index);
+    });
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => selectProject(index));
+  });
+
+  projectGallery.querySelector('[data-gallery-prev]').addEventListener('click', () => selectProject(activeProject - 1));
+  projectGallery.querySelector('[data-gallery-next]').addEventListener('click', () => selectProject(activeProject + 1));
+
+  stage.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    if (event.key === 'ArrowLeft') selectProject(activeProject - 1, true);
+    if (event.key === 'ArrowRight') selectProject(activeProject + 1, true);
+    if (event.key === 'Home') selectProject(0, true);
+    if (event.key === 'End') selectProject(cards.length - 1, true);
+  });
+
+  stage.addEventListener('pointerdown', event => {
+    if (event.button !== 0) return;
+    pointerStartX = event.clientX;
+    activePointerId = event.pointerId;
+    pointerDragging = false;
+  });
+
+  stage.addEventListener('pointermove', event => {
+    if (pointerStartX === null || event.pointerId !== activePointerId) return;
+    if (!pointerDragging && Math.abs(event.clientX - pointerStartX) > 8) {
+      pointerDragging = true;
+      stage.classList.add('is-dragging');
+      stage.setPointerCapture?.(event.pointerId);
+    }
+  });
+
+  stage.addEventListener('pointerup', event => {
+    if (pointerStartX === null || event.pointerId !== activePointerId) return;
+    const delta = event.clientX - pointerStartX;
+    pointerStartX = null;
+    activePointerId = null;
+    stage.classList.remove('is-dragging');
+    if (stage.hasPointerCapture?.(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+    if (pointerDragging && Math.abs(delta) > 45) {
+      suppressClickUntil = performance.now() + 280;
+      selectProject(activeProject + (delta < 0 ? 1 : -1));
+    }
+    pointerDragging = false;
+  });
+
+  stage.addEventListener('pointercancel', event => {
+    if (activePointerId !== null && event.pointerId !== activePointerId) return;
+    pointerStartX = null;
+    activePointerId = null;
+    pointerDragging = false;
+    stage.classList.remove('is-dragging');
+  });
+
+  let resizeFrame = 0;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(positionCards);
+  });
+
+  positionCards();
 }
         
         // 简单的自定义光标逻辑
