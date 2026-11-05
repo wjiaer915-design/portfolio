@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JACKSON | 做点有趣的东西</title>
     <link rel="stylesheet" href="assets/styles/tailwind.css">
-    <script src="assets/vendor/lucide.min.js"></script>
     <link rel="stylesheet" href="assets/styles/fonts.css">
     <style>
         :root {
@@ -964,7 +963,7 @@
   </a>
 </div>
 <button id="mobile-menu-btn" class="pill-menu-button" aria-label="打开菜单" aria-expanded="false">
-  <i data-lucide="menu"></i>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
 </button>
     </nav>
 <!-- Mobile Menu -->
@@ -1031,7 +1030,7 @@
                 </div>
                 <div class="hero-scroll-row md:col-span-6 flex items-end justify-between">
                     <div class="text-xs uppercase tracking-widest text-zinc-500 animate-pulse">Scroll to Explore Info</div>
-                    <i data-lucide="arrow-down" class="text-zinc-500 animate-bounce"></i>
+                    <svg class="w-6 h-6 text-zinc-500 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
                 </div>
             </div>
         </section>
@@ -1060,7 +1059,7 @@
 
 
                         <a href="assets/docs/jin-huan-resume-2027.pdf" download="2027届-金桓-简历.pdf" class="inline-flex items-center gap-2 text-indigo-400 hover:text-white transition uppercase text-xs font-bold tracking-w...">
-  Download Resume <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+  Download Resume <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
 </a>
 
                     </div>
@@ -1160,7 +1159,7 @@
             <div class="project-gallery-shell reveal" data-project-gallery>
                 <div class="project-gallery-stage" data-gallery-stage tabindex="0" aria-label="精选项目画廊，可使用左右方向键切换">
                     <a id="project-internship" class="project-gallery-card is-active" data-project-index="0" href="project-internship.html" aria-label="打开 XFUN 智能包装平台项目" aria-current="true">
-                        <img src="assets/images/internship-cover.jpg" alt="XFUN 智能包装平台产品设计实习项目" decoding="async" loading="lazy">
+                        <img src="assets/images/internship-cover-web.webp" alt="XFUN 智能包装平台产品设计实习项目" decoding="async" loading="lazy">
                         <span class="project-gallery-card-copy">
                             <span class="project-gallery-card-index">01 / REAL-WORLD PRODUCT</span>
                             <span class="project-gallery-card-title">XFUN 智能包装平台</span>
@@ -1252,7 +1251,7 @@
 
                 <div class="project-gallery-controls" aria-label="项目切换控制">
                     <button type="button" class="project-gallery-arrow" data-gallery-prev aria-label="上一个项目">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
                     </button>
                     <div class="project-gallery-dots" role="tablist" aria-label="选择项目">
                         <button type="button" class="project-gallery-dot is-active" data-gallery-dot="0" role="tab" aria-label="项目 1" aria-selected="true"></button>
@@ -1262,7 +1261,7 @@
                         <button type="button" class="project-gallery-dot" data-gallery-dot="4" role="tab" aria-label="项目 5" aria-selected="false"></button>
                     </div>
                     <button type="button" class="project-gallery-arrow" data-gallery-next aria-label="下一个项目">
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
                     </button>
                 </div>
 
@@ -1324,7 +1323,7 @@
 
       <div class="mt-10 flex items-center gap-4 text-xs uppercase tracking-widest text-zinc-400 group-hover:text-white transition">
         View Creative Lab
-        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition"></i>
+        <svg class="w-5 h-5 group-hover:translate-x-2 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
       </div>
     </div>
 
@@ -1571,8 +1570,6 @@
     </main>
 
     <script>
-        lucide.createIcons();
-
         // Mobile menu toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
