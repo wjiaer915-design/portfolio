@@ -15,12 +15,12 @@
             --text-secondary: #a1a1aa;
         }
 
-        * {
-            cursor: none; /* 保持自定义光标 */
+        @media (pointer: fine) and (hover: hover) {
+            html, body, body * { cursor: none !important; }
         }
 
         @media (hover: none), (pointer: coarse) {
-            * { cursor: auto; }
+            html, body, body * { cursor: auto !important; }
             #cursor { display: none !important; }
         }
 
@@ -81,10 +81,15 @@
             background: #fff;
             border-radius: 50%;
             position: fixed;
+            left: 0;
+            top: 0;
             pointer-events: none;
             z-index: 9999;
             mix-blend-mode: difference;
-            transition: width 0.3s, height 0.3s, transform 0.1s;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.14s ease, opacity 0.12s ease, background-color 0.18s ease, backdrop-filter 0.18s ease;
+            will-change: left, top, transform;
         }
 
         .work-card {
@@ -162,11 +167,6 @@
             perspective: 1500px;
             touch-action: pan-y;
             user-select: none;
-            cursor: grab;
-        }
-
-        .project-gallery-stage.is-dragging {
-            cursor: grabbing;
         }
 
         .project-gallery-card {
@@ -1744,32 +1744,66 @@ if (projectGallery) {
   positionCards();
 }
         
-        // 简单的自定义光标逻辑
+        // 稳定的自定义光标逻辑：精选项目区域使用单一状态，避免重叠卡片触发闪烁。
         const cursor = document.getElementById('cursor');
-        
-        // 仅在非触摸设备启用自定义光标跟随
-        if (window.matchMedia("(pointer: fine)").matches) {
-            document.addEventListener('mousemove', e => {
+        const hasFinePointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
+
+        if (cursor && hasFinePointer) {
+            const resetCursor = () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.mixBlendMode = 'difference';
+                cursor.style.backgroundColor = '#fff';
+                cursor.style.backdropFilter = 'none';
+            };
+
+            const setGalleryCursor = (dragging = false) => {
+                cursor.style.transform = `translate(-50%, -50%) scale(${dragging ? 0.85 : 1.65})`;
+                cursor.style.mixBlendMode = 'normal';
+                cursor.style.backgroundColor = dragging ? '#fff' : 'rgba(129, 140, 248, 0.48)';
+                cursor.style.backdropFilter = dragging ? 'none' : 'blur(2px)';
+            };
+
+            document.addEventListener('pointermove', e => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
+                cursor.style.opacity = '1';
+            }, { passive: true });
+
+            document.documentElement.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+            });
+
+            window.addEventListener('blur', () => {
+                cursor.style.opacity = '0';
+            });
+
+            window.addEventListener('pageshow', () => {
+                cursor.style.opacity = '0';
+                resetCursor();
             });
             
-            // Hover 效果
             document.querySelectorAll('a, button, .work-card, .archive-row').forEach(el => {
+                if (el.closest('[data-project-gallery]')) return;
                 el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(3)';
+                    cursor.style.transform = 'translate(-50%, -50%) scale(3)';
                     cursor.style.mixBlendMode = 'normal';
                     cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                     cursor.style.backdropFilter = 'blur(2px)';
                 });
                 el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursor.style.mixBlendMode = 'difference';
-                    cursor.style.backgroundColor = '#fff';
-                    cursor.style.backdropFilter = 'none';
+                    resetCursor();
                 });
             });
-        } else {
+
+            const galleryStage = document.querySelector('[data-gallery-stage]');
+            if (galleryStage) {
+                galleryStage.addEventListener('mouseenter', () => setGalleryCursor(false));
+                galleryStage.addEventListener('mousedown', () => setGalleryCursor(true));
+                galleryStage.addEventListener('mouseup', () => setGalleryCursor(false));
+                galleryStage.addEventListener('mouseleave', () => resetCursor());
+                galleryStage.addEventListener('pointercancel', () => setGalleryCursor(false));
+            }
+        } else if (cursor) {
             cursor.style.display = 'none';
         }
 
