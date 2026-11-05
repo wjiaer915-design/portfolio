@@ -284,11 +284,41 @@
         }
 
         .project-gallery-overlay-kicker {
-            color: #a5b4fc;
-            font-size: 0.58rem;
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            max-width: 100%;
+            overflow: hidden;
+            color: #e0e7ff;
+            font-size: 0.6rem;
             font-weight: 700;
-            letter-spacing: 0.18em;
+            line-height: 1;
+            letter-spacing: 0.13em;
             text-transform: uppercase;
+            background: rgba(5, 5, 9, 0.82);
+            border: 1px solid rgba(165, 180, 252, 0.42);
+            border-radius: 999px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(8px);
+        }
+
+        .project-gallery-overlay-number {
+            display: grid;
+            min-width: 2.25rem;
+            padding: 0.5rem 0.58rem;
+            place-items: center;
+            color: #09090b;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            background: #a5b4fc;
+        }
+
+        .project-gallery-overlay-category {
+            min-width: 0;
+            padding: 0.5rem 0.7rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .project-gallery-overlay-title {
@@ -1076,12 +1106,14 @@
                                 <div class="font-bold text-lg">兰州大学 Lanzhou Univ.</div>
                                 <div class="text-zinc-400 text-sm">视觉传达设计硕士 (MFA)</div>
                                 <div class="text-zinc-600 text-xs mt-2">GPA: 3.9/5.0 | 985/211 Double First Class</div>
+                                <div class="text-indigo-300/80 text-xs mt-2">学生工作：党支部副书记</div>
                             </div>
                             <div class="resume-item">
                                 <div class="text-sm text-zinc-500 mb-1">2020 - 2024</div>
                                 <div class="font-bold text-lg">广东外语外贸大学 GDUFS</div>
                                 <div class="text-zinc-400 text-sm">环境与展示设计 (BA)</div>
                                 <div class="text-zinc-600 text-xs mt-2">GPA: 3.42/4.0 | 连续两年获校二等奖学金</div>
+                                <div class="text-indigo-300/80 text-xs mt-2">学生工作：学习委员、学院朋辈导师</div>
                             </div>
                         </div>
                     </div>
@@ -1125,6 +1157,11 @@
     <span>English (IELTS)</span>
     <span class="text-white font-bold">6.5</span>
   </li>
+
+  <li class="flex justify-between gap-4 border-b border-zinc-800 pb-1">
+    <span>日语（JLPT N3）</span>
+    <span class="text-white font-bold text-right">备考中 / Preparing</span>
+  </li>
 </ul>
 
 
@@ -1165,7 +1202,7 @@
                             <span class="project-gallery-card-title">XFUN 智能包装平台</span>
                         </span>
                         <span class="project-gallery-card-details">
-                            <span class="project-gallery-overlay-kicker">01 / 实习项目 · REAL-WORLD PRODUCT</span>
+                            <span class="project-gallery-overlay-kicker"><span class="project-gallery-overlay-number">01</span><span class="project-gallery-overlay-category">实习项目 · REAL-WORLD PRODUCT</span></span>
                             <span class="project-gallery-overlay-title">XFUN 智能包装平台</span>
                             <span class="project-gallery-overlay-subtitle">实习期产品体验与界面设计</span>
                             <span class="project-gallery-overlay-description">面向真实平台业务，参与内容广场、案例详情、AI 字体工具与会员账户体系等功能设计。在既有产品约束下完成信息架构、界面方案、状态迭代与交付协作。</span>
@@ -1183,7 +1220,7 @@
                             <span class="project-gallery-card-title">躺平 TANGPING</span>
                         </span>
                         <span class="project-gallery-card-details">
-                            <span class="project-gallery-overlay-kicker">02 / 课程作业 · BRAND IDENTITY</span>
+                            <span class="project-gallery-overlay-kicker"><span class="project-gallery-overlay-number">02</span><span class="project-gallery-overlay-category">课程作业 · BRAND IDENTITY</span></span>
                             <span class="project-gallery-overlay-title">躺平 TANGPING</span>
                             <span class="project-gallery-overlay-subtitle">拒绝焦虑的生活方式品牌</span>
                             <span class="project-gallery-overlay-description">以“拒绝内卷，回归自在”为核心理念的品牌全案设计。通过低饱和度色彩与极简视觉符号，传达松弛感与治愈力。</span>
@@ -1201,7 +1238,7 @@
                             <span class="project-gallery-card-title">AI 时尚顾问</span>
                         </span>
                         <span class="project-gallery-card-details">
-                            <span class="project-gallery-overlay-kicker">03 / 课程作业 · UI &amp; UX DESIGN</span>
+                            <span class="project-gallery-overlay-kicker"><span class="project-gallery-overlay-number">03</span><span class="project-gallery-overlay-category">课程作业 · UI &amp; UX DESIGN</span></span>
                             <span class="project-gallery-overlay-title">AI 时尚顾问</span>
                             <span class="project-gallery-overlay-subtitle">虚拟试衣与个性化搭配建议</span>
                             <span class="project-gallery-overlay-description">聚焦无法试穿、风格不明确与搭配成本高等痛点，基于用户画像与偏好分析，输出可执行的穿搭建议与试衣体验。</span>
@@ -1219,7 +1256,7 @@
                             <span class="project-gallery-card-title">DOCTOR KIDS 小小医生</span>
                         </span>
                         <span class="project-gallery-card-details">
-                            <span class="project-gallery-overlay-kicker">04 / 个人提案 · IP &amp; CAMPAIGN</span>
+                            <span class="project-gallery-overlay-kicker"><span class="project-gallery-overlay-number">04</span><span class="project-gallery-overlay-category">个人提案 · IP &amp; CAMPAIGN</span></span>
                             <span class="project-gallery-overlay-title">DOCTOR KIDS 小小医生</span>
                             <span class="project-gallery-overlay-subtitle">卓正医疗公益活动 IP 设计</span>
                             <span class="project-gallery-overlay-description">围绕“缓解儿童就医恐惧”的公益活动，完成 IP 形象设定、3D 角色三视图、主视觉与延展物料，构建亲和统一的传播系统。</span>
@@ -1237,7 +1274,7 @@
                             <span class="project-gallery-card-title">小宇宙世界睡眠日</span>
                         </span>
                         <span class="project-gallery-card-details">
-                            <span class="project-gallery-overlay-kicker">05 / 个人提案 · AIGC CAMPAIGN</span>
+                            <span class="project-gallery-overlay-kicker"><span class="project-gallery-overlay-number">05</span><span class="project-gallery-overlay-category">个人提案 · AIGC CAMPAIGN</span></span>
                             <span class="project-gallery-overlay-title">小宇宙世界睡眠日</span>
                             <span class="project-gallery-overlay-subtitle">H5 营销活动与 AIGC 运营视觉</span>
                             <span class="project-gallery-overlay-description">以“宇宙睡眠舱”为核心概念，结合 AIGC 主视觉、入睡测试、盲盒歌单与签到奖励，将助眠内容转化为更具陪伴感的互动体验。</span>
