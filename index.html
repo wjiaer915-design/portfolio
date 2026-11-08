@@ -117,6 +117,12 @@
             text-align: left;
         }
 
+        .section-display-title {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            line-height: 0.94;
+            letter-spacing: -0.05em;
+        }
+
         .project-category-list {
             display: flex;
             flex-wrap: wrap;
@@ -148,7 +154,23 @@
             box-shadow: 0 0 10px rgba(129, 140, 248, 0.65);
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 768px) and (max-width: 1279px) {
+            .selected-work-heading-column {
+                grid-column: span 4 / span 4;
+            }
+
+            .selected-work-intro-column {
+                grid-column: span 8 / span 8;
+                padding-left: clamp(0.25rem, 1vw, 0.75rem);
+            }
+
+            .selected-work-intro-copy {
+                font-size: 0.84rem;
+                line-height: 1.75;
+            }
+        }
+
+        @media (min-width: 1280px) {
             .selected-work-heading-column {
                 grid-column: span 3 / span 3;
             }
@@ -1177,7 +1199,7 @@
             <div class="reveal grid gap-8 md:grid-cols-12 md:items-end">
                 <div class="selected-work-heading-column">
                     <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">PORTFOLIO / 01—05</span>
-                    <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-none">Selected<br>Works.</h2>
+                    <h2 class="section-display-title font-bold uppercase">Selected<br>Works.</h2>
                 </div>
                 <div class="selected-work-intro-column">
                     <span class="text-indigo-400 font-bold text-[10px] tracking-[0.2em] uppercase block mb-3">Project Index / 项目分类</span>
@@ -1309,7 +1331,7 @@
 <div class="reveal grid gap-8 md:grid-cols-12 md:items-end mb-12">
     <div class="selected-work-heading-column">
         <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">DAILY VISUAL EXPERIMENTS</span>
-        <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-none">Creative<br>Lab.</h2>
+        <h2 class="section-display-title font-bold uppercase">Creative<br>Lab.</h2>
     </div>
 
     <div class="selected-work-intro-column">
@@ -1396,7 +1418,7 @@
             <div class="reveal mb-16 grid gap-8 md:grid-cols-12 md:items-end">
                 <div class="selected-work-heading-column">
                     <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">EXHIBITION & EXECUTION</span>
-                    <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-none">Event<br>Projects.</h2>
+                    <h2 class="section-display-title font-bold uppercase">Event<br>Projects.</h2>
                 </div>
 
                 <div class="selected-work-intro-column">
@@ -1456,14 +1478,23 @@
 
       <!-- Archive (Awards & Competitions) -->
 <section id="archive" class="px-6 md:px-12 py-32 border-t border-zinc-900">
-  <div class="reveal mb-16 flex justify-between items-end">
-    <div>
-      <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">
-        ARCHIVE
-      </span>
-      <h2 class="text-4xl font-bold uppercase tracking-tighter">
-        Awards &<br>Competitions
-      </h2>
+  <div class="reveal mb-16 grid gap-8 md:grid-cols-12 md:items-end">
+    <div class="selected-work-heading-column">
+      <span class="text-indigo-500 font-bold text-xs tracking-widest mb-4 block">ARCHIVE / 2021—2025</span>
+      <h2 class="section-display-title font-bold uppercase">Awards &<br>Honors.</h2>
+    </div>
+
+    <div class="selected-work-intro-column">
+      <span class="text-indigo-400 font-bold text-[10px] tracking-[0.2em] uppercase block mb-3">Recognition &amp; Practice / 荣誉与实践</span>
+      <p class="selected-work-intro-copy">
+        记录视觉设计竞赛、插画征集、公益活动与志愿服务中的阶段性成果。它们既是对专业能力的外部检验，也保留了我在不同议题、团队协作与真实场景中持续实践的轨迹。
+      </p>
+      <div class="project-category-list" aria-label="荣誉与实践类别">
+        <span class="project-category-item">设计竞赛 / Design Awards</span>
+        <span class="project-category-item">插画入围 / Illustration</span>
+        <span class="project-category-item">公益实践 / Public Service</span>
+      </div>
+      <p class="mt-4 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-700">Scan / Review / Trace</p>
     </div>
   </div>
 
