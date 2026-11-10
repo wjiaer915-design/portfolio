@@ -20,6 +20,7 @@ Get-ChildItem -LiteralPath $projectRoot -File -Filter "*.html" | ForEach-Object 
 }
 
 Copy-Item -LiteralPath (Join-Path $projectRoot "_headers") -Destination $deployDirectory
+Copy-Item -LiteralPath (Join-Path $projectRoot "favicon.ico") -Destination $deployDirectory
 Copy-Item -LiteralPath (Join-Path $projectRoot "assets") -Destination $deployDirectory -Recurse
 
 $wrangler = Join-Path $projectRoot "node_modules\.bin\wrangler.cmd"
