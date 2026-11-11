@@ -91,15 +91,27 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        /* ===== Mobile: make banner shorter & disable fixed background ===== */
-@media (max-width: 768px){
-  .parallax-img{
-    height: 22vh !important;
-    min-height: 22vh !important;
-    background-attachment: scroll !important; /* iOS 上 fixed 容易怪 */
-    background-position: center top !important;
-  }
-}
+
+        /*
+         * Touch devices use the complete 16:9 artwork as a real image.
+         * This avoids iOS/iPadOS fixed-background cropping and keeps the
+         * transition into the following section identical to the AI project.
+         */
+        .brand-banner__desktop { display: none; }
+        .brand-banner__touch { display: block; }
+        .brand-banner__touch img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* 1440px keeps every current iPad landscape size on the stable image path. */
+        @media (min-width: 1440px) and (hover: hover) and (pointer: fine) {
+            .brand-banner__desktop { display: block; }
+            .brand-banner__touch { display: none; }
+        }
 
         .img-reveal {
             opacity: 0;
@@ -204,10 +216,26 @@
             </div>
         </header>
 
-       <section class="w-full h-[22vh] md:h-[80vh] parallax-img bg-zinc-800 relative mb-10 md:mb-32 bg-center bg-cover"
-  style="background-image: url('assets/images/project-01-cover-web.webp');">
-  <div class="absolute inset-0 bg-black/20"></div>
-</section>
+        <!-- Banner: full artwork on iPhone/iPad, parallax only on pointer desktops -->
+        <section class="brand-banner relative mb-10 md:mb-32">
+            <div class="brand-banner__desktop w-full h-[80vh] parallax-img bg-zinc-800 relative"
+                 style="background-image: url('assets/images/project-01-cover-web.webp');">
+                <div class="absolute inset-0 bg-emerald-950/10 mix-blend-overlay"></div>
+                <div class="absolute bottom-10 right-10 text-xs text-emerald-300/70 uppercase tracking-widest">
+                    Brand Identity
+                </div>
+            </div>
+
+            <div class="brand-banner__touch w-full bg-zinc-800 overflow-hidden relative">
+                <img src="assets/images/project-01-cover-web.webp"
+                     width="1600" height="1114"
+                     alt="躺平吧疗愈品牌设计跨页"
+                     decoding="async" fetchpriority="high">
+                <div class="absolute bottom-4 right-5 text-[10px] text-emerald-700/80 uppercase tracking-[0.25em]">
+                    Brand Identity
+                </div>
+            </div>
+        </section>
 
 
         <!-- Project Intro -->
