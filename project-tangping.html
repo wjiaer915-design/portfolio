@@ -115,16 +115,13 @@
       width: min(calc(100% - 2.5rem), 1320px);
       margin-inline: auto;
     }
-    .project-cover {
-      padding: 1.25rem;
-      border-block: 1px solid rgba(255, 255, 255, .1);
-    }
-    .project-cover__inner {
-      width: min(100%, 1400px);
-      margin-inline: auto;
-    }
     .project-intro {
       padding-block: clamp(6rem, 10vw, 9rem);
+    }
+    .project-meta {
+      margin-top: clamp(4.5rem, 8vw, 7rem);
+      padding-top: clamp(1.75rem, 3vw, 2.5rem);
+      border-top: 1px solid rgba(255, 255, 255, .12);
     }
     .phase-section {
       margin-bottom: clamp(8rem, 12vw, 12rem);
@@ -140,7 +137,7 @@
     }
     .case-frame {
       width: 100%;
-      max-width: 1240px;
+      max-width: none;
       margin-inline: auto;
       overflow: visible;
       border: 0;
@@ -148,7 +145,6 @@
       background: transparent;
       box-shadow: none;
     }
-    .case-frame--reading { max-width: 1040px; }
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -162,7 +158,7 @@
       .site-nav__inner { padding: 1.15rem 1.25rem; }
       .site-nav .display-en { font-size: 10px; letter-spacing: .1em; }
       .project-shell { width: min(calc(100% - 2.5rem), 1320px); }
-      .project-cover { padding: 1.25rem; }
+      .project-meta { margin-top: 3.5rem; padding-top: 1.5rem; }
       .phase-section { margin-bottom: 7rem; }
       .case-stack { gap: 3.5rem; }
     }
@@ -185,7 +181,7 @@
   </nav>
 
   <main>
-    <header class="relative flex min-h-[86vh] flex-col justify-end px-5 pb-14 pt-32 md:px-12 md:pb-20">
+    <header class="project-shell relative flex min-h-[86vh] flex-col justify-end pb-14 pt-32 md:pb-20">
       <div class="relative z-10 max-w-[1500px]">
         <p class="mb-6 text-sm font-bold uppercase tracking-[.22em] text-[#b7f15c]">Light Wellness · Healing Brand</p>
         <h1 class="hero-title bg-gradient-to-br from-white via-white to-[#9c7cff] bg-clip-text text-transparent">躺平吧</h1>
@@ -195,19 +191,13 @@
           以更鲜明的紫色与荧光绿视觉系统，重新建立品牌与年轻人的情绪连接。
         </p>
       </div>
-      <div class="mt-14 grid grid-cols-2 gap-7 border-t border-white/10 pt-7 text-sm md:grid-cols-4 md:gap-10">
+      <div class="project-meta grid grid-cols-2 gap-7 text-sm md:grid-cols-4 md:gap-10">
         <div><span class="mb-2 block text-zinc-600">ROLE</span><span>Brand Designer</span></div>
         <div><span class="mb-2 block text-zinc-600">CONCEPT</span><span>Healing / Wellness</span></div>
         <div><span class="mb-2 block text-zinc-600">SCOPE</span><span>Identity / IP / Application</span></div>
         <div><span class="mb-2 block text-zinc-600">YEAR</span><span>2026</span></div>
       </div>
     </header>
-
-    <section aria-label="躺平吧品牌封面" class="project-cover">
-      <div class="project-cover__inner">
-        <img src="assets/images/tangping-2026-01.webp" width="1600" height="986" class="case-image" alt="躺平吧轻养生疗愈品牌新版封面" decoding="async" fetchpriority="high">
-      </div>
-    </section>
 
     <section class="project-intro project-shell">
       <div class="grid gap-10 md:grid-cols-12">
@@ -230,8 +220,8 @@
           <p class="mt-4 max-w-2xl text-base leading-8 text-zinc-500">从市场语境、年轻人情绪需求与品牌核心词出发，建立更聚焦的疗愈型品牌定位。</p>
         </div>
         <div class="case-stack">
-          <figure class="case-frame case-frame--reading reveal"><img src="assets/images/tangping-2026-02.webp" width="1600" height="1722" class="case-image" alt="躺平吧品牌背景与理念说明" decoding="async" loading="eager"></figure>
-          <figure class="case-frame case-frame--reading reveal"><img src="assets/images/tangping-2026-03.webp" width="1600" height="2181" class="case-image" alt="轻养生疗愈市场分析与品牌核心词" decoding="async" loading="lazy"></figure>
+          <figure class="case-frame reveal"><img src="assets/images/tangping-2026-02.webp" width="1600" height="1722" class="case-image" alt="躺平吧品牌背景与理念说明" decoding="async" loading="eager"></figure>
+          <figure class="case-frame reveal"><img src="assets/images/tangping-2026-03.webp" width="1600" height="2181" class="case-image" alt="轻养生疗愈市场分析与品牌核心词" decoding="async" loading="lazy"></figure>
           <figure class="case-frame reveal"><img src="assets/images/tangping-2026-04.webp" width="1600" height="983" class="case-image" alt="躺平吧品牌定位" decoding="async" loading="lazy"></figure>
         </div>
       </div>
@@ -261,7 +251,7 @@
           <p class="mt-4 max-w-2xl text-base leading-8 text-zinc-500">通过慵懒、松弛的动作与日常睡眠场景，让疗愈理念转化为具有陪伴感的品牌角色。</p>
         </div>
         <div class="case-stack">
-          <figure class="case-frame case-frame--reading reveal"><img src="assets/images/tangping-2026-09.webp" width="1600" height="2018" class="case-image" alt="躺平吧小梦 IP 角色设定与三视图" decoding="async" loading="lazy"></figure>
+          <figure class="case-frame reveal"><img src="assets/images/tangping-2026-09.webp" width="1600" height="2018" class="case-image" alt="躺平吧小梦 IP 角色设定与三视图" decoding="async" loading="lazy"></figure>
           <figure class="case-frame reveal"><img src="assets/images/tangping-2026-10.webp" width="1600" height="984" class="case-image" alt="小梦 IP 动作延展" decoding="async" loading="lazy"></figure>
           <figure class="case-frame reveal"><img src="assets/images/tangping-2026-11.webp" width="1600" height="984" class="case-image" alt="小梦 IP 插画场景延展" decoding="async" loading="lazy"></figure>
         </div>
