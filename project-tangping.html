@@ -10,6 +10,7 @@
   <title>躺平吧 Lie Down Flat | Brand Identity 2026</title>
   <link rel="stylesheet" href="assets/styles/tailwind.css">
   <link rel="stylesheet" href="assets/styles/fonts.css">
+  <link rel="stylesheet" href="assets/styles/project-navigation.css">
   <style>
     :root {
       --bg: #08080b;
@@ -25,7 +26,11 @@
     body {
       margin: 0;
       overflow-x: hidden;
-      background: var(--bg);
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px;
       color: var(--text);
       font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
     }
@@ -65,10 +70,18 @@
 
     .hero-title {
       font-family: 'Noto Sans SC', sans-serif;
-      font-size: clamp(4.25rem, 12vw, 10.5rem);
+      font-size: clamp(5rem, 15vw, 15rem);
       font-weight: 900;
-      line-height: .88;
+      line-height: .9;
       letter-spacing: -.08em;
+    }
+    .hero-title-en {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 4.2rem);
+      line-height: 1;
+      letter-spacing: .18em;
+      color: var(--purple-soft);
+      text-transform: uppercase;
     }
     .display-en {
       font-family: 'Syncopate', sans-serif;
@@ -81,69 +94,78 @@
       display: block;
       transform: translateZ(0);
     }
-    .site-nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 100;
-      width: 100vw;
-      min-width: 100%;
-      isolation: isolate;
-    }
-    .site-nav::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      width: 100vw;
-      background: linear-gradient(105deg, rgba(8, 8, 11, .88), rgba(20, 14, 39, .72));
-      border-bottom: 1px solid rgba(255, 255, 255, .12);
-      box-shadow: 0 16px 44px rgba(0, 0, 0, .24);
-      -webkit-backdrop-filter: blur(22px) saturate(145%);
-      backdrop-filter: blur(22px) saturate(145%);
-      transform: translateZ(0);
-    }
-    .site-nav__inner {
-      position: relative;
-      display: flex;
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.25rem;
-    }
     .project-shell {
       width: min(calc(100% - 2.5rem), 1320px);
       margin-inline: auto;
-    }
-    .project-intro {
-      padding-block: clamp(6rem, 10vw, 9rem);
     }
     .project-meta {
       margin-top: clamp(4.5rem, 8vw, 7rem);
       padding-top: clamp(1.75rem, 3vw, 2.5rem);
       border-top: 1px solid rgba(255, 255, 255, .12);
     }
+    .project-meta > div { min-width: 0; }
+    .project-meta > div > span:last-child {
+      display: block;
+      overflow-wrap: anywhere;
+    }
     .phase-section {
-      margin-bottom: clamp(8rem, 12vw, 12rem);
-      padding-top: clamp(3rem, 5vw, 4.5rem);
+      margin-bottom: clamp(7rem, 10vw, 10rem);
+      padding-top: clamp(3.5rem, 5vw, 4.5rem);
       border-top: 1px solid rgba(255, 255, 255, .1);
     }
     .phase-head {
-      margin-bottom: clamp(3rem, 6vw, 5.5rem);
+      margin-bottom: clamp(3rem, 5vw, 4.5rem);
+    }
+    .phase-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: .35rem 1.05rem;
+      border: 1px solid var(--purple-soft);
+      border-radius: 999px;
+      color: var(--purple-soft);
+      font-family: 'Syncopate', sans-serif;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .phase-title {
+      margin-top: 2rem;
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -.045em;
+    }
+    .phase-subtitle {
+      margin-top: 1rem;
+      color: #71717a;
+      font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+      line-height: 1.5;
+    }
+    .phase-copy {
+      max-width: 64rem;
+      margin-top: 2rem;
+      color: #a1a1aa;
+      font-size: clamp(1rem, 1.4vw, 1.125rem);
+      line-height: 2;
+    }
+    .phase-copy > * + * {
+      margin-top: 1rem;
     }
     .case-stack {
       display: grid;
-      gap: clamp(3rem, 7vw, 7rem);
+      gap: clamp(2.5rem, 5vw, 5rem);
     }
     .case-frame {
       width: 100%;
       max-width: none;
       margin-inline: auto;
-      overflow: visible;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-      box-shadow: none;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 28px;
+      background: #111;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .45);
     }
     .reveal {
       opacity: 0;
@@ -155,12 +177,11 @@
 
     @media (max-width: 767px) {
       .hero-title { letter-spacing: -.06em; }
-      .site-nav__inner { padding: 1.15rem 1.25rem; }
-      .site-nav .display-en { font-size: 10px; letter-spacing: .1em; }
       .project-shell { width: min(calc(100% - 2.5rem), 1320px); }
       .project-meta { margin-top: 3.5rem; padding-top: 1.5rem; }
       .phase-section { margin-bottom: 7rem; }
       .case-stack { gap: 3.5rem; }
+      .case-frame { border-radius: 18px; box-shadow: 0 24px 70px rgba(0, 0, 0, .4); }
     }
     @media (pointer: coarse), (hover: none) { #cursor { display: none; } }
     @media (prefers-reduced-motion: reduce) {
@@ -173,19 +194,17 @@
   <div id="cursor" aria-hidden="true"></div>
   <div class="ambient" aria-hidden="true"></div>
 
-  <nav class="site-nav">
-    <div class="site-nav__inner md:px-12 md:py-7">
-      <a href="index.html#selected-works-title" class="whitespace-nowrap text-sm font-bold uppercase tracking-[.18em] transition hover:text-[#b7f15c]">Back to Index</a>
-      <div class="display-en whitespace-nowrap text-[12px] text-zinc-500">Brand Identity · 2026</div>
-    </div>
+  <nav class="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-white/5 bg-[#0a0a0a]/82 px-6 py-6 text-white shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl md:px-12 md:py-8">
+    <a href="index.html#selected-works-title" class="group flex items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest transition hover:text-violet-400"><span class="transition group-hover:-translate-x-1">←</span>Back to Index</a>
+    <div class="whitespace-nowrap font-mono text-xs opacity-60">Brand Identity · 2026</div>
   </nav>
 
   <main>
-    <header class="project-shell relative flex min-h-[86vh] flex-col justify-end pb-14 pt-32 md:pb-20">
+    <header class="project-shell relative flex min-h-[88vh] flex-col justify-end pb-14 pt-32 md:pb-20">
       <div class="relative z-10 max-w-[1500px]">
-        <p class="mb-6 text-sm font-bold uppercase tracking-[.22em] text-[#b7f15c]">Light Wellness · Healing Brand</p>
+        <p class="mb-10 flex items-center gap-3 text-sm font-bold uppercase tracking-[.22em] text-[#b7f15c]"><span class="h-3 w-3 rounded-full bg-[#b7f15c] shadow-[0_0_18px_rgba(183,241,92,.65)]"></span>Light Wellness · Healing Brand</p>
         <h1 class="hero-title bg-gradient-to-br from-white via-white to-[#9c7cff] bg-clip-text text-transparent">躺平吧</h1>
-        <p class="display-en mt-6 text-sm text-[#9c7cff] md:text-xl">Lie Down Flat</p>
+        <p class="hero-title-en mt-3 md:-mt-2 md:ml-4">Lie Down Flat</p>
         <p class="mt-10 max-w-3xl text-lg leading-8 text-zinc-300 md:text-2xl md:leading-10">
           让休息成为一种日常疗愈方式。围绕“拒绝内耗、轻松养生、情绪疗愈”的理念，
           以更鲜明的紫色与荧光绿视觉系统，重新建立品牌与年轻人的情绪连接。
@@ -199,13 +218,12 @@
       </div>
     </header>
 
-    <section class="project-intro project-shell">
-      <div class="grid gap-10 md:grid-cols-12">
-        <div class="md:col-span-4">
-          <p class="display-en text-[12px] text-[#b7f15c]">Brand Refresh</p>
-          <h2 class="mt-5 text-4xl font-bold md:text-6xl">从“躺平”到<br>轻养生疗愈</h2>
-        </div>
-        <div class="space-y-6 text-lg leading-9 text-zinc-400 md:col-span-8 md:text-xl">
+    <section class="phase-section project-shell">
+      <div class="phase-head">
+        <span class="phase-chip">Project Overview</span>
+        <h2 class="phase-title">Brand Refresh</h2>
+        <p class="phase-subtitle">从“躺平”到轻养生疗愈</p>
+        <div class="phase-copy">
           <p>新版保留“拒绝内耗、回归自在”的核心态度，将原有概念进一步精简为更清晰的轻养生疗愈品牌定位。</p>
           <p>视觉上以高识别度紫色为主色，搭配荧光绿形成活力对比；同时引入“小梦”IP 与睡眠灵感辅助图形，使品牌从平面标识延伸到情绪陪伴、插画叙事与日常物料。</p>
         </div>
@@ -215,9 +233,10 @@
     <section class="phase-section project-shell">
       <div>
         <div class="phase-head">
-          <p class="display-en text-[12px] text-[#9c7cff]">01 · Strategy</p>
-          <h2 class="mt-4 text-3xl font-bold md:text-5xl">品牌背景与定位</h2>
-          <p class="mt-4 max-w-2xl text-base leading-8 text-zinc-500">从市场语境、年轻人情绪需求与品牌核心词出发，建立更聚焦的疗愈型品牌定位。</p>
+          <span class="phase-chip">Phase 01</span>
+          <h2 class="phase-title">Brand Strategy</h2>
+          <p class="phase-subtitle">品牌背景与定位</p>
+          <p class="phase-copy">从市场语境、年轻人情绪需求与品牌核心词出发，建立更聚焦的疗愈型品牌定位。</p>
         </div>
         <div class="case-stack">
           <figure class="case-frame reveal"><img src="assets/images/tangping-2026-02.webp" width="1600" height="1722" class="case-image" alt="躺平吧品牌背景与理念说明" decoding="async" loading="eager"></figure>
@@ -230,9 +249,10 @@
     <section class="phase-section project-shell">
       <div>
         <div class="phase-head">
-          <p class="display-en text-[12px] text-[#9c7cff]">02 · Visual System</p>
-          <h2 class="mt-4 text-3xl font-bold md:text-5xl">字体、色彩与辅助图形</h2>
-          <p class="mt-4 max-w-2xl text-base leading-8 text-zinc-500">以更紧凑的中文标识、鲜明色彩组合与睡眠灵感图形，构建轻松但具传播力的品牌语言。</p>
+          <span class="phase-chip">Phase 02</span>
+          <h2 class="phase-title">Visual Identity</h2>
+          <p class="phase-subtitle">字体、色彩与辅助图形</p>
+          <p class="phase-copy">以更紧凑的中文标识、鲜明色彩组合与睡眠灵感图形，构建轻松但具传播力的品牌语言。</p>
         </div>
         <div class="case-stack">
           <figure class="case-frame reveal"><img src="assets/images/tangping-2026-05.webp" width="1600" height="984" class="case-image" alt="躺平吧品牌字体网格规范" decoding="async" loading="lazy"></figure>
@@ -246,9 +266,10 @@
     <section class="phase-section project-shell">
       <div>
         <div class="phase-head">
-          <p class="display-en text-[12px] text-[#b7f15c]">03 · Character &amp; Story</p>
-          <h2 class="mt-4 text-3xl font-bold md:text-5xl">“小梦”IP 与插画延展</h2>
-          <p class="mt-4 max-w-2xl text-base leading-8 text-zinc-500">通过慵懒、松弛的动作与日常睡眠场景，让疗愈理念转化为具有陪伴感的品牌角色。</p>
+          <span class="phase-chip">Phase 03</span>
+          <h2 class="phase-title">Character &amp; Story</h2>
+          <p class="phase-subtitle">“小梦”IP 与插画延展</p>
+          <p class="phase-copy">通过慵懒、松弛的动作与日常睡眠场景，让疗愈理念转化为具有陪伴感的品牌角色。</p>
         </div>
         <div class="case-stack">
           <figure class="case-frame reveal"><img src="assets/images/tangping-2026-09.webp" width="1600" height="2018" class="case-image" alt="躺平吧小梦 IP 角色设定与三视图" decoding="async" loading="lazy"></figure>
@@ -261,9 +282,10 @@
     <section class="phase-section project-shell">
       <div>
         <div class="phase-head">
-          <p class="display-en text-[12px] text-[#b7f15c]">04 · Applications</p>
-          <h2 class="mt-4 text-3xl font-bold md:text-5xl">品牌物料与生活方式延展</h2>
-          <p class="mt-4 max-w-2xl text-base leading-8 text-zinc-500">将视觉系统落到礼盒、包装、文创与生活方式产品中，形成统一且可持续扩展的品牌触点。</p>
+          <span class="phase-chip">Phase 04</span>
+          <h2 class="phase-title">Brand Applications</h2>
+          <p class="phase-subtitle">品牌物料与生活方式延展</p>
+          <p class="phase-copy">将视觉系统落到礼盒、包装、文创与生活方式产品中，形成统一且可持续扩展的品牌触点。</p>
         </div>
         <div class="case-stack">
           <figure class="case-frame reveal"><img src="assets/images/tangping-2026-12.webp" width="1600" height="984" class="case-image" alt="躺平吧品牌礼盒与文创物料" decoding="async" loading="lazy"></figure>
@@ -276,16 +298,19 @@
       </div>
     </section>
 
-    <a href="project-fashion.html" class="group block border-t border-white/10 px-5 py-20 transition hover:bg-[#612fdf]/10 md:px-12 md:py-28">
-      <span class="display-en text-[12px] text-zinc-600">Next Project</span>
-      <div class="mt-5 flex flex-wrap items-end justify-between gap-5">
-        <h2 class="text-4xl font-bold transition group-hover:text-[#b7f15c] md:text-7xl">AI 时尚顾问</h2>
-        <span class="text-base text-zinc-500">UI / UX Design</span>
+    <a href="project-fashion.html" class="portfolio-project-nav" aria-label="下一个项目：AI 时尚顾问界面设计">
+      <div class="portfolio-project-nav__inner">
+        <div class="portfolio-project-nav__copy">
+          <span class="portfolio-project-nav__kicker">Next Project / 下一个项目</span>
+          <h2 class="portfolio-project-nav__title">AI 时尚顾问界面设计</h2>
+          <span class="portfolio-project-nav__subtitle">AI Fashion Advisor · UI / UX Design</span>
+        </div>
+        <svg class="portfolio-project-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
       </div>
     </a>
   </main>
 
-  <footer class="border-t border-white/10 px-5 py-10 text-center text-sm uppercase tracking-[.16em] text-zinc-600 md:px-12">© 2026 Jackson Huan Portfolio</footer>
+  <footer class="portfolio-project-footer">© 2026 Jackson Huan Portfolio</footer>
 
   <script>
     const cursor = document.getElementById('cursor');

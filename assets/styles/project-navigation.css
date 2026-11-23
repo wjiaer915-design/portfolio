@@ -1,0 +1,114 @@
+.portfolio-project-nav {
+  display: block;
+  width: 100vw;
+  margin-top: clamp(6rem, 10vw, 10rem);
+  margin-left: 50%;
+  transform: translateX(-50%);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 12, 15, 0.36);
+  color: #f4f4f5;
+  text-decoration: none;
+  transition: background-color 240ms ease;
+}
+
+.portfolio-project-nav:hover {
+  background: rgba(124, 92, 255, 0.1);
+}
+
+.portfolio-project-nav__inner {
+  display: flex;
+  width: min(calc(100% - 3rem), 1320px);
+  min-height: clamp(15rem, 22vw, 20rem);
+  margin-inline: auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.portfolio-project-nav__copy {
+  min-width: 0;
+}
+
+.portfolio-project-nav__kicker {
+  display: block;
+  margin-bottom: 0.9rem;
+  color: #71717a;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.portfolio-project-nav__title {
+  margin: 0;
+  color: #f4f4f5;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  transition: color 240ms ease;
+}
+
+.portfolio-project-nav__subtitle {
+  display: block;
+  margin-top: 1rem;
+  color: #52525b;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.portfolio-project-nav__icon {
+  width: clamp(2.75rem, 4.5vw, 4rem);
+  height: clamp(2.75rem, 4.5vw, 4rem);
+  flex: 0 0 auto;
+  color: #3f3f46;
+  transition: color 240ms ease, transform 240ms ease;
+}
+
+.portfolio-project-nav:hover .portfolio-project-nav__title,
+.portfolio-project-nav:hover .portfolio-project-nav__icon {
+  color: #a78bfa;
+}
+
+.portfolio-project-nav:hover .portfolio-project-nav__icon {
+  transform: translateX(0.6rem);
+}
+
+.portfolio-project-footer {
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+  color: #52525b;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  .portfolio-project-nav__inner {
+    width: min(calc(100% - 2.5rem), 1320px);
+    min-height: 13rem;
+    gap: 1.25rem;
+  }
+
+  .portfolio-project-nav__title {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .portfolio-project-nav__subtitle {
+    max-width: 17rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-project-nav,
+  .portfolio-project-nav__title,
+  .portfolio-project-nav__icon {
+    transition: none;
+  }
+}

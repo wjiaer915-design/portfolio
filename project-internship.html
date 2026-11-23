@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="assets/styles/tailwind.css">
   <script src="assets/vendor/lucide.min.js"></script>
   <link rel="stylesheet" href="assets/styles/fonts.css">
+  <link rel="stylesheet" href="assets/styles/project-navigation.css">
   <style>
     :root {
       --bg: #070709;
@@ -271,15 +272,19 @@
       </div>
     </section>
 
-    <a href="project-tangping.html" class="group relative block overflow-hidden border-b border-zinc-900 px-6 py-20 transition hover:bg-zinc-900/40 md:px-12 md:py-24">
-      <div class="relative z-10 flex items-center justify-between gap-8">
-        <div><span class="mb-3 block text-[10px] uppercase tracking-[.24em] text-zinc-600">Next Project</span><h2 class="text-3xl font-bold uppercase tracking-tight transition group-hover:text-indigo-300 md:text-6xl">Tangping Brand Identity 2026</h2><p class="mt-4 text-xs uppercase tracking-[.2em] text-zinc-600">Healing Brand / IP System</p></div>
-        <i data-lucide="arrow-right" class="h-10 w-10 shrink-0 text-zinc-700 transition group-hover:translate-x-2 group-hover:text-indigo-300 md:h-14 md:w-14"></i>
+    <a href="project-tangping.html" class="portfolio-project-nav" aria-label="下一个项目：躺平吧品牌视觉设计">
+      <div class="portfolio-project-nav__inner">
+        <div class="portfolio-project-nav__copy">
+          <span class="portfolio-project-nav__kicker">Next Project / 下一个项目</span>
+          <h2 class="portfolio-project-nav__title">躺平吧品牌视觉设计</h2>
+          <span class="portfolio-project-nav__subtitle">Tangping Brand Identity</span>
+        </div>
+        <svg class="portfolio-project-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
       </div>
     </a>
   </main>
 
-  <footer class="px-6 py-12 text-center text-[10px] uppercase tracking-[.22em] text-zinc-600 md:px-12"><p>© 2026 Jackson Huan Portfolio</p></footer>
+  <footer class="portfolio-project-footer"><p>© 2026 Jackson Huan Portfolio</p></footer>
 
   <script>
     lucide.createIcons();

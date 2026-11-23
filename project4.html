@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/styles/tailwind.css">
 
 <link rel="stylesheet" href="assets/styles/fonts.css">
+<link rel="stylesheet" href="assets/styles/project-navigation.css">
 
   <style>
     :root {
@@ -139,7 +140,7 @@
 <nav class="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 md:py-8 flex justify-between items-center bg-[#0a0a0a]/82 backdrop-blur-xl border-b border-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.35)] text-white">
   <a href="index.html#selected-works-title" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-violet-400 transition group">
     <span class="group-hover:-translate-x-1 transition">←</span>
-    Back to Portfolio
+    Back to Index
   </a>
 
   <div class="text-xs font-mono opacity-60">
@@ -354,34 +355,20 @@
       <img src="assets/images/sleep-wave-09-web.webp" alt="H5 活动页设计与样机展示" decoding="async" loading="lazy">
     </section>
 
-    <footer class="border-t border-zinc-800 pt-10 pb-16 text-xs uppercase tracking-[0.25em] text-zinc-500">
-    <!-- 底部导航：返回首页对应项目 -->
-<a href="index.html#selected-works-title"
-   class="block mt-16 px-6 md:px-12 py-14 border-t border-zinc-900/50 hover:bg-zinc-900/30 transition cursor-pointer group relative overflow-hidden">
-
-  <div class="relative z-10 flex justify-between items-center">
-    <div>
-      <span class="text-zinc-500 text-xs tracking-widest uppercase mb-2 block">
-        Back to
-      </span>
-
-      <h2 class="text-3xl md:text-5xl font-bold group-hover:text-violet-400 transition">
-        The Sleep Wave Project
-      </h2>
+<a href="index.html#selected-works-title" class="portfolio-project-nav" aria-label="返回精选项目">
+  <div class="portfolio-project-nav__inner">
+    <div class="portfolio-project-nav__copy">
+      <span class="portfolio-project-nav__kicker">Back To / 返回</span>
+      <h2 class="portfolio-project-nav__title">精选项目</h2>
+      <span class="portfolio-project-nav__subtitle">Selected Works</span>
     </div>
-
-    <svg class="w-12 h-12 text-zinc-700 group-hover:text-violet-400 transition transform group-hover:-translate-y-2 group-hover:-translate-x-2"
-         xmlns="http://www.w3.org/2000/svg"
-         fill="none"
-         viewBox="0 0 24 24"
-         stroke="currentColor"
-         stroke-width="1.8">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7v9" />
-    </svg>
+    <svg class="portfolio-project-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
   </div>
 </a>
 
    </main>
+
+  <footer class="portfolio-project-footer">© 2026 Jackson Huan Portfolio</footer>
 
   <script>
     const cursor = document.getElementById('cursor');

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/styles/tailwind.css">
     <script src="assets/vendor/lucide.min.js"></script>
     <link rel="stylesheet" href="assets/styles/fonts.css">
+    <link rel="stylesheet" href="assets/styles/project-navigation.css">
     <style>
         :root {
             --bg: #050505; 
@@ -310,30 +311,21 @@ html {
         </section>
 
     <!-- 底部导航：跳转到下一个项目 -->
-<a href="project-doctorkids.html" class="block mt-24 md:mt-32 px-6 md:px-12 py-20 md:py-24 border-t border-zinc-900/50 hover:bg-zinc-900/30 transition cursor-pointer group relative overflow-hidden">
-    <div class="relative z-10 flex justify-between items-center gap-6">
-        <div>
-            <span class="text-zinc-500 text-xs tracking-widest uppercase mb-3 block">
-                Next Project
-            </span>
-
-            <h2 class="text-3xl md:text-5xl font-bold uppercase tracking-tight group-hover:text-violet-400 transition leading-tight">
-                Doctor Kids 小小医生
-            </h2>
-
-            <p class="text-zinc-500 text-xs md:text-sm uppercase tracking-widest mt-4">
-                IP & Campaign Design / Public Welfare
-            </p>
-        </div>
-
-        <i data-lucide="arrow-right" class="w-10 h-10 md:w-12 md:h-12 text-zinc-700 group-hover:text-violet-400 transition transform group-hover:translate-x-2 shrink-0"></i>
+<a href="project-doctorkids.html" class="portfolio-project-nav" aria-label="下一个项目：小小医生公益 IP 设计">
+  <div class="portfolio-project-nav__inner">
+    <div class="portfolio-project-nav__copy">
+      <span class="portfolio-project-nav__kicker">Next Project / 下一个项目</span>
+      <h2 class="portfolio-project-nav__title">小小医生公益 IP 设计</h2>
+      <span class="portfolio-project-nav__subtitle">Doctor Kids · IP &amp; Campaign Design</span>
     </div>
+    <svg class="portfolio-project-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" /></svg>
+  </div>
 </a>
 
     </main>
 
-    <footer class="px-6 md:px-12 py-12 text-center text-[10px] uppercase tracking-widest text-zinc-600 border-t border-zinc-900">
-        <p>© 2025 Jackson Jin Portfolio</p>
+    <footer class="portfolio-project-footer">
+        <p>© 2026 Jackson Huan Portfolio</p>
     </footer>
 
     <script>
