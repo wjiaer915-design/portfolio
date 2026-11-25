@@ -96,7 +96,7 @@
             opacity: 0;
             transform: translate(-50%, -50%) scale(1);
             transition: transform 0.14s ease, opacity 0.12s ease, background-color 0.18s ease, backdrop-filter 0.18s ease;
-            will-change: left, top, transform;
+            will-change: translate, transform, opacity;
         }
 
         .work-card {
@@ -1669,7 +1669,7 @@
             </button>
           </div>
         </header>
-        <div id="project-modal-scroller" class="project-modal__scroller" tabindex="0">
+        <div id="project-modal-scroller" class="project-modal__scroller" tabindex="0" aria-label="躺平吧项目内容">
           <div class="project-modal__loading" role="status">
             <div>
               <div class="project-modal__loading-mark" aria-hidden="true"></div>
@@ -1816,7 +1816,7 @@ const showTangpingModal = ({ pushHistory = true } = {}) => {
     projectModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('project-modal-open');
     setModalBackgroundState(true);
-    requestAnimationFrame(() => projectModalPanel.focus({ preventScroll: true }));
+    requestAnimationFrame(() => projectModalScroller.focus({ preventScroll: true }));
   }
 
   if (pushHistory && !tangpingModalIsRequested()) {
@@ -2032,6 +2032,11 @@ if (projectGallery) {
         const hasFinePointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
 
         if (cursor && hasFinePointer) {
+            let cursorFrame = 0;
+            let cursorX = -100;
+            let cursorY = -100;
+            const supportsIndividualTranslate = 'translate' in cursor.style;
+
             const resetCursor = () => {
                 cursor.style.transform = 'translate(-50%, -50%) scale(1)';
                 cursor.style.mixBlendMode = 'difference';
@@ -2047,9 +2052,19 @@ if (projectGallery) {
             };
 
             document.addEventListener('pointermove', e => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                cursor.style.opacity = '1';
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                if (cursorFrame) return;
+                cursorFrame = requestAnimationFrame(() => {
+                    if (supportsIndividualTranslate) {
+                        cursor.style.translate = `${cursorX}px ${cursorY}px`;
+                    } else {
+                        cursor.style.left = `${cursorX}px`;
+                        cursor.style.top = `${cursorY}px`;
+                    }
+                    cursor.style.opacity = '1';
+                    cursorFrame = 0;
+                });
             }, { passive: true });
 
             document.documentElement.addEventListener('mouseleave', () => {
