@@ -12,6 +12,8 @@
     <link rel="preload" href="assets/fonts/syncopate-700-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/styles/tailwind.css">
     <link rel="stylesheet" href="assets/styles/fonts.css">
+    <link rel="stylesheet" href="assets/styles/project-navigation.css">
+    <link rel="stylesheet" href="assets/styles/tangping-modal.css">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -1651,6 +1653,33 @@
 </footer>
     </main>
 
+    <div id="project-modal" class="project-modal" aria-hidden="true">
+      <div class="project-modal__backdrop" data-project-modal-close aria-hidden="true"></div>
+      <section class="project-modal__panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" tabindex="-1">
+        <header class="project-modal__header">
+          <div class="project-modal__identity">
+            <span class="project-modal__eyebrow">Selected Work / 精选项目</span>
+            <strong id="project-modal-title" class="project-modal__title">躺平吧 · Lie Down Flat</strong>
+          </div>
+          <div class="project-modal__actions">
+            <a class="project-modal__action" href="project-tangping.html">独立页面</a>
+            <button class="project-modal__action" type="button" data-project-modal-close aria-label="关闭躺平吧项目弹层">
+              <span>关闭</span>
+              <svg class="project-modal__close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+        </header>
+        <div id="project-modal-scroller" class="project-modal__scroller" tabindex="0">
+          <div class="project-modal__loading" role="status">
+            <div>
+              <div class="project-modal__loading-mark" aria-hidden="true"></div>
+              <p>正在载入项目内容…</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <script>
         // Mobile menu toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -1692,6 +1721,170 @@ if (pillSections.length) {
 
   pillSections.forEach(section => navObserver.observe(section));
 }
+
+// “躺平吧”项目长弹层：即时打开外壳，按需复用原项目页主体内容。
+const projectModal = document.getElementById('project-modal');
+const projectModalPanel = projectModal?.querySelector('.project-modal__panel');
+const projectModalScroller = document.getElementById('project-modal-scroller');
+const projectModalCloseControls = [...document.querySelectorAll('[data-project-modal-close]')];
+const modalBackgroundNodes = [...document.body.children]
+  .filter(node => node !== projectModal && node.tagName !== 'SCRIPT');
+let tangpingModalLoaded = false;
+let tangpingModalLoading = null;
+let modalReturnFocus = null;
+
+const tangpingModalIsRequested = () => {
+  const url = new URL(window.location.href);
+  return url.searchParams.get('project') === 'tangping';
+};
+
+const setModalBackgroundState = isInert => {
+  modalBackgroundNodes.forEach(node => {
+    node.inert = isInert;
+  });
+};
+
+const renderTangpingModalError = () => {
+  if (!projectModalScroller) return;
+  projectModalScroller.innerHTML = `
+    <div class="project-modal__error" role="alert">
+      <div>
+        <p class="text-xl font-bold text-white">项目内容暂时没有载入</p>
+        <p class="mt-3 text-sm text-zinc-400">可以重试，或直接打开独立项目页。</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <button class="project-modal__action" type="button" data-project-modal-retry>重新载入</button>
+          <a class="project-modal__action" href="project-tangping.html">打开独立页面</a>
+        </div>
+      </div>
+    </div>`;
+  projectModalScroller.querySelector('[data-project-modal-retry]')?.addEventListener('click', () => {
+    tangpingModalLoading = null;
+    loadTangpingModal();
+  });
+};
+
+const loadTangpingModal = () => {
+  if (!projectModalScroller || tangpingModalLoaded) return Promise.resolve();
+  if (tangpingModalLoading) return tangpingModalLoading;
+
+  projectModalScroller.setAttribute('aria-busy', 'true');
+  projectModalScroller.innerHTML = `
+    <div class="project-modal__loading" role="status">
+      <div>
+        <div class="project-modal__loading-mark" aria-hidden="true"></div>
+        <p>正在载入项目内容…</p>
+      </div>
+    </div>`;
+
+  tangpingModalLoading = fetch('project-tangping.html', { cache: 'no-cache' })
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.text();
+    })
+    .then(html => {
+      const source = new DOMParser().parseFromString(html, 'text/html');
+      const sourceMain = source.querySelector('main');
+      if (!sourceMain) throw new Error('Project content was not found');
+
+      const projectRoot = document.createElement('div');
+      projectRoot.className = 'tangping-modal-project';
+      projectRoot.innerHTML = sourceMain.innerHTML;
+      projectRoot.querySelectorAll('.reveal').forEach(element => {
+        element.classList.add('active', 'is-visible');
+      });
+
+      projectModalScroller.replaceChildren(projectRoot);
+      projectModalScroller.scrollTop = 0;
+      tangpingModalLoaded = true;
+    })
+    .catch(error => {
+      console.error('Failed to load Tangping modal:', error);
+      renderTangpingModalError();
+    })
+    .finally(() => {
+      projectModalScroller.removeAttribute('aria-busy');
+    });
+
+  return tangpingModalLoading;
+};
+
+const showTangpingModal = ({ pushHistory = true } = {}) => {
+  if (!projectModal || !projectModalPanel || !projectModalScroller) return;
+  if (!projectModal.classList.contains('is-open')) {
+    modalReturnFocus = document.activeElement;
+    projectModal.classList.add('is-open');
+    projectModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('project-modal-open');
+    setModalBackgroundState(true);
+    requestAnimationFrame(() => projectModalPanel.focus({ preventScroll: true }));
+  }
+
+  if (pushHistory && !tangpingModalIsRequested()) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('project', 'tangping');
+    url.hash = '';
+    history.pushState({ ...(history.state || {}), projectModal: 'tangping' }, '', url);
+  }
+
+  loadTangpingModal();
+};
+
+const hideTangpingModal = ({ restoreFocus = true } = {}) => {
+  if (!projectModal?.classList.contains('is-open')) return;
+  projectModal.classList.remove('is-open');
+  projectModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('project-modal-open');
+  setModalBackgroundState(false);
+  if (restoreFocus && modalReturnFocus instanceof HTMLElement) {
+    modalReturnFocus.focus({ preventScroll: true });
+  }
+};
+
+const requestTangpingModalClose = () => {
+  if (history.state?.projectModal === 'tangping') {
+    history.back();
+    return;
+  }
+  const url = new URL(window.location.href);
+  url.searchParams.delete('project');
+  history.replaceState(history.state, '', url);
+  hideTangpingModal();
+};
+
+projectModalCloseControls.forEach(control => {
+  control.addEventListener('click', requestTangpingModalClose);
+});
+
+document.addEventListener('keydown', event => {
+  if (!projectModal?.classList.contains('is-open')) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    requestTangpingModalClose();
+    return;
+  }
+  if (event.key !== 'Tab' || !projectModalPanel) return;
+
+  const focusable = [...projectModalPanel.querySelectorAll(
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter(element => element.offsetParent !== null);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
+
+window.addEventListener('popstate', () => {
+  if (tangpingModalIsRequested()) showTangpingModal({ pushHistory: false });
+  else hideTangpingModal({ restoreFocus: false });
+});
+
+if (tangpingModalIsRequested()) showTangpingModal({ pushHistory: false });
 
 // Selected Works：原生环形画廊（不引入外部运行时）
 const projectGallery = document.querySelector('[data-project-gallery]');
@@ -1754,7 +1947,18 @@ if (projectGallery) {
         event.preventDefault();
         return;
       }
-      if (index === activeProject) return;
+      if (index === activeProject) {
+        const standardClick = event.button === 0
+          && !event.metaKey
+          && !event.ctrlKey
+          && !event.shiftKey
+          && !event.altKey;
+        if (standardClick && card.id === 'project-01') {
+          event.preventDefault();
+          showTangpingModal();
+        }
+        return;
+      }
       event.preventDefault();
       selectProject(index);
     });

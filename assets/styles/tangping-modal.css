@@ -1,0 +1,392 @@
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 2vw, 2rem);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms ease, visibility 260ms ease;
+}
+
+.project-modal.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.project-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.76);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.project-modal__panel {
+  position: relative;
+  display: flex;
+  width: min(100%, 1800px);
+  height: 100%;
+  max-height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  background: #08080b;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transform: translateY(28px) scale(0.992);
+  transition: opacity 260ms ease, transform 360ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.project-modal.is-open .project-modal__panel {
+  opacity: 1;
+  transform: none;
+}
+
+.project-modal__header {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  min-height: 72px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(9, 9, 12, 0.82);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+.project-modal__identity {
+  min-width: 0;
+}
+
+.project-modal__eyebrow {
+  display: block;
+  color: #71717a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.project-modal__title {
+  display: block;
+  overflow: hidden;
+  margin-top: 0.15rem;
+  color: #f4f4f5;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-modal__actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.project-modal__action {
+  display: inline-flex;
+  min-height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #d4d4d8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.project-modal__action:hover,
+.project-modal__action:focus-visible {
+  border-color: rgba(183, 241, 92, 0.55);
+  background: rgba(183, 241, 92, 0.1);
+  color: #b7f15c;
+  outline: none;
+}
+
+.project-modal__close-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.project-modal__scroller {
+  position: relative;
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: rgba(156, 124, 255, 0.72) #08080b;
+  scrollbar-width: thin;
+}
+
+.project-modal__scroller::-webkit-scrollbar {
+  width: 6px;
+}
+
+.project-modal__scroller::-webkit-scrollbar-track {
+  background: #08080b;
+}
+
+.project-modal__scroller::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(156, 124, 255, 0.72);
+}
+
+.project-modal__loading,
+.project-modal__error {
+  display: grid;
+  min-height: 70vh;
+  place-items: center;
+  padding: 3rem 1.5rem;
+  color: #71717a;
+  text-align: center;
+}
+
+.project-modal__loading-mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0 auto 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-top-color: #b7f15c;
+  border-radius: 50%;
+  animation: project-modal-spin 800ms linear infinite;
+}
+
+body.project-modal-open {
+  overflow: hidden;
+}
+
+body.project-modal-open #cursor {
+  z-index: 10020;
+}
+
+.tangping-modal-project {
+  --purple: #612fdf;
+  --purple-soft: #9c7cff;
+  --lime: #b7f15c;
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 80% 4%, rgba(97, 47, 223, 0.22), transparent 28%),
+    radial-gradient(circle at 8% 72%, rgba(183, 241, 92, 0.08), transparent 24%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    #08080b;
+  background-size: auto, auto, 40px 40px, 40px 40px, auto;
+  color: #f7f7f8;
+  font-family: "Space Grotesk", "Microsoft YaHei", sans-serif;
+}
+
+.tangping-modal-project .hero-title {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: clamp(5rem, 15vw, 15rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.tangping-modal-project .hero-title-en {
+  color: var(--purple-soft);
+  font-family: "Syncopate", sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 4.2rem);
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.tangping-modal-project .display-en {
+  font-family: "Syncopate", sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.tangping-modal-project .case-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateZ(0);
+}
+
+.tangping-modal-project .project-shell {
+  width: min(calc(100% - 2.5rem), 1320px);
+  margin-inline: auto;
+}
+
+.tangping-modal-project .project-meta {
+  margin-top: clamp(4.5rem, 8vw, 7rem);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tangping-modal-project .project-meta > div {
+  min-width: 0;
+}
+
+.tangping-modal-project .project-meta > div > span:last-child {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.tangping-modal-project .phase-section {
+  margin-bottom: clamp(7rem, 10vw, 10rem);
+  padding-top: clamp(3.5rem, 5vw, 4.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tangping-modal-project .phase-head {
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+
+.tangping-modal-project .phase-chip {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  padding: 0.35rem 1.05rem;
+  border: 1px solid var(--purple-soft);
+  border-radius: 999px;
+  color: var(--purple-soft);
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.tangping-modal-project .phase-title {
+  margin-top: 2rem;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.tangping-modal-project .phase-subtitle {
+  margin-top: 1rem;
+  color: #71717a;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.5;
+}
+
+.tangping-modal-project .phase-copy {
+  max-width: 64rem;
+  margin-top: 2rem;
+  color: #a1a1aa;
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 2;
+}
+
+.tangping-modal-project .phase-copy > * + * {
+  margin-top: 1rem;
+}
+
+.tangping-modal-project .case-stack {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+.tangping-modal-project .case-frame {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  background: #111;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
+}
+
+.tangping-modal-project .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.tangping-modal-project .section-rule {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes project-modal-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 767px) {
+  .project-modal {
+    padding: 0;
+  }
+
+  .project-modal__panel {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .project-modal__header {
+    min-height: calc(64px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) 0.85rem 0;
+  }
+
+  .project-modal__action {
+    min-width: 2.65rem;
+    padding-inline: 0.75rem;
+  }
+
+  .project-modal__action-label--optional {
+    display: none;
+  }
+
+  .tangping-modal-project .hero-title {
+    letter-spacing: -0.06em;
+  }
+
+  .tangping-modal-project .project-meta {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .tangping-modal-project .phase-section {
+    margin-bottom: 7rem;
+  }
+
+  .tangping-modal-project .case-stack {
+    gap: 3.5rem;
+  }
+
+  .tangping-modal-project .case-frame {
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-modal,
+  .project-modal__panel,
+  .project-modal__action {
+    transition: none;
+  }
+
+  .project-modal__loading-mark {
+    animation: none;
+  }
+}
