@@ -95,7 +95,7 @@
             mix-blend-mode: difference;
             opacity: 0;
             transform: translate(-50%, -50%) scale(1);
-            transition: transform 0.14s ease, opacity 0.12s ease, background-color 0.18s ease, backdrop-filter 0.18s ease;
+            transition: transform 0.12s ease, opacity 0.1s ease, background-color 0.14s ease;
             will-change: translate, transform, opacity;
         }
 
@@ -1659,17 +1659,17 @@
         <header class="project-modal__header">
           <div class="project-modal__identity">
             <span class="project-modal__eyebrow">Selected Work / 精选项目</span>
-            <strong id="project-modal-title" class="project-modal__title">躺平吧 · Lie Down Flat</strong>
+            <strong id="project-modal-title" class="project-modal__title">Selected Project</strong>
           </div>
           <div class="project-modal__actions">
-            <a class="project-modal__action" href="project-tangping.html">独立页面</a>
-            <button class="project-modal__action" type="button" data-project-modal-close aria-label="关闭躺平吧项目弹层">
+            <a id="project-modal-external" class="project-modal__action" href="index.html#selected-works-title">独立页面</a>
+            <button class="project-modal__action" type="button" data-project-modal-close aria-label="关闭项目弹层">
               <span>关闭</span>
               <svg class="project-modal__close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
             </button>
           </div>
         </header>
-        <div id="project-modal-scroller" class="project-modal__scroller" tabindex="0" aria-label="躺平吧项目内容">
+        <div id="project-modal-scroller" class="project-modal__scroller" tabindex="0" aria-label="精选项目内容">
           <div class="project-modal__loading" role="status">
             <div>
               <div class="project-modal__loading-mark" aria-hidden="true"></div>
@@ -1722,20 +1722,34 @@ if (pillSections.length) {
   pillSections.forEach(section => navObserver.observe(section));
 }
 
-// “躺平吧”项目长弹层：即时打开外壳，按需复用原项目页主体内容。
+// 精选项目长弹层：五个项目共用同一外壳，按需复用各自的二级页内容。
 const projectModal = document.getElementById('project-modal');
 const projectModalPanel = projectModal?.querySelector('.project-modal__panel');
 const projectModalScroller = document.getElementById('project-modal-scroller');
+const projectModalTitle = document.getElementById('project-modal-title');
+const projectModalExternal = document.getElementById('project-modal-external');
 const projectModalCloseControls = [...document.querySelectorAll('[data-project-modal-close]')];
 const modalBackgroundNodes = [...document.body.children]
   .filter(node => node !== projectModal && node.tagName !== 'SCRIPT');
-let tangpingModalLoaded = false;
-let tangpingModalLoading = null;
+const projectModalConfigs = [
+  { slug: 'internship', cardId: 'project-internship', path: 'project-internship.html', title: 'XFUN 智能包装平台' },
+  { slug: 'tangping', cardId: 'project-01', path: 'project-tangping.html', title: '躺平吧 · Lie Down Flat' },
+  { slug: 'fashion', cardId: 'project-02', path: 'project-fashion.html', title: 'AI 时尚顾问 · Fashion Stylist' },
+  { slug: 'doctorkids', cardId: 'project-03', path: 'project-doctorkids.html', title: '小小医生 · Little Dr. Bear' },
+  { slug: 'sleep-wave', cardId: 'project-04', path: 'project4.html', title: '小宇宙睡眠电波计划' }
+];
+const projectModalBySlug = new Map(projectModalConfigs.map(config => [config.slug, config]));
+const projectModalByCardId = new Map(projectModalConfigs.map(config => [config.cardId, config]));
+const projectModalByPath = new Map(projectModalConfigs.map(config => [config.path, config]));
+const projectModalHosts = new Map();
+const projectModalLoads = new Map();
+const projectSourceLoads = new Map();
 let modalReturnFocus = null;
+let activeProjectModalConfig = null;
 
-const tangpingModalIsRequested = () => {
+const getRequestedProjectConfig = () => {
   const url = new URL(window.location.href);
-  return url.searchParams.get('project') === 'tangping';
+  return projectModalBySlug.get(url.searchParams.get('project')) || null;
 };
 
 const setModalBackgroundState = isInert => {
@@ -1744,7 +1758,16 @@ const setModalBackgroundState = isInert => {
   });
 };
 
-const renderTangpingModalError = () => {
+const updateProjectModalHeader = config => {
+  if (projectModalTitle) projectModalTitle.textContent = config.title;
+  if (projectModalExternal) {
+    projectModalExternal.href = config.path;
+    projectModalExternal.setAttribute('aria-label', `在独立页面打开${config.title}`);
+  }
+  projectModalScroller?.setAttribute('aria-label', `${config.title}项目内容`);
+};
+
+const renderProjectModalError = config => {
   if (!projectModalScroller) return;
   projectModalScroller.innerHTML = `
     <div class="project-modal__error" role="alert">
@@ -1753,19 +1776,157 @@ const renderTangpingModalError = () => {
         <p class="mt-3 text-sm text-zinc-400">可以重试，或直接打开独立项目页。</p>
         <div class="mt-6 flex flex-wrap justify-center gap-3">
           <button class="project-modal__action" type="button" data-project-modal-retry>重新载入</button>
-          <a class="project-modal__action" href="project-tangping.html">打开独立页面</a>
+          <a class="project-modal__action" href="${config.path}">打开独立页面</a>
         </div>
       </div>
     </div>`;
   projectModalScroller.querySelector('[data-project-modal-retry]')?.addEventListener('click', () => {
-    tangpingModalLoading = null;
-    loadTangpingModal();
+    projectModalLoads.delete(config.slug);
+    projectSourceLoads.delete(config.path);
+    loadProjectModal(config);
   });
 };
 
-const loadTangpingModal = () => {
-  if (!projectModalScroller || tangpingModalLoaded) return Promise.resolve();
-  if (tangpingModalLoading) return tangpingModalLoading;
+const modalPageOverrides = `
+  :host {
+    display: block;
+    min-height: 100%;
+    color: #f4f4f5;
+    font-family: "Space Grotesk", "Microsoft YaHei", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  .project-modal-page {
+    min-height: 100%;
+    overflow: hidden;
+    container-type: inline-size;
+    background-color: #08080b;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: #f4f4f5;
+  }
+  .project-modal-page main { min-height: 100%; background-color: transparent !important; }
+  .project-modal-page img { max-width: 100%; }
+  .project-modal-page .reveal,
+  .project-modal-page .img-reveal { opacity: 1 !important; transform: none !important; }
+  .project-modal-page .ambient,
+  .project-modal-page .ambient-light { display: none !important; }
+  .project-modal-page .portfolio-project-nav {
+    width: 100% !important;
+    margin-left: 0 !important;
+    transform: none !important;
+  }
+  .project-modal-page[data-project-slug="internship"] .display-title {
+    font-size: clamp(3rem, 10cqw, 7.5rem) !important;
+  }
+  .project-modal-page[data-project-slug="tangping"] .hero-title {
+    font-size: clamp(4rem, 17cqw, 11rem) !important;
+  }
+  .project-modal-page[data-project-slug="fashion"] .project-title-zh,
+  .project-modal-page[data-project-slug="doctorkids"] .project-title-zh {
+    font-size: clamp(4rem, 16cqw, 10rem) !important;
+  }
+  .project-modal-page[data-project-slug="sleep-wave"] .sleep-hero-title-zh {
+    font-size: clamp(4rem, 17cqw, 11rem) !important;
+  }
+  @media (pointer: fine) and (hover: hover) {
+    :host, :host * { cursor: none !important; }
+  }
+  @media (max-width: 767px) {
+    .project-modal-page { background-size: 28px 28px; }
+  }
+`;
+
+const loadShadowStylesheet = (shadowRoot, href) => {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  shadowRoot.append(link);
+};
+
+const fetchProjectSource = config => {
+  if (projectSourceLoads.has(config.path)) return projectSourceLoads.get(config.path);
+  const request = fetch(config.path, { cache: 'no-cache' })
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.text();
+    })
+    .catch(error => {
+      projectSourceLoads.delete(config.path);
+      throw error;
+    });
+  projectSourceLoads.set(config.path, request);
+  return request;
+};
+
+const buildProjectModalHost = async config => {
+  const html = await fetchProjectSource(config);
+  const source = new DOMParser().parseFromString(html, 'text/html');
+  const sourceMain = source.querySelector('main');
+  if (!sourceMain) throw new Error('Project content was not found');
+
+  const host = document.createElement('div');
+  host.className = 'project-modal-host';
+  host.dataset.projectSlug = config.slug;
+  const shadowRoot = host.attachShadow({ mode: 'open' });
+  loadShadowStylesheet(shadowRoot, 'assets/styles/tailwind.css');
+  loadShadowStylesheet(shadowRoot, 'assets/styles/fonts.css');
+  loadShadowStylesheet(shadowRoot, 'assets/styles/project-navigation.css');
+
+  const sourceStyle = document.createElement('style');
+  sourceStyle.textContent = [...source.querySelectorAll('style')]
+    .map(style => style.textContent)
+    .join('\n')
+    .replaceAll(':root', ':host');
+  shadowRoot.append(sourceStyle);
+
+  const overrideStyle = document.createElement('style');
+  overrideStyle.textContent = modalPageOverrides;
+  shadowRoot.append(overrideStyle);
+
+  const page = document.createElement('div');
+  page.className = 'project-modal-page';
+  page.dataset.projectSlug = config.slug;
+  const main = sourceMain.cloneNode(true);
+  main.querySelectorAll('.reveal, .img-reveal').forEach(element => {
+    element.classList.add('active', 'is-visible');
+  });
+  main.querySelectorAll('img').forEach((image, index) => {
+    image.decoding = 'async';
+    if (index > 0 && !image.hasAttribute('loading')) image.loading = 'lazy';
+  });
+  page.append(main);
+  shadowRoot.append(page);
+
+  shadowRoot.addEventListener('click', event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.composedPath().find(node => node instanceof HTMLAnchorElement);
+    if (!link) return;
+    const rawHref = link.getAttribute('href') || '';
+    const path = rawHref.split(/[?#]/)[0].replace(/^\.\//, '');
+    const nextConfig = projectModalByPath.get(path);
+    if (nextConfig) {
+      event.preventDefault();
+      showProjectModal(nextConfig, { historyMode: 'replace' });
+    } else if (path === 'index.html' || rawHref.startsWith('#selected-works-title')) {
+      event.preventDefault();
+      closeProjectModalToIndex();
+    }
+  });
+
+  return host;
+};
+
+const loadProjectModal = config => {
+  if (!projectModalScroller) return Promise.resolve();
+  if (projectModalHosts.has(config.slug)) {
+    const host = projectModalHosts.get(config.slug);
+    projectModalScroller.replaceChildren(host);
+    projectModalScroller.scrollTop = 0;
+    return Promise.resolve(host);
+  }
+  if (projectModalLoads.has(config.slug)) return projectModalLoads.get(config.slug);
 
   projectModalScroller.setAttribute('aria-busy', 'true');
   projectModalScroller.innerHTML = `
@@ -1776,40 +1937,31 @@ const loadTangpingModal = () => {
       </div>
     </div>`;
 
-  tangpingModalLoading = fetch('project-tangping.html', { cache: 'no-cache' })
-    .then(response => {
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return response.text();
-    })
-    .then(html => {
-      const source = new DOMParser().parseFromString(html, 'text/html');
-      const sourceMain = source.querySelector('main');
-      if (!sourceMain) throw new Error('Project content was not found');
-
-      const projectRoot = document.createElement('div');
-      projectRoot.className = 'tangping-modal-project';
-      projectRoot.innerHTML = sourceMain.innerHTML;
-      projectRoot.querySelectorAll('.reveal').forEach(element => {
-        element.classList.add('active', 'is-visible');
-      });
-
-      projectModalScroller.replaceChildren(projectRoot);
-      projectModalScroller.scrollTop = 0;
-      tangpingModalLoaded = true;
+  const request = buildProjectModalHost(config)
+    .then(host => {
+      projectModalHosts.set(config.slug, host);
+      if (activeProjectModalConfig?.slug === config.slug) {
+        projectModalScroller.replaceChildren(host);
+        projectModalScroller.scrollTop = 0;
+      }
+      return host;
     })
     .catch(error => {
-      console.error('Failed to load Tangping modal:', error);
-      renderTangpingModalError();
+      projectModalLoads.delete(config.slug);
+      console.error(`Failed to load ${config.slug} modal:`, error);
+      if (activeProjectModalConfig?.slug === config.slug) renderProjectModalError(config);
     })
     .finally(() => {
-      projectModalScroller.removeAttribute('aria-busy');
+      if (activeProjectModalConfig?.slug === config.slug) projectModalScroller.removeAttribute('aria-busy');
     });
-
-  return tangpingModalLoading;
+  projectModalLoads.set(config.slug, request);
+  return request;
 };
 
-const showTangpingModal = ({ pushHistory = true } = {}) => {
+const showProjectModal = (config, { historyMode = 'push' } = {}) => {
   if (!projectModal || !projectModalPanel || !projectModalScroller) return;
+  activeProjectModalConfig = config;
+  updateProjectModalHeader(config);
   if (!projectModal.classList.contains('is-open')) {
     modalReturnFocus = document.activeElement;
     projectModal.classList.add('is-open');
@@ -1819,72 +1971,74 @@ const showTangpingModal = ({ pushHistory = true } = {}) => {
     requestAnimationFrame(() => projectModalScroller.focus({ preventScroll: true }));
   }
 
-  if (pushHistory && !tangpingModalIsRequested()) {
+  if (historyMode !== 'none') {
     const url = new URL(window.location.href);
-    url.searchParams.set('project', 'tangping');
+    url.searchParams.set('project', config.slug);
     url.hash = '';
-    history.pushState({ ...(history.state || {}), projectModal: 'tangping' }, '', url);
+    const state = { ...(history.state || {}), projectModal: config.slug };
+    if (historyMode === 'replace' || getRequestedProjectConfig()?.slug === config.slug) {
+      history.replaceState(state, '', url);
+    } else {
+      history.pushState(state, '', url);
+    }
   }
 
-  loadTangpingModal();
+  loadProjectModal(config);
 };
 
-const hideTangpingModal = ({ restoreFocus = true } = {}) => {
+const hideProjectModal = ({ restoreFocus = true } = {}) => {
   if (!projectModal?.classList.contains('is-open')) return;
   projectModal.classList.remove('is-open');
   projectModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('project-modal-open');
   setModalBackgroundState(false);
+  activeProjectModalConfig = null;
   if (restoreFocus && modalReturnFocus instanceof HTMLElement) {
     modalReturnFocus.focus({ preventScroll: true });
   }
 };
 
-const requestTangpingModalClose = () => {
-  if (history.state?.projectModal === 'tangping') {
+const requestProjectModalClose = () => {
+  if (history.state?.projectModal) {
     history.back();
     return;
   }
   const url = new URL(window.location.href);
   url.searchParams.delete('project');
   history.replaceState(history.state, '', url);
-  hideTangpingModal();
+  hideProjectModal();
+};
+
+const closeProjectModalToIndex = () => {
+  const url = new URL(window.location.href);
+  url.searchParams.delete('project');
+  url.hash = 'selected-works-title';
+  const { projectModal: _projectModal, ...state } = history.state || {};
+  history.replaceState(state, '', url);
+  hideProjectModal({ restoreFocus: false });
+  document.getElementById('selected-works-title')?.scrollIntoView({ block: 'start' });
 };
 
 projectModalCloseControls.forEach(control => {
-  control.addEventListener('click', requestTangpingModalClose);
+  control.addEventListener('click', requestProjectModalClose);
 });
 
 document.addEventListener('keydown', event => {
   if (!projectModal?.classList.contains('is-open')) return;
   if (event.key === 'Escape') {
     event.preventDefault();
-    requestTangpingModalClose();
-    return;
-  }
-  if (event.key !== 'Tab' || !projectModalPanel) return;
-
-  const focusable = [...projectModalPanel.querySelectorAll(
-    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-  )].filter(element => element.offsetParent !== null);
-  if (!focusable.length) return;
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-  if (event.shiftKey && document.activeElement === first) {
-    event.preventDefault();
-    last.focus();
-  } else if (!event.shiftKey && document.activeElement === last) {
-    event.preventDefault();
-    first.focus();
+    requestProjectModalClose();
   }
 });
 
 window.addEventListener('popstate', () => {
-  if (tangpingModalIsRequested()) showTangpingModal({ pushHistory: false });
-  else hideTangpingModal({ restoreFocus: false });
+  const config = getRequestedProjectConfig();
+  if (config) showProjectModal(config, { historyMode: 'none' });
+  else hideProjectModal({ restoreFocus: false });
 });
 
-if (tangpingModalIsRequested()) showTangpingModal({ pushHistory: false });
+const initialProjectModalConfig = getRequestedProjectConfig();
+if (initialProjectModalConfig) showProjectModal(initialProjectModalConfig, { historyMode: 'none' });
 
 // Selected Works：原生环形画廊（不引入外部运行时）
 const projectGallery = document.querySelector('[data-project-gallery]');
@@ -1942,6 +2096,13 @@ if (projectGallery) {
   };
 
   cards.forEach((card, index) => {
+    const modalConfig = projectModalByCardId.get(card.id);
+    const prefetchProject = () => {
+      if (modalConfig) fetchProjectSource(modalConfig).catch(() => {});
+    };
+    card.addEventListener('pointerenter', prefetchProject, { once: true, passive: true });
+    card.addEventListener('focus', prefetchProject, { once: true });
+
     card.addEventListener('click', event => {
       if (performance.now() < suppressClickUntil) {
         event.preventDefault();
@@ -1953,9 +2114,9 @@ if (projectGallery) {
           && !event.ctrlKey
           && !event.shiftKey
           && !event.altKey;
-        if (standardClick && card.id === 'project-01') {
+        if (standardClick && modalConfig) {
           event.preventDefault();
-          showTangpingModal();
+          showProjectModal(modalConfig);
         }
         return;
       }
@@ -2048,7 +2209,7 @@ if (projectGallery) {
                 cursor.style.transform = `translate(-50%, -50%) scale(${dragging ? 0.85 : 1.65})`;
                 cursor.style.mixBlendMode = 'normal';
                 cursor.style.backgroundColor = dragging ? '#fff' : 'rgba(129, 140, 248, 0.48)';
-                cursor.style.backdropFilter = dragging ? 'none' : 'blur(2px)';
+                cursor.style.backdropFilter = 'none';
             };
 
             document.addEventListener('pointermove', e => {
@@ -2086,7 +2247,7 @@ if (projectGallery) {
                     cursor.style.transform = 'translate(-50%, -50%) scale(3)';
                     cursor.style.mixBlendMode = 'normal';
                     cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    cursor.style.backdropFilter = 'blur(2px)';
+                    cursor.style.backdropFilter = 'none';
                 });
                 el.addEventListener('mouseleave', () => {
                     resetCursor();
@@ -2101,6 +2262,28 @@ if (projectGallery) {
                 galleryStage.addEventListener('mouseleave', () => resetCursor());
                 galleryStage.addEventListener('pointercancel', () => setGalleryCursor(false));
             }
+
+            let modalCursorInteractive = false;
+            projectModal?.addEventListener('pointermove', event => {
+                const nextInteractive = event.composedPath().some(node =>
+                    node instanceof Element && node.matches('a, button, [role="button"]')
+                );
+                if (nextInteractive === modalCursorInteractive) return;
+                modalCursorInteractive = nextInteractive;
+                if (nextInteractive) {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(2.35)';
+                    cursor.style.mixBlendMode = 'normal';
+                    cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.14)';
+                    cursor.style.backdropFilter = 'none';
+                } else {
+                    resetCursor();
+                }
+            }, { passive: true });
+
+            projectModal?.addEventListener('pointerleave', () => {
+                modalCursorInteractive = false;
+                resetCursor();
+            });
         } else if (cursor) {
             cursor.style.display = 'none';
         }
