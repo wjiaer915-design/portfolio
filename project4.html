@@ -134,6 +134,11 @@
   transition: opacity 0.1s, background-color 0.14s;
   will-change: transform, opacity;
 }
+
+html:active #cursor {
+  opacity: 0 !important;
+  transition: none !important;
+}
   </style>
 </head>
 
@@ -417,6 +422,6 @@
     }
   </script>
 
-  <script src="assets/cursor-scrollbar-guard.js"></script>
+  <script src="assets/cursor-scrollbar-guard.js?v=20261125-2"></script>
 </body>
 </html>

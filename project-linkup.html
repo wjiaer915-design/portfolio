@@ -116,6 +116,11 @@ html {
     will-change: transform, opacity;
 }
 
+html:active #cursor {
+    opacity: 0 !important;
+    transition: none !important;
+}
+
 #cursor.cursor-ready {
     opacity: 1;
 }
@@ -255,7 +260,7 @@ html {
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
-    <script src="assets/cursor-scrollbar-guard.js"></script>
+    <script src="assets/cursor-scrollbar-guard.js?v=20261125-2"></script>
 </body>
 
 </html>

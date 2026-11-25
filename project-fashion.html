@@ -111,6 +111,11 @@ html {
             will-change: transform, opacity;
         }
 
+        html:active #cursor {
+            opacity: 0 !important;
+            transition: none !important;
+        }
+
         /* 宽跨页比例 */
      /* 宽跨页比例：桌面端保持横向跨页展示 */
 .aspect-spread {
@@ -353,7 +358,7 @@ html {
 
         document.querySelectorAll('.img-reveal').forEach(el => observer.observe(el));
     </script>
-    <script src="assets/cursor-scrollbar-guard.js"></script>
+    <script src="assets/cursor-scrollbar-guard.js?v=20261125-2"></script>
 </body>
 
 </html>

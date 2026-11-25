@@ -81,6 +81,11 @@
       will-change: transform;
     }
 
+    html:active #cursor {
+      opacity: 0 !important;
+      transition: none !important;
+    }
+
     ::selection {
       background: var(--accent);
       color: #000;
@@ -822,6 +827,6 @@
     });
   </script>
 
-  <script src="assets/cursor-scrollbar-guard.js"></script>
+  <script src="assets/cursor-scrollbar-guard.js?v=20261125-2"></script>
 </body>
 </html>

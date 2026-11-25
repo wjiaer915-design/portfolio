@@ -64,6 +64,11 @@
       will-change: transform, opacity;
     }
 
+    html:active #cursor {
+      opacity: 0 !important;
+      transition: none !important;
+    }
+
     .ambient {
       position: fixed;
       inset: 0;
@@ -362,6 +367,6 @@
     }, { rootMargin: '0px 0px 12% 0px', threshold: 0.04 });
     document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
   </script>
-  <script src="assets/cursor-scrollbar-guard.js"></script>
+  <script src="assets/cursor-scrollbar-guard.js?v=20261125-2"></script>
 </body>
 </html>

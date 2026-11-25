@@ -103,6 +103,11 @@
             will-change: transform, opacity;
         }
 
+        html:active #cursor {
+            opacity: 0 !important;
+            transition: none !important;
+        }
+
         .work-card {
             transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             filter: grayscale(100%);
@@ -2321,7 +2326,7 @@ if (projectGallery) {
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     </script>
-    <script src="assets/cursor-scrollbar-guard.js"></script>
+    <script src="assets/cursor-scrollbar-guard.js?v=20261125-2"></script>
 </body>
 
 </html>

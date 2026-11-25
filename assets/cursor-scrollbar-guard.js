@@ -5,7 +5,13 @@
 
   const hiddenClass = 'cursor--native-scrollbar';
   const style = document.createElement('style');
-  style.textContent = `#cursor.${hiddenClass} { opacity: 0 !important; }`;
+  style.textContent = `
+    #cursor.${hiddenClass},
+    html:active #cursor {
+      opacity: 0 !important;
+      transition: none !important;
+    }
+  `;
   document.head.append(style);
 
   const scrollingElement = document.scrollingElement || document.documentElement;

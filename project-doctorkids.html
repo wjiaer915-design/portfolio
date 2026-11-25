@@ -49,6 +49,11 @@
   will-change: transform, opacity;
 }
 
+html:active #cursor {
+  opacity: 0 !important;
+  transition: none !important;
+}
+
 @media (pointer: fine) and (hover: hover) {
   html, body, body * {
     cursor: none !important;
@@ -326,7 +331,7 @@ html {
 
         document.querySelectorAll('.img-reveal').forEach(el => observer.observe(el));
     </script>
-<script src="assets/cursor-scrollbar-guard.js"></script>
+<script src="assets/cursor-scrollbar-guard.js?v=20261125-2"></script>
 </body>
 
 </html>
