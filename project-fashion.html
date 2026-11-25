@@ -87,13 +87,6 @@ html {
                         radial-gradient(circle at 5% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 40%);
         }
 
-        .parallax-img {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
         .img-reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
         .img-reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -181,32 +174,6 @@ html {
                 <div><span class="block text-zinc-700 mb-1">Year</span><span class="text-white">2024</span></div>
             </div>
         </header>
-
-      <!-- Banner -->
-<section class="relative mb-10 md:mb-32">
-
-  <!-- Desktop: parallax background -->
-  <div class="hidden md:block w-full h-[80vh] parallax-img bg-zinc-800 bg-center bg-cover"
-       style="background-image: url('assets/images/ui_banner-web.webp');">
-    <div class="absolute inset-0 bg-violet-900/20 mix-blend-overlay"></div>
-    <div class="absolute bottom-10 right-10 text-xs text-violet-400 uppercase tracking-widest">
-      Digital Experience
-    </div>
-  </div>
-
-  <!-- Mobile: full image display -->
-<div class="block md:hidden w-full bg-zinc-800 overflow-hidden relative">
-  <img src="assets/images/ui_banner-web.webp"
-       class="w-full h-auto block"
-       alt="AI Fashion Stylist Banner" decoding="async" fetchpriority="high">
-
-  <div class="absolute bottom-4 right-5 text-[10px] text-violet-500/80 uppercase tracking-[0.25em]">
-    Digital Experience
-  </div>
-</div>
-
-</section>
-
 
         <!-- 核心内容区 -->
         <section class="space-y-32 px-4 md:px-12 pb-32">
