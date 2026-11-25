@@ -1807,6 +1807,10 @@ const modalPageOverrides = `
     color: #f4f4f5;
   }
   .project-modal-page main { min-height: 100%; background-color: transparent !important; }
+  .project-modal-page main > section:not(:first-child) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
   .project-modal-page img { max-width: 100%; }
   .project-modal-page .reveal,
   .project-modal-page .img-reveal { opacity: 1 !important; transform: none !important; }
@@ -1915,6 +1919,32 @@ const buildProjectModalHost = async config => {
     }
   });
 
+  let hoveredModalControl = null;
+  const emitModalCursorState = interactive => {
+    host.dispatchEvent(new CustomEvent('project-modal-cursor-state', {
+      bubbles: true,
+      composed: true,
+      detail: { interactive }
+    }));
+  };
+
+  shadowRoot.addEventListener('pointerover', event => {
+    const control = event.composedPath().find(node =>
+      node instanceof Element && node.matches('a, button, [role="button"]')
+    );
+    if (!control || control === hoveredModalControl) return;
+    hoveredModalControl = control;
+    emitModalCursorState(true);
+  });
+
+  shadowRoot.addEventListener('pointerout', event => {
+    if (!hoveredModalControl) return;
+    const relatedTarget = event.relatedTarget;
+    if (relatedTarget instanceof Node && hoveredModalControl.contains(relatedTarget)) return;
+    hoveredModalControl = null;
+    emitModalCursorState(false);
+  });
+
   return host;
 };
 
@@ -1960,6 +1990,9 @@ const loadProjectModal = config => {
 
 const showProjectModal = (config, { historyMode = 'push' } = {}) => {
   if (!projectModal || !projectModalPanel || !projectModalScroller) return;
+  projectModal.dispatchEvent(new CustomEvent('project-modal-cursor-state', {
+    detail: { interactive: false }
+  }));
   activeProjectModalConfig = config;
   updateProjectModalHeader(config);
   if (!projectModal.classList.contains('is-open')) {
@@ -2263,14 +2296,8 @@ if (projectGallery) {
                 galleryStage.addEventListener('pointercancel', () => setGalleryCursor(false));
             }
 
-            let modalCursorInteractive = false;
-            projectModal?.addEventListener('pointermove', event => {
-                const nextInteractive = event.composedPath().some(node =>
-                    node instanceof Element && node.matches('a, button, [role="button"]')
-                );
-                if (nextInteractive === modalCursorInteractive) return;
-                modalCursorInteractive = nextInteractive;
-                if (nextInteractive) {
+            const setModalCursor = interactive => {
+                if (interactive) {
                     cursor.style.transform = 'translate(-50%, -50%) scale(2.35)';
                     cursor.style.mixBlendMode = 'normal';
                     cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.14)';
@@ -2278,11 +2305,14 @@ if (projectGallery) {
                 } else {
                     resetCursor();
                 }
-            }, { passive: true });
+            };
+
+            projectModal?.addEventListener('project-modal-cursor-state', event => {
+                setModalCursor(Boolean(event.detail?.interactive));
+            });
 
             projectModal?.addEventListener('pointerleave', () => {
-                modalCursorInteractive = false;
-                resetCursor();
+                setModalCursor(false);
             });
         } else if (cursor) {
             cursor.style.display = 'none';
