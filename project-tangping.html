@@ -44,6 +44,9 @@
     }
 
     #cursor {
+      --cursor-x: -100px;
+      --cursor-y: -100px;
+      --cursor-scale: 1;
       position: fixed;
       z-index: 9999;
       width: 18px;
@@ -53,9 +56,12 @@
       background: #fff;
       mix-blend-mode: difference;
       opacity: 0;
-      transform: translate(-50%, -50%);
-      transition: transform .14s ease, opacity .12s ease, background-color .18s ease;
-      will-change: left, top, transform;
+      left: 0;
+      top: 0;
+      transform: translate3d(var(--cursor-x), var(--cursor-y), 0) scale(var(--cursor-scale)) translate(-50%, -50%);
+      transform-origin: 0 0;
+      transition: opacity .1s ease, background-color .14s ease;
+      will-change: transform, opacity;
     }
 
     .ambient {
@@ -317,17 +323,26 @@
     const finePointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
     if (finePointer) {
       const resetCursor = () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursor.style.setProperty('--cursor-scale', '1');
         cursor.style.backgroundColor = '#fff';
       };
+      let cursorFrame = 0;
+      let cursorX = -100;
+      let cursorY = -100;
       document.addEventListener('pointermove', event => {
-        cursor.style.left = `${event.clientX}px`;
-        cursor.style.top = `${event.clientY}px`;
-        cursor.style.opacity = '1';
+        cursorX = event.clientX;
+        cursorY = event.clientY;
+        if (cursorFrame) return;
+        cursorFrame = requestAnimationFrame(() => {
+          cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+          cursor.style.setProperty('--cursor-y', `${cursorY}px`);
+          cursor.style.opacity = '1';
+          cursorFrame = 0;
+        });
       }, { passive: true });
       document.querySelectorAll('a').forEach(element => {
         element.addEventListener('pointerenter', () => {
-          cursor.style.transform = 'translate(-50%, -50%) scale(2.4)';
+          cursor.style.setProperty('--cursor-scale', '2.4');
           cursor.style.backgroundColor = 'rgba(183, 241, 92, .8)';
         });
         element.addEventListener('pointerleave', resetCursor);

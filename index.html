@@ -83,6 +83,9 @@
         }
 
         #cursor {
+            --cursor-x: -100px;
+            --cursor-y: -100px;
+            --cursor-scale: 1;
             width: 20px;
             height: 20px;
             background: #fff;
@@ -94,9 +97,10 @@
             z-index: 9999;
             mix-blend-mode: difference;
             opacity: 0;
-            transform: translate(-50%, -50%) scale(1);
-            transition: transform 0.12s ease, opacity 0.1s ease, background-color 0.14s ease;
-            will-change: translate, transform, opacity;
+            transform: translate3d(var(--cursor-x), var(--cursor-y), 0) scale(var(--cursor-scale)) translate(-50%, -50%);
+            transform-origin: 0 0;
+            transition: opacity 0.1s ease, background-color 0.14s ease;
+            will-change: transform, opacity;
         }
 
         .work-card {
@@ -1250,7 +1254,7 @@
                             <span class="project-gallery-card-title">躺平 TANGPING</span>
                         </span>
                         <span class="project-gallery-card-details">
-                            <span class="project-gallery-overlay-kicker"><span class="project-gallery-overlay-number">02</span><span class="project-gallery-overlay-category">课程作业 · BRAND IDENTITY</span></span>
+                            <span class="project-gallery-overlay-kicker"><span class="project-gallery-overlay-number">02</span><span class="project-gallery-overlay-category">个人提案 · SELF-INITIATED</span></span>
                             <span class="project-gallery-overlay-title">躺平 TANGPING</span>
                             <span class="project-gallery-overlay-subtitle">轻养生疗愈品牌视觉系统</span>
                             <span class="project-gallery-overlay-description">保留“拒绝内耗、回归自在”的核心态度，以紫色与荧光绿重塑品牌识别，并通过“小梦”IP、插画与生活方式物料延展年轻化的疗愈体验。</span>
@@ -2032,14 +2036,7 @@ const hideProjectModal = ({ restoreFocus = true } = {}) => {
 };
 
 const requestProjectModalClose = () => {
-  if (history.state?.projectModal) {
-    history.back();
-    return;
-  }
-  const url = new URL(window.location.href);
-  url.searchParams.delete('project');
-  history.replaceState(history.state, '', url);
-  hideProjectModal();
+  closeProjectModalToIndex();
 };
 
 const closeProjectModalToIndex = () => {
@@ -2229,17 +2226,15 @@ if (projectGallery) {
             let cursorFrame = 0;
             let cursorX = -100;
             let cursorY = -100;
-            const supportsIndividualTranslate = 'translate' in cursor.style;
-
             const resetCursor = () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.setProperty('--cursor-scale', '1');
                 cursor.style.mixBlendMode = 'difference';
                 cursor.style.backgroundColor = '#fff';
                 cursor.style.backdropFilter = 'none';
             };
 
             const setGalleryCursor = (dragging = false) => {
-                cursor.style.transform = `translate(-50%, -50%) scale(${dragging ? 0.85 : 1.65})`;
+                cursor.style.setProperty('--cursor-scale', dragging ? '0.85' : '1.65');
                 cursor.style.mixBlendMode = 'normal';
                 cursor.style.backgroundColor = dragging ? '#fff' : 'rgba(129, 140, 248, 0.48)';
                 cursor.style.backdropFilter = 'none';
@@ -2250,12 +2245,8 @@ if (projectGallery) {
                 cursorY = e.clientY;
                 if (cursorFrame) return;
                 cursorFrame = requestAnimationFrame(() => {
-                    if (supportsIndividualTranslate) {
-                        cursor.style.translate = `${cursorX}px ${cursorY}px`;
-                    } else {
-                        cursor.style.left = `${cursorX}px`;
-                        cursor.style.top = `${cursorY}px`;
-                    }
+                    cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+                    cursor.style.setProperty('--cursor-y', `${cursorY}px`);
                     cursor.style.opacity = '1';
                     cursorFrame = 0;
                 });
@@ -2277,7 +2268,7 @@ if (projectGallery) {
             document.querySelectorAll('a, button, .work-card, .archive-row').forEach(el => {
                 if (el.closest('[data-project-gallery]')) return;
                 el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(3)';
+                    cursor.style.setProperty('--cursor-scale', '3');
                     cursor.style.mixBlendMode = 'normal';
                     cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                     cursor.style.backdropFilter = 'none';
@@ -2298,7 +2289,7 @@ if (projectGallery) {
 
             const setModalCursor = interactive => {
                 if (interactive) {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(2.35)';
+                    cursor.style.setProperty('--cursor-scale', '2.35');
                     cursor.style.mixBlendMode = 'normal';
                     cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.14)';
                     cursor.style.backdropFilter = 'none';

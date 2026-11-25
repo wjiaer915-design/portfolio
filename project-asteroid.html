@@ -72,6 +72,9 @@
         /* 自定义光标 */
    /* 自定义光标 */
 #cursor {
+    --cursor-x: -100px;
+    --cursor-y: -100px;
+    --cursor-scale: 1;
     width: 20px;
     height: 20px;
     background: #fff;
@@ -83,8 +86,10 @@
     z-index: 9999;
     mix-blend-mode: difference;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(1);
-    transition: transform 0.1s, opacity 0.2s;
+    transform: translate3d(var(--cursor-x), var(--cursor-y), 0) scale(var(--cursor-scale)) translate(-50%, -50%);
+    transform-origin: 0 0;
+    transition: opacity 0.1s, background-color 0.14s;
+    will-change: transform, opacity;
 }
 
 #cursor.cursor-ready {
@@ -213,25 +218,36 @@
         // 自定义光标逻辑
         const cursor = document.getElementById('cursor');
         if (window.matchMedia("(pointer: fine)").matches) {
-           document.addEventListener('mousemove', e => {
-    cursor.classList.add('cursor-ready');
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
+           let cursorFrame = 0;
+           let cursorX = -100;
+           let cursorY = -100;
+           document.addEventListener('pointermove', e => {
+             cursorX = e.clientX;
+             cursorY = e.clientY;
+             if (cursorFrame) return;
+             cursorFrame = requestAnimationFrame(() => {
+               cursor.classList.add('cursor-ready');
+               cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+               cursor.style.setProperty('--cursor-y', `${cursorY}px`);
+               cursorFrame = 0;
+             });
+           }, { passive: true });
             document.querySelectorAll('a, .long-image-container').forEach(el => {
                 el.addEventListener('mouseenter', () => {
-                   cursor.style.transform = 'translate(-50%, -50%) scale(3)';
+                   cursor.style.setProperty('--cursor-scale', '3');
                     cursor.style.mixBlendMode = 'normal';
                     cursor.style.backgroundColor = 'rgba(253, 164, 175, 0.3)'; // 粉色光标
-                    cursor.style.backdropFilter = 'blur(2px)';
+                    cursor.style.backdropFilter = 'none';
                 });
                 el.addEventListener('mouseleave', () => {
-                   cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                   cursor.style.setProperty('--cursor-scale', '1');
                     cursor.style.mixBlendMode = 'difference';
                     cursor.style.backgroundColor = '#fff';
                     cursor.style.backdropFilter = 'none';
                 });
             });
+            document.documentElement.addEventListener('mouseleave', () => { cursor.classList.remove('cursor-ready'); });
+            window.addEventListener('blur', () => { cursor.classList.remove('cursor-ready'); });
         } else {
             cursor.style.display = 'none';
         }

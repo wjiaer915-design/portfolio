@@ -62,6 +62,9 @@
     }
 
     #cursor {
+      --cursor-x: -100px;
+      --cursor-y: -100px;
+      --cursor-scale: 1;
       width: 20px;
       height: 20px;
       background: #fff;
@@ -72,10 +75,10 @@
       pointer-events: none;
       z-index: 9999;
       mix-blend-mode: difference;
-      translate: -100px -100px;
-      transform: translate(-50%, -50%) scale(var(--cursor-scale, 1));
-      transition: transform 0.1s, background-color 0.2s;
-      will-change: translate, transform;
+      transform: translate3d(var(--cursor-x), var(--cursor-y), 0) scale(var(--cursor-scale)) translate(-50%, -50%);
+      transform-origin: 0 0;
+      transition: background-color 0.14s;
+      will-change: transform;
     }
 
     ::selection {
@@ -734,12 +737,13 @@
       let cursorFrame = 0;
       let cursorX = -100;
       let cursorY = -100;
-      document.addEventListener('mousemove', e => {
+      document.addEventListener('pointermove', e => {
         cursorX = e.clientX;
         cursorY = e.clientY;
         if (cursorFrame) return;
         cursorFrame = requestAnimationFrame(() => {
-          cursor.style.translate = `${cursorX}px ${cursorY}px`;
+          cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+          cursor.style.setProperty('--cursor-y', `${cursorY}px`);
           cursorFrame = 0;
         });
       });

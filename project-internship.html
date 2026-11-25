@@ -37,15 +37,24 @@
     ::-webkit-scrollbar-thumb { background: rgba(129,140,248,.75); border: 2px solid var(--bg); border-radius: 999px; }
 
     #cursor {
+      --cursor-x: -100px;
+      --cursor-y: -100px;
+      --cursor-scale: 1;
       position: fixed;
       z-index: 9999;
       width: 20px;
       height: 20px;
       border-radius: 999px;
       pointer-events: none;
+      left: 0;
+      top: 0;
       background: #fff;
       mix-blend-mode: difference;
-      transition: transform .12s ease, background-color .2s ease;
+      opacity: 0;
+      transform: translate3d(var(--cursor-x), var(--cursor-y), 0) scale(var(--cursor-scale)) translate(-50%, -50%);
+      transform-origin: 0 0;
+      transition: opacity .1s ease, background-color .14s ease;
+      will-change: transform, opacity;
     }
     .ambient {
       position: fixed;
@@ -290,14 +299,26 @@
     lucide.createIcons();
     const cursor = document.getElementById('cursor');
     if (window.matchMedia('(pointer: fine)').matches) {
-      document.addEventListener('mousemove', (event) => {
-        cursor.style.left = event.clientX + 'px';
-        cursor.style.top = event.clientY + 'px';
-      });
+      let cursorFrame = 0;
+      let cursorX = -100;
+      let cursorY = -100;
+      document.addEventListener('pointermove', (event) => {
+        cursorX = event.clientX;
+        cursorY = event.clientY;
+        if (cursorFrame) return;
+        cursorFrame = requestAnimationFrame(() => {
+          cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+          cursor.style.setProperty('--cursor-y', `${cursorY}px`);
+          cursor.style.opacity = '1';
+          cursorFrame = 0;
+        });
+      }, { passive: true });
       document.querySelectorAll('a, img, .glass').forEach((element) => {
-        element.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.8)'; cursor.style.backgroundColor = 'rgba(129,140,248,.4)'; cursor.style.mixBlendMode = 'normal'; });
-        element.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; cursor.style.backgroundColor = '#fff'; cursor.style.mixBlendMode = 'difference'; });
+        element.addEventListener('mouseenter', () => { cursor.style.setProperty('--cursor-scale', '2.8'); cursor.style.backgroundColor = 'rgba(129,140,248,.4)'; cursor.style.mixBlendMode = 'normal'; });
+        element.addEventListener('mouseleave', () => { cursor.style.setProperty('--cursor-scale', '1'); cursor.style.backgroundColor = '#fff'; cursor.style.mixBlendMode = 'difference'; });
       });
+      document.documentElement.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+      window.addEventListener('blur', () => { cursor.style.opacity = '0'; });
     } else { cursor.style.display = 'none'; }
 
     const observer = new IntersectionObserver((entries) => {

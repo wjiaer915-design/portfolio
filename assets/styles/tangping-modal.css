@@ -92,6 +92,8 @@
 }
 
 .project-modal__actions {
+  position: relative;
+  z-index: 6;
   display: flex;
   flex: 0 0 auto;
   align-items: center;
@@ -100,7 +102,7 @@
 
 .project-modal__action {
   display: inline-flex;
-  min-height: 2.6rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
@@ -114,6 +116,8 @@
   letter-spacing: 0.13em;
   line-height: 1;
   text-transform: uppercase;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
 }
 
