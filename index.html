@@ -1667,7 +1667,7 @@
       <section class="project-modal__panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" tabindex="-1">
         <header class="project-modal__header">
           <div class="project-modal__identity">
-            <span class="project-modal__eyebrow">Selected Work / 精选项目</span>
+            <span id="project-modal-eyebrow" class="project-modal__eyebrow">Selected Work / 精选项目</span>
             <strong id="project-modal-title" class="project-modal__title">Selected Project</strong>
           </div>
           <div class="project-modal__actions">
@@ -1678,7 +1678,7 @@
             </button>
           </div>
         </header>
-        <div id="project-modal-scroller" class="project-modal__scroller" tabindex="0" aria-label="精选项目内容">
+        <div id="project-modal-scroller" class="project-modal__scroller" tabindex="0" aria-label="项目内容">
           <div class="project-modal__loading" role="status">
             <div>
               <div class="project-modal__loading-mark" aria-hidden="true"></div>
@@ -1731,10 +1731,11 @@ if (pillSections.length) {
   pillSections.forEach(section => navObserver.observe(section));
 }
 
-// 精选项目长弹层：五个项目共用同一外壳，按需复用各自的二级页内容。
+// 项目长弹层：精选项目与展览项目共用同一外壳，按需复用各自的二级页内容。
 const projectModal = document.getElementById('project-modal');
 const projectModalPanel = projectModal?.querySelector('.project-modal__panel');
 const projectModalScroller = document.getElementById('project-modal-scroller');
+const projectModalEyebrow = document.getElementById('project-modal-eyebrow');
 const projectModalTitle = document.getElementById('project-modal-title');
 const projectModalExternal = document.getElementById('project-modal-external');
 const projectModalCloseControls = [...document.querySelectorAll('[data-project-modal-close]')];
@@ -1745,7 +1746,9 @@ const projectModalConfigs = [
   { slug: 'tangping', cardId: 'project-01', path: 'project-tangping.html', title: '躺平吧 · Lie Down Flat' },
   { slug: 'fashion', cardId: 'project-02', path: 'project-fashion.html', title: 'AI 时尚顾问 · Fashion Stylist' },
   { slug: 'doctorkids', cardId: 'project-03', path: 'project-doctorkids.html', title: '小小医生 · Little Dr. Bear' },
-  { slug: 'sleep-wave', cardId: 'project-04', path: 'project4.html', title: '小宇宙睡眠电波计划' }
+  { slug: 'sleep-wave', cardId: 'project-04', path: 'project4.html', title: '小宇宙睡眠电波计划' },
+  { slug: 'asteroid', cardId: 'exhibition-asteroid', path: 'project-asteroid.html', title: '一颗小行星：月经不隐藏', returnId: 'exhibition-asteroid', eyebrow: 'Exhibition Project / 展览项目' },
+  { slug: 'linkup', cardId: 'exhibition-linkup', path: 'project-linkup.html', title: 'Linkup 领跑计划', returnId: 'exhibition-linkup', eyebrow: 'Exhibition Project / 展览项目' }
 ];
 const projectModalBySlug = new Map(projectModalConfigs.map(config => [config.slug, config]));
 const projectModalByCardId = new Map(projectModalConfigs.map(config => [config.cardId, config]));
@@ -1768,6 +1771,7 @@ const setModalBackgroundState = isInert => {
 };
 
 const updateProjectModalHeader = config => {
+  if (projectModalEyebrow) projectModalEyebrow.textContent = config.eyebrow || 'Selected Work / 精选项目';
   if (projectModalTitle) projectModalTitle.textContent = config.title;
   if (projectModalExternal) {
     projectModalExternal.href = config.path;
@@ -1842,6 +1846,10 @@ const modalPageOverrides = `
   }
   .project-modal-page[data-project-slug="sleep-wave"] .sleep-hero-title-zh {
     font-size: clamp(4rem, 17cqw, 11rem) !important;
+  }
+  .project-modal-page[data-project-slug="asteroid"] .project-title-zh,
+  .project-modal-page[data-project-slug="linkup"] .project-title-zh {
+    font-size: clamp(3rem, 12cqw, 8rem) !important;
   }
   @media (pointer: fine) and (hover: hover) {
     :host, :host * { cursor: none !important; }
@@ -1922,9 +1930,10 @@ const buildProjectModalHost = async config => {
     if (nextConfig) {
       event.preventDefault();
       showProjectModal(nextConfig, { historyMode: 'replace' });
-    } else if (path === 'index.html' || rawHref.startsWith('#selected-works-title')) {
+    } else if (path === 'index.html' || rawHref.startsWith('#')) {
       event.preventDefault();
-      closeProjectModalToIndex();
+      const requestedAnchor = rawHref.includes('#') ? rawHref.split('#').pop() : '';
+      closeProjectModalToIndex(requestedAnchor || config.returnId);
     }
   });
 
@@ -2044,14 +2053,14 @@ const requestProjectModalClose = () => {
   closeProjectModalToIndex();
 };
 
-const closeProjectModalToIndex = () => {
+const closeProjectModalToIndex = (anchorId = activeProjectModalConfig?.returnId || 'selected-works-title') => {
   const url = new URL(window.location.href);
   url.searchParams.delete('project');
-  url.hash = 'selected-works-title';
+  url.hash = anchorId;
   const { projectModal: _projectModal, ...state } = history.state || {};
   history.replaceState(state, '', url);
   hideProjectModal({ restoreFocus: false });
-  document.getElementById('selected-works-title')?.scrollIntoView({ block: 'start' });
+  document.getElementById(anchorId)?.scrollIntoView({ block: 'start' });
 };
 
 projectModalCloseControls.forEach(control => {
@@ -2074,6 +2083,25 @@ window.addEventListener('popstate', () => {
 
 const initialProjectModalConfig = getRequestedProjectConfig();
 if (initialProjectModalConfig) showProjectModal(initialProjectModalConfig, { historyMode: 'none' });
+
+projectModalConfigs.forEach(config => {
+  const card = document.getElementById(config.cardId);
+  if (!card || card.closest('[data-project-gallery]')) return;
+
+  const prefetchProject = () => fetchProjectSource(config).catch(() => {});
+  card.addEventListener('pointerenter', prefetchProject, { once: true, passive: true });
+  card.addEventListener('focus', prefetchProject, { once: true });
+  card.addEventListener('click', event => {
+    const standardClick = event.button === 0
+      && !event.metaKey
+      && !event.ctrlKey
+      && !event.shiftKey
+      && !event.altKey;
+    if (!standardClick) return;
+    event.preventDefault();
+    showProjectModal(config);
+  });
+});
 
 // Selected Works：原生环形画廊（不引入外部运行时）
 const projectGallery = document.querySelector('[data-project-gallery]');
