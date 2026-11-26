@@ -94,6 +94,25 @@
       color: var(--purple-soft);
       text-transform: uppercase;
     }
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-bottom: 1rem;
+      color: #a78bfa;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .hero-kicker-dot {
+      width: .5rem;
+      height: .5rem;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #a78bfa;
+      box-shadow: 0 0 15px rgba(167, 139, 250, .8);
+    }
     .display-en {
       font-family: 'Syncopate', sans-serif;
       letter-spacing: .18em;
@@ -213,7 +232,7 @@
   <main>
     <header class="project-shell relative flex min-h-[88vh] flex-col justify-end pb-14 pt-32 md:pb-20">
       <div class="relative z-10 max-w-[1500px]">
-        <p class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#9c7cff]"><span class="h-2 w-2 shrink-0 rounded-full bg-[#9c7cff] shadow-[0_0_15px_rgba(156,124,255,.8)]"></span>Light Wellness · Healing Brand</p>
+        <p class="hero-kicker"><span class="hero-kicker-dot" aria-hidden="true"></span>Light Wellness · Healing Brand</p>
         <h1 class="hero-title bg-gradient-to-br from-white via-white to-[#9c7cff] bg-clip-text text-transparent">躺平吧</h1>
         <p class="hero-title-en mt-3 md:-mt-2 md:ml-4">Lie Down Flat</p>
         <p class="mt-10 max-w-3xl text-lg leading-8 text-zinc-300 md:text-2xl md:leading-10">
